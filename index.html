@@ -251,8 +251,8 @@
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-serif);
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.7;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -273,7 +273,7 @@
   header {
     position: relative;
     z-index: 10;
-    padding: 80px 60px 60px;
+    padding: clamp(40px,8vw,80px) clamp(20px,6vw,60px) clamp(40px,6vw,60px);
     max-width: 1400px;
     margin: 0 auto;
   }
@@ -288,7 +288,7 @@
   }
 
   .main-title {
-    font-size: clamp(52px, 8vw, 112px);
+    font-size: clamp(36px, 8vw, 112px);
     font-weight: 300;
     line-height: 0.9;
     letter-spacing: -0.02em;
@@ -306,7 +306,7 @@
     font-weight: 300;
     color: var(--muted);
     font-family: var(--font-mono);
-    max-width: 480px;
+    max-width: 560px;
     line-height: 1.8;
   }
 
@@ -314,14 +314,14 @@
   .manifesto {
     position: relative;
     z-index: 10;
-    padding: 40px 60px;
+    padding: clamp(28px,5vw,40px) clamp(20px,6vw,60px);
     max-width: 1400px;
     margin: 0 auto;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    gap: clamp(20px,4vw,40px);
   }
 
   .manifesto-item {
@@ -338,17 +338,17 @@
   }
 
   .manifesto-item p {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 300;
-    color: rgba(232,226,216,0.7);
-    line-height: 1.6;
+    color: rgba(232,226,216,0.75);
+    line-height: 1.7;
   }
 
   /* ── SECTION TITLE ── */
   .section-header {
     position: relative;
     z-index: 10;
-    padding: 80px 60px 40px;
+    padding: clamp(40px,8vw,80px) clamp(20px,6vw,60px) clamp(24px,4vw,40px);
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
@@ -375,7 +375,7 @@
   .projects {
     position: relative;
     z-index: 10;
-    padding: 0 60px 80px;
+    padding: 0 clamp(20px,6vw,60px) clamp(40px,8vw,80px);
     max-width: 1400px;
     margin: 0 auto;
     display: grid;
@@ -386,7 +386,7 @@
   .project-card {
     position: relative;
     background: var(--surface);
-    padding: 52px 48px 48px;
+    padding: clamp(28px,5vw,52px) clamp(20px,4vw,48px) clamp(28px,5vw,48px);
     text-decoration: none;
     color: inherit;
     overflow: hidden;
@@ -450,7 +450,7 @@
   }
 
   .card-title {
-    font-size: clamp(32px, 4vw, 52px);
+    font-size: clamp(26px, 4vw, 52px);
     font-weight: 300;
     line-height: 1;
     letter-spacing: -0.02em;
@@ -467,17 +467,17 @@
     font-size: 13px;
     font-weight: 300;
     font-style: italic;
-    color: var(--muted);
+    color: rgba(90,95,110,0.9);
     margin-bottom: 28px;
   }
 
   .card-desc {
     font-size: 15px;
     font-weight: 300;
-    color: rgba(232,226,216,0.6);
+    color: rgba(232,226,216,0.75);
     line-height: 1.75;
     margin-bottom: 36px;
-    max-width: 380px;
+    max-width: 100%;
   }
 
   .card-stats {
@@ -552,7 +552,7 @@
   .thread {
     position: relative;
     z-index: 10;
-    padding: 80px 60px;
+    padding: clamp(40px,8vw,80px) clamp(20px,6vw,60px);
     max-width: 1400px;
     margin: 0 auto;
     border-top: 1px solid var(--border);
@@ -589,7 +589,7 @@
 
   .thread-item {
     background: var(--bg);
-    padding: 36px 28px;
+    padding: clamp(20px,3vw,36px) clamp(16px,2.5vw,28px);
     position: relative;
   }
 
@@ -652,13 +652,15 @@
   footer {
     position: relative;
     z-index: 10;
-    padding: 40px 60px;
+    padding: clamp(28px,5vw,40px) clamp(20px,6vw,60px);
     max-width: 1400px;
     margin: 0 auto;
     border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
   .footer-brand {
@@ -701,7 +703,7 @@
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    padding: 18px 60px;
+    padding: 14px clamp(20px,6vw,60px);
     border-bottom: 1px solid var(--border);
   }
 
@@ -809,19 +811,32 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    header, .manifesto, .section-header, .projects, .thread, footer {
-      padding-left: 24px;
-      padding-right: 24px;
-    }
     .projects { grid-template-columns: 1fr; }
-    .manifesto { grid-template-columns: 1fr; }
+    .manifesto { grid-template-columns: 1fr; gap: 20px; }
     .thread-grid { grid-template-columns: repeat(2, 1fr); }
-    footer { flex-direction: column; gap: 20px; text-align: center; }
     .footer-links { justify-content: center; }
+    .card-stats { flex-wrap: wrap; gap: 20px; }
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 640px) {
+    .main-title { font-size: clamp(32px, 10vw, 56px); line-height: 1; }
+    .tagline { font-size: 14px; }
     .thread-grid { grid-template-columns: 1fr; }
+    .card-title { font-size: clamp(24px, 7vw, 40px); }
+    .card-stats { gap: 16px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+    .footer-links { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    .modal-box { padding: 32px 24px; }
+    .navbar { grid-template-columns: 1fr auto; }
+    .navbar-spacer { display: none; }
+    .social-links { gap: 12px; }
+  }
+
+  @media (max-width: 420px) {
+    .main-title { font-size: 28px; }
+    .card-stats { gap: 12px; }
+    .stat-value { font-size: 18px; }
+    .manifesto { padding: 20px; }
   }
   /* ── MODAL MENTIONS ── */
   .modal-overlay {
@@ -1305,7 +1320,7 @@
     Auteur et responsable de la publication : Shams Guettaf, Paris, France.</p>
 
     <h3>Contact</h3>
-    <p><a href="/cdn-cgi/l/email-protection#bac9d2dbd7c9dfcededfdbd4faddd7dbd3d694d9d5d7">shamsetdean@gmail.com</a></p>
+    <p><a href="/cdn-cgi/l/email-protection#bac9d2dbd7c9dfcededfdbd4faddd7dbd3d694d9d5d7"><span class="__cf_email__" data-cfemail="c7b4afa6aab4a2b3a3a2a6a987a0aaa6aeabe9a4a8aa">[email&#160;protected]</span></a></p>
 
     <h3>Hébergement</h3>
     <p>GitHub Pages — GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, USA.</p>
@@ -1324,7 +1339,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
@@ -1358,12 +1373,4 @@
   });
 
   // Keyboard close modal
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      const modal = document.getElementById('modal-mentions');
-      if (modal) modal.style.display = 'none';
-    }
-  });
-</script>
-</body>
-</html>
+  document.addEventLi

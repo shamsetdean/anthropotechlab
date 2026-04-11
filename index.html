@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHAMS&DEAN — Quests</title>
+<title>Anthropotech Lab — Laboratoire de systèmes numériques</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne+Mono&family=Playfair+Display:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
@@ -545,6 +545,8 @@
   .card-sentinel     { --card-accent: var(--accent-2); }
   .card-legaleink    { --card-accent: var(--accent-3); }
   .card-pistream     { --card-accent: var(--accent-4); }
+  .card-scribe       { --card-accent: #c07a5e; }
+  .card-codex        { --card-accent: #8b7355; }
 
   /* ── THREAD SECTION ── */
   .thread {
@@ -643,6 +645,8 @@
   .proj-tag.a2 { background: rgba(91,143,168,0.15); color: var(--accent-2); }
   .proj-tag.a3 { background: rgba(74,124,92,0.15);  color: var(--accent-3); }
   .proj-tag.a4 { background: rgba(155,107,155,0.15);color: var(--accent-4); }
+  .proj-tag.a5 { background: rgba(192,122,94,0.15); color: #c07a5e; }
+  .proj-tag.a6 { background: rgba(139,115,85,0.15); color: #8b7355; }
 
   /* ── FOOTER ── */
   footer {
@@ -878,17 +882,15 @@
   .modal-box a { color: var(--accent-1); }
 </style>
 </head>
+</head>
 <body>
 
 <!-- ═══════════════════════════════════════
      SPLASH SCREEN
-     · data-title    : titre (balises <em> supportées)
-     · data-eyebrow  : texte eyebrow
-     · Surchargez les variables CSS de #splash pour adapter le thème
 ═══════════════════════════════════════ -->
 <div id="splash"
-     data-title="SHAMS<em>&amp;</em>DEAN"
-     data-eyebrow="SHAMS &amp; DEAN / QUESTS">
+     data-title="anthropotech <em>/</em>lab"
+     data-eyebrow="ANTHROPOTECH · LAB · PARIS">
   <div class="splash-inner">
     <p class="splash-eyebrow"></p>
     <div class="splash-line"></div>
@@ -944,7 +946,7 @@
 
   <div class="navbar-spacer"></div>
 
-  <a href="https://shamsetdean.github.io/humiAn/" class="entity-link">
+  <a href="https://shamsetdean.github.io/anthropotechlab/" class="entity-link">
     anthropotech <span class="entity-sep">&nbsp;/</span>lab
   </a>
 
@@ -1006,35 +1008,35 @@
 <header>
   <div class="eyebrow fade-up">Shams Guettaf · 2025–2026 · Paris</div>
   <h1 class="main-title fade-up delay-1">
-    SHAMS<em>&</em>DEAN<br>
-    <em>Quests</em>
+    anthropotech<br>
+    <em>/lab</em>
   </h1>
   <p class="tagline fade-up delay-2">
-    Quatre projets. Une même conviction :<br>
-    bâtir par soi-même ce qu'on rêve<br>
-    de voir exister.
+    Bâtir par soi-même ce qu'on rêve de voir exister.<br>
+    Un laboratoire de systèmes numériques explorant<br>
+    la relation entre humain, langage et technologie.
   </p>
 </header>
 
 <!-- ── MANIFESTO STRIP ── -->
 <div class="manifesto fade-up delay-3">
   <div class="manifesto-item">
-    <div class="label">Philosophie</div>
-    <p>Zéro dépendance cloud imposée. Zéro tracker. Privacy by design sur chaque projet.</p>
+    <div class="label">Souveraineté</div>
+    <p>Aucun projet ne collecte de données ni n'en envoie vers l'extérieur. Ce n'est pas un paramètre — c'est une architecture.</p>
   </div>
   <div class="manifesto-item">
-    <div class="label">Territoire</div>
-    <p>Du hardware à l'éditorial, du diagnostic système au droit du travail — un seul fil.</p>
+    <div class="label">Lisibilité</div>
+    <p>Chaque outil est construit pour être compris en totalité par celui qui l'utilise. La maîtrise totale de la chaîne, du code à la publication.</p>
   </div>
   <div class="manifesto-item">
-    <div class="label">Méthode</div>
-    <p>HTML · CSS · Python · Raspberry Pi. Maîtrise totale de la chaîne, du code à la publication.</p>
+    <div class="label">Intention</div>
+    <p>Chaque projet est une question posée sous forme d'outil. La forme répond au fond — toujours.</p>
   </div>
 </div>
 
 <!-- ── PROJECTS ── -->
 <div class="section-header fade-up delay-4">
-  <h2>Quests</h2>
+  <h2>Écosystème · 6 projets</h2>
 </div>
 
 <div class="projects">
@@ -1042,13 +1044,13 @@
   <!-- HUM{I}AN -->
   <a class="project-card card-anthropotech" href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener">
     <div class="card-index">01</div>
-    <div class="card-tag">Magazine · IA · Numérique</div>
+    <div class="card-tag">Éditorial · IA · Société</div>
     <h2 class="card-title">Hum<span style="font-style:normal;color:var(--accent-1)">{i}</span>An</h2>
     <p class="card-subtitle">Explorer · Comprendre · Questionner</p>
-    <p class="card-desc">Un magazine numérique statique sur ce que la tech fait réellement aux humains. 40 articles publiés, un fichier HTML unique, zéro tracker. La forme répond au fond.</p>
+    <p class="card-desc">Un magazine numérique qui traite l'intelligence artificielle comme un phénomène culturel. Chaque article est une enquête sur ce que la technologie fait réellement aux comportements, aux institutions et aux individus.</p>
     <div class="card-stats">
       <div class="stat">
-        <span class="stat-value">40</span>
+        <span class="stat-value">40+</span>
         <span class="stat-label">Articles</span>
       </div>
       <div class="stat">
@@ -1069,10 +1071,10 @@
   <!-- SENTINEL -->
   <a class="project-card card-sentinel" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">
     <div class="card-index">02</div>
-    <div class="card-tag">Outil · Sécurité · Python</div>
+    <div class="card-tag">Diagnostic · Python · Vie privée</div>
     <h2 class="card-title">SENTINEL</h2>
-    <p class="card-subtitle">Diagnostic système multi-plateforme</p>
-    <p class="card-desc">240+ métriques système analysées en local. Rapport HTML autonome généré en quelques secondes. Mode Simple pour tous, Mode Expert pour les pros. Aucune donnée ne quitte la machine.</p>
+    <p class="card-subtitle">Connaître son système sans en perdre le contrôle</p>
+    <p class="card-desc">Un outil d'audit système qui rend visible ce que votre machine fait réellement — sans rien envoyer ailleurs. La souveraineté numérique commence par la lisibilité de sa propre infrastructure.</p>
     <div class="card-stats">
       <div class="stat">
         <span class="stat-value">240+</span>
@@ -1096,10 +1098,10 @@
   <!-- LEGALEINK -->
   <a class="project-card card-legaleink" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">
     <div class="card-index">03</div>
-    <div class="card-tag">Concept · e-ink · SaaS · Légal</div>
+    <div class="card-tag">Concept · e-ink · Droit</div>
     <h2 class="card-title">LégaleInk</h2>
-    <p class="card-subtitle">Affichage légal obligatoire sur e-ink</p>
-    <p class="card-desc">Panneaux e-ink connectés pour la mise à jour à distance de l'affichage légal obligatoire en entreprise. Plateforme SaaS + audit trail. Conformité automatique au Code du travail.</p>
+    <p class="card-subtitle">La conformité légale comme problème de design</p>
+    <p class="card-desc">Panneaux e-ink connectés pour l'affichage légal obligatoire en entreprise. Et si la conformité au Code du travail devenait aussi invisible et fiable qu'une mise à jour système&nbsp;?</p>
     <div class="card-stats">
       <div class="stat">
         <span class="stat-value">10+</span>
@@ -1123,10 +1125,10 @@
   <!-- PI.STREAM -->
   <a class="project-card card-pistream" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">
     <div class="card-index">04</div>
-    <div class="card-tag">Hardware · Python · Raspberry Pi</div>
+    <div class="card-tag">Hardware · Automatisation · Distance</div>
     <h2 class="card-title">π.stream</h2>
-    <p class="card-subtitle">Diffusion vidéo pilotée à distance</p>
-    <p class="card-desc">Raspberry Pi à New York, opérateur à Paris. Dropbox dépose la vidéo, le Pi la détecte, la télécharge et la diffuse en boucle. SSH sécurisé via Tailscale. Automatisé, robuste, souverain.</p>
+    <p class="card-subtitle">Jusqu'où peut-on aller seul, avec du hardware bas de gamme&nbsp;?</p>
+    <p class="card-desc">Un Raspberry Pi à New York, un opérateur à Paris. Un fichier déposé déclenche une diffusion vidéo automatique — sans cloud imposé, sans intermédiaire, sans intervention sur place.</p>
     <div class="card-stats">
       <div class="stat">
         <span class="stat-value">24/7</span>
@@ -1147,12 +1149,66 @@
     </span>
   </a>
 
+  <!-- SCRIBE -->
+  <a class="project-card card-scribe" href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener">
+    <div class="card-index">05</div>
+    <div class="card-tag">Outil · Emploi · Autonomie</div>
+    <h2 class="card-title">Scribe</h2>
+    <p class="card-subtitle">Un outil d'agentivité pure</p>
+    <p class="card-desc">Compagnon de recherche d'emploi fonctionnant entièrement dans le navigateur. CV, lettre de motivation, suivi de candidatures — sans compte, sans abonnement, sans que les données quittent l'appareil.</p>
+    <div class="card-stats">
+      <div class="stat">
+        <span class="stat-value">100%</span>
+        <span class="stat-label">Local</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">0</span>
+        <span class="stat-label">Compte requis</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">0</span>
+        <span class="stat-label">Trackers</span>
+      </div>
+    </div>
+    <span class="card-link">
+      Voir le projet
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </span>
+  </a>
+
+  <!-- CODEX -->
+  <a class="project-card card-codex" href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener">
+    <div class="card-index">06</div>
+    <div class="card-tag">Culture · Domaine public · Littérature</div>
+    <h2 class="card-title">Codex</h2>
+    <p class="card-subtitle">La littérature comme infrastructure publique</p>
+    <p class="card-desc">Bibliothèque numérique des grandes oeuvres du domaine public, sans compte, sans publicité, sans dark patterns. Les textes libres de droits devraient être librement lisibles, dans une interface qui honore l'oeuvre.</p>
+    <div class="card-stats">
+      <div class="stat">
+        <span class="stat-value">∞</span>
+        <span class="stat-label">Oeuvres</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">0</span>
+        <span class="stat-label">Publicités</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">Libre</span>
+        <span class="stat-label">Accès</span>
+      </div>
+    </div>
+    <span class="card-link">
+      Accéder à la bibliothèque
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </span>
+  </a>
+
 </div>
 
 <!-- ── THREAD ── -->
 <div class="thread">
   <h2>Ce qui les <em>relie</em></h2>
-  <p class="thread-intro">Quatre projets différents, quatre domaines distincts. Un seul fil conducteur.</p>
+  <p class="thread-intro">Six projets différents, six domaines distincts. Un seul fil conducteur.</p>
 
   <div class="thread-grid">
 
@@ -1161,13 +1217,15 @@
       <svg class="thread-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="1.5">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
       </svg>
-      <h3>Privacy by design</h3>
-      <p>Aucun des quatre projets ne collecte de données utilisateur ni ne les envoie vers l'extérieur. Ce n'est pas un paramètre — c'est une architecture.</p>
+      <h3>Souveraineté</h3>
+      <p>Aucun projet ne collecte de données utilisateur ni ne les envoie vers l'extérieur. Ce n'est pas un paramètre — c'est une architecture.</p>
       <div class="projects-list">
         <span class="proj-tag a2">SENTINEL</span>
-        <span class="proj-tag a1">Anthropotech</span>
+        <span class="proj-tag a1">Hum{i}An</span>
         <span class="proj-tag a3">LégaleInk</span>
         <span class="proj-tag a4">π.stream</span>
+        <span class="proj-tag a5">Scribe</span>
+        <span class="proj-tag a6">Codex</span>
       </div>
     </div>
 
@@ -1177,11 +1235,12 @@
         <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
       </svg>
       <h3>Zéro dépendance critique</h3>
-      <p>HTML, CSS, Python, Raspberry Pi. Chaque outil choisi peut fonctionner seul, mis à jour seul, compris en totalité par son auteur.</p>
+      <p>HTML, CSS, Python, Raspberry Pi. Chaque outil peut fonctionner seul, mis à jour seul, compris en totalité par son auteur.</p>
       <div class="projects-list">
-        <span class="proj-tag a1">Anthropotech</span>
+        <span class="proj-tag a1">Hum{i}An</span>
         <span class="proj-tag a2">SENTINEL</span>
         <span class="proj-tag a4">π.stream</span>
+        <span class="proj-tag a5">Scribe</span>
       </div>
     </div>
 
@@ -1194,10 +1253,11 @@
       <h3>Hébergement souverain</h3>
       <p>GitHub Pages ou Raspberry Pi local. Zéro coût d'infrastructure, zéro plateforme imposée, déploiement en un push.</p>
       <div class="projects-list">
-        <span class="proj-tag a1">Anthropotech</span>
+        <span class="proj-tag a1">Hum{i}An</span>
         <span class="proj-tag a2">SENTINEL</span>
         <span class="proj-tag a3">LégaleInk</span>
         <span class="proj-tag a4">π.stream</span>
+        <span class="proj-tag a6">Codex</span>
       </div>
     </div>
 
@@ -1210,9 +1270,11 @@
       <h3>Cohérence fond / forme</h3>
       <p>Un site sur la maîtrise numérique qui est lui-même maîtrisé. Un outil de diagnostic qui ne transmet rien. La forme est le message.</p>
       <div class="projects-list">
-        <span class="proj-tag a1">Anthropotech</span>
+        <span class="proj-tag a1">Hum{i}An</span>
         <span class="proj-tag a2">SENTINEL</span>
         <span class="proj-tag a3">LégaleInk</span>
+        <span class="proj-tag a5">Scribe</span>
+        <span class="proj-tag a6">Codex</span>
       </div>
     </div>
 
@@ -1221,7 +1283,7 @@
 
 <!-- ── FOOTER ── -->
 <footer>
-  <div class="footer-brand">SHAMS<em>&</em>DEAN</div>
+  <div class="footer-brand">anthropotech <em>/</em>lab</div>
   <ul class="footer-links">
     <li><a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank">LinkedIn</a></li>
     <li><a href="https://github.com/shamsetdean" target="_blank">GitHub</a></li>
@@ -1231,6 +1293,36 @@
   </ul>
   <span class="footer-copy">© 2026 Shams Guettaf</span>
 </footer>
+
+<!-- ── MODAL MENTIONS LÉGALES ── -->
+<div id="modal-mentions" class="modal-overlay" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-mentions').style.display='none'">✕ fermer</button>
+    <h2>Mentions légales</h2>
+
+    <h3>Éditeur</h3>
+    <p>Anthropotech Lab — site personnel et expérimental, projet non commercial.<br>
+    Auteur et responsable de la publication : Shams Guettaf, Paris, France.</p>
+
+    <h3>Contact</h3>
+    <p><a href="/cdn-cgi/l/email-protection#bac9d2dbd7c9dfcededfdbd4faddd7dbd3d694d9d5d7">shamsetdean@gmail.com</a></p>
+
+    <h3>Hébergement</h3>
+    <p>GitHub Pages — GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, USA.</p>
+
+    <h3>Données personnelles & cookies</h3>
+    <p>Ce site ne collecte aucune donnée personnelle, n'utilise aucun cookie de traçage et ne recourt à aucun outil d'analyse comportementale. Aucune donnée utilisateur n'est transmise à des tiers.</p>
+
+    <h3>Propriété intellectuelle</h3>
+    <p>Les contenus publiés sur ce site sont soumis au droit d'auteur français. Toute reproduction partielle ou totale est soumise à autorisation préalable de l'auteur.</p>
+
+    <h3>Nature du site</h3>
+    <p>Les projets présentés sont des expérimentations personnelles. Ils ne constituent ni une offre commerciale, ni un service professionnel. Ce site est non commercial et sans visée publicitaire.</p>
+
+    <h3>Mise à jour</h3>
+    <p>Dernière mise à jour : avril 2026.</p>
+  </div>
+</div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Custom cursor
@@ -1260,4 +1352,18 @@
     });
     el.addEventListener('mouseleave', () => {
       cursor.style.width = '8px';
-      cursor.style.height = '8px'
+      cursor.style.height = '8px';
+      cursor.style.opacity = '1';
+    });
+  });
+
+  // Keyboard close modal
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('modal-mentions');
+      if (modal) modal.style.display = 'none';
+    }
+  });
+</script>
+</body>
+</html>

@@ -619,17 +619,60 @@ gsap.to('#ph', {
   opacity: 1, y: 0, duration: 1, ease: 'expo.out'
 });
 
-// ── PROJECT CARDS
+// ── PROJECT CARDS + EFFET SABLE
 document.querySelectorAll('.pc').forEach((el, i) => {
   gsap.to(el, {
     scrollTrigger: { trigger: el, start: 'top 82%', toggleActions: 'play none none none' },
     opacity: 1, y: 0, duration: 1.1, ease: 'expo.out', delay: i * .04
   });
 
-  // Hover: title scale
+  // Découpe le titre en spans par lettre
   const title = el.querySelector('.pc-title');
-  el.addEventListener('mouseenter', () => gsap.to(title, { scale: 1.015, duration: .5, ease: 'power2.out', transformOrigin: 'left center' }));
-  el.addEventListener('mouseleave', () => gsap.to(title, { scale: 1, duration: .5, ease: 'power2.out' }));
+  const rawHTML = title.innerHTML;
+  // Préserver les balises em — on split le texte visible uniquement
+  let result = '';
+  let inTag = false;
+  for (let i = 0; i < rawHTML.length; i++) {
+    const ch = rawHTML[i];
+    if (ch === '<') { inTag = true; result += ch; continue; }
+    if (ch === '>') { inTag = false; result += ch; continue; }
+    if (inTag) { result += ch; continue; }
+    if (ch === ' ') { result += '<span class="sc" style="display:inline-block"> </span>'; continue; }
+    result += `<span class="sc" style="display:inline-block">${ch}</span>`;
+  }
+  title.innerHTML = result;
+
+  const chars = title.querySelectorAll('.sc');
+
+  el.addEventListener('mouseenter', () => {
+    chars.forEach(ch => {
+      const angle = (Math.random() - .5) * 80;
+      const dist  = 4 + Math.random() * 16;
+      const dx    = Math.cos(angle) * dist;
+      const dy    = Math.sin(angle) * dist - Math.random() * 8;
+      const delay = Math.random() * .35;
+      gsap.to(ch, {
+        x: dx, y: dy,
+        rotation: (Math.random() - .5) * 18,
+        opacity: .35 + Math.random() * .45,
+        duration: .9 + Math.random() * .4,
+        ease: 'power1.out',
+        delay
+      });
+    });
+  });
+
+  el.addEventListener('mouseleave', () => {
+    chars.forEach(ch => {
+      const delay = Math.random() * .3;
+      gsap.to(ch, {
+        x: 0, y: 0, rotation: 0, opacity: 1,
+        duration: 1.1 + Math.random() * .4,
+        ease: 'elastic.out(1, .45)',
+        delay
+      });
+    });
+  });
 });
 
 // ── INTERLUDE

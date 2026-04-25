@@ -92,8 +92,8 @@ body::before {
 /* HERO */
 #stage {
   min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 0 3.5rem 9vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 7rem 3.5rem 6vh;
   position: relative; overflow: hidden;
 }
 .stage-bg {
@@ -145,7 +145,7 @@ body::before {
   opacity: 0; will-change: opacity;
 }
 .stage-scroll {
-  position: absolute; right: 3.5rem; bottom: 9vh;
+  position: absolute; right: 3.5rem; bottom: 2.5rem;
   display: flex; flex-direction: column; align-items: center; gap: 8px;
   opacity: 0;
 }
@@ -303,7 +303,7 @@ footer {
 /* MOBILE */
 @media (max-width: 900px) {
   #nav { top: .7rem; width: calc(100% - 1.8rem); padding: .75rem 1.3rem; }
-  #stage, #projects, #interlude, #principes { padding-left: 1.4rem; padding-right: 1.4rem; }
+  #stage, #projects, #interlude, #principes, #mentions { padding-left: 1.4rem; padding-right: 1.4rem; }
   #stage { padding-bottom: 8vh; }
   .stage-dots, .stage-scroll { display: none; }
   #projects { padding-top: 4.5rem; }
@@ -313,6 +313,7 @@ footer {
   .int-inner { padding: 2.2rem 1.6rem; }
   #principes { padding: 5rem 1.4rem; }
   .pr-grid { grid-template-columns: 1fr 1fr; }
+  #mentions > div > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
   footer { margin: 0 .8rem .8rem; padding: 1.6rem 1.4rem; flex-direction: column; align-items: flex-start; }
   #cur, #cur-r { display: none; }
   body { cursor: auto; }
@@ -326,6 +327,7 @@ footer {
 <header id="nav">
   <a href="#" class="nav-logo">anthropotech /lab</a>
   <div class="nav-r">
+    <a href="#mentions" class="nav-link">Légal</a>
     <a href="#projects" class="nav-link">Projets</a>
     <a href="https://shamsetdean.github.io/humiAn/" target="_blank" class="nav-link">Magazine</a>
     <a href="https://github.com/shamsetdean" target="_blank" class="nav-link">GitHub</a>
@@ -546,6 +548,86 @@ footer {
   </div>
 </section>
 
+
+<!-- MENTIONS LÉGALES -->
+<section id="mentions" style="padding: 6rem 3.5rem; background: var(--bg2); border-top: 1px solid var(--rule);">
+  <div style="max-width: 860px; margin: 0 auto;">
+
+    <p style="font-family: var(--sans); font-size: .62rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--ink4); margin-bottom: 2.5rem; display: flex; align-items: center; gap: .9rem;">
+      <span style="display:inline-block; width:20px; height:1px; background:var(--blue);"></span>
+      Mentions légales
+    </p>
+
+    <h2 style="font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 400; letter-spacing: -.02em; margin-bottom: 3rem; color: var(--ink);">Informations <em style="font-style:italic; color:var(--ink2);">légales</em></h2>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+
+      <!-- Éditeur -->
+      <div style="background: var(--glass-b); border: 1px solid rgba(255,255,255,.72); border-radius: var(--r-lg); padding: 2rem 2rem;">
+        <p style="font-family: var(--sans); font-size: .55rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--ink4); margin-bottom: 1rem;">Éditeur</p>
+        <p style="font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: .5rem;">Shams Guettaf</p>
+        <p style="font-family: var(--sans); font-size: .84rem; font-weight: 300; color: var(--ink2); line-height: 1.8;">
+          Personne physique — créateur indépendant<br>
+          France<br>
+          <a href="mailto:shamsetdean@gmail.com" style="color: var(--blue); text-decoration: none;">shamsetdean@gmail.com</a>
+        </p>
+      </div>
+
+      <!-- Hébergement -->
+      <div style="background: var(--glass-b); border: 1px solid rgba(255,255,255,.72); border-radius: var(--r-lg); padding: 2rem 2rem;">
+        <p style="font-family: var(--sans); font-size: .55rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--ink4); margin-bottom: 1rem;">Hébergement</p>
+        <p style="font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: .5rem;">GitHub Pages &amp; Vercel</p>
+        <p style="font-family: var(--sans); font-size: .84rem; font-weight: 300; color: var(--ink2); line-height: 1.8;">
+          GitHub, Inc. — 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA<br>
+          Vercel Inc. — 340 Pine Street, San Francisco, CA 94104, USA
+        </p>
+      </div>
+
+      <!-- Nature des projets -->
+      <div style="background: var(--glass-b); border: 1px solid rgba(255,255,255,.72); border-radius: var(--r-lg); padding: 2rem 2rem;">
+        <p style="font-family: var(--sans); font-size: .55rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--ink4); margin-bottom: 1rem;">Nature des projets</p>
+        <p style="font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: .5rem;">Projets personnels non commerciaux</p>
+        <p style="font-family: var(--sans); font-size: .84rem; font-weight: 300; color: var(--ink2); line-height: 1.8;">
+          L'ensemble des projets présentés sur ce site (Hum{i}An, Codex, Fabulae, Scribe, Didici, SENTINEL, Talaria, π.stream, LégaleInk, Vacuum) sont des créations personnelles à but strictement non commercial. Ils ne génèrent aucun revenu, ne collectent aucune donnée personnelle et ne font l'objet d'aucune exploitation commerciale.
+        </p>
+      </div>
+
+      <!-- Propriété intellectuelle -->
+      <div style="background: var(--glass-b); border: 1px solid rgba(255,255,255,.72); border-radius: var(--r-lg); padding: 2rem 2rem;">
+        <p style="font-family: var(--sans); font-size: .55rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--ink4); margin-bottom: 1rem;">Propriété intellectuelle</p>
+        <p style="font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: .5rem;">Code protégé par le droit d'auteur</p>
+        <p style="font-family: var(--sans); font-size: .84rem; font-weight: 300; color: var(--ink2); line-height: 1.8;">
+          Le code source, le design, la documentation et l'ensemble des contenus produits dans le cadre de ces projets constituent des œuvres originales protégées par le droit d'auteur en vertu des articles L.111-1 et suivants du Code de la propriété intellectuelle français. Toute reproduction, modification ou exploitation sans autorisation écrite préalable est strictement interdite (art. L.335-2 CPI).
+        </p>
+      </div>
+
+      <!-- Données personnelles -->
+      <div style="background: var(--glass-b); border: 1px solid rgba(255,255,255,.72); border-radius: var(--r-lg); padding: 2rem 2rem;">
+        <p style="font-family: var(--sans); font-size: .55rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--ink4); margin-bottom: 1rem;">Données personnelles</p>
+        <p style="font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: .5rem;">Zéro collecte — Conforme RGPD</p>
+        <p style="font-family: var(--sans); font-size: .84rem; font-weight: 300; color: var(--ink2); line-height: 1.8;">
+          Ce site ne collecte aucune donnée personnelle, n'installe aucun cookie tiers et ne recourt à aucun outil de traçage ou d'analyse comportementale. Aucun formulaire de contact n'est hébergé sur ce domaine. Conforme au Règlement Général sur la Protection des Données (UE) 2016/679.
+        </p>
+      </div>
+
+      <!-- Liens externes -->
+      <div style="background: var(--glass-b); border: 1px solid rgba(255,255,255,.72); border-radius: var(--r-lg); padding: 2rem 2rem;">
+        <p style="font-family: var(--sans); font-size: .55rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--ink4); margin-bottom: 1rem;">Liens externes</p>
+        <p style="font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: .5rem;">Responsabilité limitée</p>
+        <p style="font-family: var(--sans); font-size: .84rem; font-weight: 300; color: var(--ink2); line-height: 1.8;">
+          Les projets liés depuis ce site sont hébergés sur des domaines distincts (GitHub Pages, Vercel). L'éditeur ne saurait être tenu responsable du contenu de sites tiers vers lesquels des liens sont établis, ni des éventuelles politiques de confidentialité appliquées par ces plateformes d'hébergement.
+        </p>
+      </div>
+
+    </div>
+
+    <p style="font-family: var(--sans); font-size: .75rem; font-weight: 300; color: var(--ink3); line-height: 1.8; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--rule);">
+      Conformément à la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN). Dernière mise à jour : avril 2026.
+    </p>
+
+  </div>
+</section>
+
 <footer>
   <span class="ft-brand">anthropotech /lab</span>
   <ul class="ft-links">
@@ -562,7 +644,7 @@ footer {
     <li><a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank">LinkedIn</a></li>
     <li><a href="https://github.com/shamsetdean" target="_blank">GitHub</a></li>
   </ul>
-  <span class="ft-copy">© 2026 Shams Guettaf</span>
+  <span class="ft-copy">© 2026 Shams Guettaf — Tous droits réservés</span>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

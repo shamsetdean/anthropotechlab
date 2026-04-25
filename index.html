@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropotech · Lab</title>
+<meta name="description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23f8f7f4'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-size='18' font-style='italic' fill='%233d5a80'%3EA%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shamsetdean.github.io/anthropotechlab/">
+<meta property="og:title" content="Anthropotech · Lab">
+<meta property="og:description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
+<meta property="og:image" content="https://shamsetdean.github.io/humiAn/icons/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Anthropotech · Lab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@shamsetdean">
+<meta name="twitter:title" content="Anthropotech · Lab">
+<meta name="twitter:description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
+<meta name="twitter:image" content="https://shamsetdean.github.io/humiAn/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:   #f7f6f2;
+  --bg2:  #f1efea;
+  --ink:  #18181b;
+  --ink2: #52525b;
+  --ink3: #a1a1aa;
+  --ink4: #d4d4d8;
+  --blue: #3d5a80;
+  --rule: rgba(24,24,27,.06);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans:  'Outfit', system-ui, sans-serif;
+  --ease:  cubic-bezier(.16,1,.3,1);
+  --glass:   rgba(255,255,255,.6);
+  --glass-b: rgba(255,255,255,.82);
+  --glass-border: rgba(255,255,255,.78);
+  --glass-shadow: 0 6px 24px rgba(24,24,27,.07), 0 1px 0 rgba(255,255,255,.9) inset;
+  --r-lg: 24px;
+  --r-xl: 999px;
+}
+
+html { overflow-x: hidden; scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .022;
+  pointer-events: none; z-index: 9000;
+}
+
+/* CURSOR */
+#cur  { position: fixed; width: 5px; height: 5px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; top: -3px; left: -3px; will-change: transform; }
+#cur-r { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(24,24,27,.14); border-radius: 50%; pointer-events: none; z-index: 9998; top: -16px; left: -16px; will-change: transform; transition: border-color .3s, width .35s var(--ease), height .35s var(--ease); }
+.ch #cur-r { width: 46px; height: 46px; border-color: rgba(61,90,128,.2); }
+
+/* NAV */
+#nav {
+  position: fixed; top: 1.1rem; left: 50%; transform: translateX(-50%); z-index: 500;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .85rem 1.8rem;
+  width: calc(100% - 3rem); max-width: 1100px;
+  background: var(--glass-b);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--glass-shadow);
+  opacity: 0; will-change: opacity;
+}
+.nav-logo { font-family: var(--sans); font-weight: 500; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink2); text-decoration: none; transition: color .25s; }
+.nav-logo:hover { color: var(--ink); }
+.nav-r { display: flex; align-items: center; gap: 2rem; }
+.nav-link { font-weight: 400; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3); text-decoration: none; transition: color .25s; }
+.nav-link:hover { color: var(--ink); }
+
+/* HERO */
+#stage {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 3.5rem 9vh;
+  position: relative; overflow: hidden;
+}
+.stage-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 72% 28%, rgba(61,90,128,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 35% at 18% 78%, rgba(200,162,106,.04) 0%, transparent 55%);
+  will-change: transform;
+}
+.stage-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(24,24,27,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(24,24,27,.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%);
+}
+.stage-dots {
+  position: absolute; top: 14%; right: 7%; width: 160px; height: 160px;
+  background-image: radial-gradient(circle, rgba(24,24,27,.1) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0; will-change: opacity, transform;
+}
+.stage-inner { position: relative; z-index: 1; max-width: 1100px; }
+
+.stage-eyebrow {
+  font-family: var(--sans); font-size: .64rem; font-weight: 500;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 2.2rem;
+  display: flex; align-items: center; gap: .8rem;
+  opacity: 0; transform: translateY(8px); will-change: opacity, transform;
+}
+.stage-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--blue); flex-shrink: 0; }
+
+.stage-title {
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 9vw, 10.5rem);
+  font-weight: 400; line-height: 1.02; letter-spacing: -.025em;
+  color: var(--ink);
+}
+.stage-title .word { display: inline-block; overflow: hidden; vertical-align: top; }
+.stage-title .word span { display: block; transform: translateY(110%); will-change: transform; }
+.stage-title em { font-style: italic; color: var(--ink2); }
+.stage-title .break { display: block; }
+
+.stage-sub {
+  margin-top: 2.4rem; font-weight: 300; font-size: 1rem; letter-spacing: .01em;
+  color: var(--ink3); line-height: 1.9; max-width: 380px;
+  opacity: 0; will-change: opacity;
+}
+.stage-scroll {
+  position: absolute; right: 3.5rem; bottom: 9vh;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0;
+}
+.stage-scroll-line { width: 1px; height: 52px; background: linear-gradient(to bottom, var(--ink4), transparent); }
+.stage-scroll span { font-family: var(--sans); font-size: .52rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ink4); writing-mode: vertical-rl; }
+
+/* TICKER */
+#ticker {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 1rem 0; overflow: hidden; white-space: nowrap;
+  background: var(--bg2); opacity: 0;
+}
+.ticker-track {
+  display: inline-flex; gap: 3.5rem;
+  animation: tick 28s linear infinite;
+  will-change: transform;
+}
+@keyframes tick { to { transform: translateX(-50%); } }
+.ticker-item { font-family: var(--serif); font-style: italic; font-size: .95rem; font-weight: 400; color: var(--ink3); flex-shrink: 0; }
+.ticker-dot { color: var(--blue); }
+
+/* PROJECTS */
+#projects { padding: 7rem 3.5rem; }
+.projects-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 4.5rem; opacity: 0; transform: translateY(14px);
+  will-change: opacity, transform;
+}
+.ph-title { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.25rem); font-style: italic; color: var(--ink2); }
+.ph-count { font-family: var(--sans); font-weight: 400; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink4); }
+
+.projects-group-label {
+  font-family: var(--sans); font-size: .58rem; font-weight: 500;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: var(--ink4); margin: 3.5rem 0 1.2rem;
+  display: flex; align-items: center; gap: .9rem;
+}
+.projects-group-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+/* CARD */
+.pc {
+  display: grid; grid-template-columns: 56px 1fr auto;
+  gap: 2.5rem; align-items: start;
+  padding: 2.4rem 2.2rem; margin-bottom: .8rem;
+  text-decoration: none; color: inherit; position: relative;
+  background: var(--glass-b);
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: var(--r-lg);
+  box-shadow: var(--glass-shadow);
+  opacity: 0; transform: translateY(22px);
+  will-change: opacity, transform;
+  transition: box-shadow .32s var(--ease), transform .26s var(--ease), border-color .22s;
+}
+.pc:hover {
+  box-shadow: 0 14px 40px rgba(24,24,27,.1), 0 1px 0 rgba(255,255,255,.95) inset;
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.9);
+}
+.pc:hover .pc-num { color: var(--blue); }
+.pc:hover .pc-arrow { transform: translate(4px,-4px); color: var(--blue); }
+.pc:hover .pc-title { letter-spacing: -.016em; }
+
+/* Badge */
+.pc-status {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--sans); font-size: .52rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px; border: 1px solid;
+}
+.pc-status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.pc-status.stable  { color: #3a7d44; background: rgba(58,125,68,.07); border-color: rgba(58,125,68,.18); }
+.pc-status.beta    { color: #b07d2a; background: rgba(200,162,106,.09); border-color: rgba(200,162,106,.28); }
+.pc-status.concept { color: var(--ink3); background: rgba(161,161,170,.07); border-color: rgba(161,161,170,.18); }
+.pc-status.actif   { color: var(--blue); background: rgba(61,90,128,.06); border-color: rgba(61,90,128,.18); }
+
+.pc-num { font-family: var(--serif); font-size: 2.6rem; font-weight: 400; color: var(--ink4); line-height: 1; padding-top: .15rem; transition: color .3s; }
+.pc-tags { display: flex; gap: .35rem; flex-wrap: wrap; margin-bottom: .65rem; }
+.pc-tag { font-family: var(--sans); font-size: .55rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3); background: rgba(255,255,255,.65); border: 1px solid rgba(255,255,255,.85); padding: 3px 11px; border-radius: 999px; }
+
+.pc-title {
+  font-family: var(--serif); font-size: clamp(1.65rem, 3vw, 2.6rem);
+  font-weight: 400; line-height: 1.07; letter-spacing: -.02em;
+  color: var(--ink); margin-bottom: .8rem;
+  transition: letter-spacing .4s var(--ease);
+}
+.pc-title em { font-style: italic; color: var(--ink2); }
+
+.pc-q { font-family: var(--serif); font-style: italic; font-size: .95rem; font-weight: 400; color: var(--ink2); line-height: 1.75; max-width: 480px; border-left: 2px solid var(--rule); padding-left: 1.1rem; }
+.pc-right { text-align: right; padding-top: .25rem; display: flex; flex-direction: column; align-items: flex-end; gap: 1rem; }
+.pc-stat-v { font-family: var(--serif); font-size: 2rem; font-weight: 400; color: var(--ink4); display: block; line-height: 1; }
+.pc-stat-l { font-family: var(--sans); font-size: .52rem; font-weight: 400; letter-spacing: .13em; text-transform: uppercase; color: var(--ink4); display: block; margin-top: 3px; }
+.pc-arrow { font-size: 1rem; color: var(--ink4); transition: transform .32s var(--ease), color .22s; }
+
+/* INTERLUDE */
+#interlude {
+  min-height: 78vh; display: flex; align-items: center;
+  padding: 8rem 3.5rem; position: relative; overflow: hidden;
+  background: var(--bg2);
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.int-bg-word {
+  position: absolute; right: -2%; top: 50%; transform: translateY(-50%);
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(9rem, 21vw, 24rem); font-weight: 400;
+  color: rgba(24,24,27,.03); line-height: 1;
+  user-select: none; pointer-events: none; will-change: transform;
+}
+.int-inner {
+  max-width: 700px; position: relative; z-index: 1;
+  background: var(--glass-b); border: 1px solid var(--glass-border);
+  border-radius: 32px; box-shadow: var(--glass-shadow); padding: 3.5rem;
+}
+.int-label {
+  font-family: var(--sans); font-size: .62rem; font-weight: 500;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 2.2rem;
+  display: flex; align-items: center; gap: .8rem;
+  opacity: 0; will-change: opacity, transform;
+}
+.int-label::before { content: ''; width: 20px; height: 1px; background: var(--blue); }
+.int-q {
+  font-family: var(--serif); font-size: clamp(1.5rem, 3.6vw, 3.6rem);
+  font-weight: 400; font-style: italic;
+  color: var(--ink); line-height: 1.18; letter-spacing: -.018em;
+  opacity: 0; will-change: opacity;
+}
+.int-q em { font-style: normal; color: var(--blue); }
+
+/* PRINCIPES */
+#principes { padding: 9rem 3.5rem; }
+.pr-header { text-align: center; margin-bottom: 6rem; opacity: 0; will-change: opacity, transform; }
+.pr-header h2 { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.8rem); font-weight: 400; letter-spacing: -.022em; margin-bottom: .45rem; }
+.pr-header h2 em { font-style: italic; color: var(--ink2); }
+.pr-header p { font-family: var(--sans); font-weight: 300; font-size: .95rem; color: var(--ink3); }
+.pr-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: .8rem; }
+.pr { padding: 2.2rem 1.8rem; border-radius: var(--r-lg); background: var(--glass-b); border: 1px solid rgba(255,255,255,.7); box-shadow: var(--glass-shadow); opacity: 0; transform: translateY(18px); will-change: opacity, transform; }
+.pr-n { font-family: var(--serif); font-style: italic; font-size: 2.2rem; font-weight: 400; color: var(--ink4); display: block; line-height: 1; margin-bottom: 1rem; }
+.pr h4 { font-family: var(--serif); font-size: 1rem; font-weight: 400; color: var(--ink); margin-bottom: .5rem; }
+.pr p  { font-family: var(--sans); font-weight: 300; font-size: .84rem; color: var(--ink2); line-height: 1.82; }
+
+/* FOOTER */
+footer {
+  margin: 0 1.2rem 1.2rem; padding: 1.8rem 2.2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1.2rem;
+  background: var(--glass-b); border: 1px solid var(--glass-border);
+  border-radius: 28px; box-shadow: var(--glass-shadow);
+}
+.ft-brand { font-family: var(--serif); font-style: italic; font-size: .95rem; color: var(--ink2); }
+.ft-links { display: flex; gap: 1.6rem; flex-wrap: wrap; list-style: none; }
+.ft-links a { font-family: var(--sans); font-weight: 400; font-size: .58rem; letter-spacing: .13em; text-transform: uppercase; color: var(--ink3); text-decoration: none; transition: color .25s; }
+.ft-links a:hover { color: var(--ink); }
+.ft-copy { font-family: var(--sans); font-weight: 300; font-size: .58rem; letter-spacing: .1em; color: var(--ink4); }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  #nav { top: .7rem; width: calc(100% - 1.8rem); padding: .75rem 1.3rem; }
+  #stage, #projects, #interlude, #principes { padding-left: 1.4rem; padding-right: 1.4rem; }
+  #stage { padding-bottom: 8vh; }
+  .stage-dots, .stage-scroll { display: none; }
+  #projects { padding-top: 4.5rem; }
+  .pc { grid-template-columns: 40px 1fr; gap: 1.3rem; padding: 1.8rem 1.4rem; }
+  .pc-right { display: none; }
+  #interlude { padding: 3.5rem 1.4rem; min-height: auto; }
+  .int-inner { padding: 2.2rem 1.6rem; }
+  #principes { padding: 5rem 1.4rem; }
+  .pr-grid { grid-template-columns: 1fr 1fr; }
+  footer { margin: 0 .8rem .8rem; padding: 1.6rem 1.4rem; flex-direction: column; align-items: flex-start; }
+  #cur, #cur-r { display: none; }
+  body { cursor: auto; }
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<header id="nav">
+  <a href="#" class="nav-logo">anthropotech /lab</a>
+  <div class="nav-r">
+    <a href="#projects" class="nav-link">Projets</a>
+    <a href="https://shamsetdean.github.io/humiAn/" target="_blank" class="nav-link">Magazine</a>
+    <a href="https://github.com/shamsetdean" target="_blank" class="nav-link">GitHub</a>
+  </div>
+</header>
+
+<section id="stage">
+  <div class="stage-bg" id="sbg"></div>
+  <div class="stage-grid"></div>
+  <div class="stage-dots" id="sdots"></div>
+  <div class="stage-inner">
+    <p class="stage-eyebrow" id="se">Shams Guettaf · Paris · 2025–2026</p>
+    <h1 class="stage-title" id="st">
+      <span class="word"><span id="w1">Bâtir</span></span>
+      <span> </span>
+      <span class="word"><span id="w2">ce</span></span>
+      <span> </span>
+      <span class="word"><span id="w3">qui</span></span>
+      <span class="break"></span>
+      <span class="word"><span id="w4">n'<em>existe</em></span></span>
+      <span class="break"></span>
+      <span class="word"><span id="w5">pas</span></span>
+      <span> </span>
+      <span class="word"><span id="w6">encore.</span></span>
+    </h1>
+    <p class="stage-sub" id="ssub">Un laboratoire numérique.</p>
+  </div>
+  <div class="stage-scroll" id="sscroll">
+    <div class="stage-scroll-line"></div>
+    <span>Descendre</span>
+  </div>
+</section>
+
+<div id="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Privacy by design</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Zéro dépendance</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Hébergement souverain</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Cohérence fond / forme</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Zéro tracker</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Privacy by design</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Zéro dépendance</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Hébergement souverain</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Cohérence fond / forme</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Zéro tracker</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span><span class="ticker-dot"> · </span>
+  </div>
+</div>
+
+<section id="projects">
+  <div class="projects-header" id="ph">
+    <span class="ph-title">Les expériences</span>
+    <span class="ph-count">10 projets</span>
+  </div>
+
+  <div class="projects-group-label">Éditorial &amp; Culture</div>
+
+  <a class="pc" href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener">
+    <div class="pc-num">01</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Éditorial</span><span class="pc-tag">IA</span><span class="pc-tag">Société</span><span class="pc-status actif"><span class="pc-status-dot"></span>Actif</span></div>
+      <div class="pc-title">Hum<em>{i}</em>An</div>
+      <p class="pc-q">"Que reste-t-il de la pensée critique dans un monde où l'IA produit de la pensée à la demande ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">43+</span><span class="pc-stat-l">Articles</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <a class="pc" href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener">
+    <div class="pc-num">02</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Culture</span><span class="pc-tag">Domaine public</span><span class="pc-tag">Littérature</span><span class="pc-status stable"><span class="pc-status-dot"></span>Stable</span></div>
+      <div class="pc-title">Codex</div>
+      <p class="pc-q">"Le patrimoine culturel commun devrait-il appartenir à celui qui construit la meilleure interface ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">458</span><span class="pc-stat-l">Œuvres libres</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <a class="pc" href="https://fabulae.vercel.app/" target="_blank" rel="noopener">
+    <div class="pc-num">03</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Séries</span><span class="pc-tag">TMDB</span><span class="pc-tag">PWA</span><span class="pc-tag">Mobile-first</span><span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span></div>
+      <div class="pc-title"><em>Fabulae</em></div>
+      <p class="pc-q">"Ton Top 3 des séries du moment — classé, partagé, sans compte, sans collecte."</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">TMDB</span><span class="pc-stat-l">API officielle</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <div class="projects-group-label">Outils &amp; Autonomie</div>
+
+  <a class="pc" href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener">
+    <div class="pc-num">04</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Emploi</span><span class="pc-tag">CV</span><span class="pc-tag">Autonomie</span><span class="pc-status stable"><span class="pc-status-dot"></span>Stable</span></div>
+      <div class="pc-title">Scribe</div>
+      <p class="pc-q">"Peut-on concevoir un outil dont le modèle économique est simplement d'être utile ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">100%</span><span class="pc-stat-l">Local · zéro tracker</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <a class="pc" href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener">
+    <div class="pc-num">05</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Apprentissage</span><span class="pc-tag">Éducation</span><span class="pc-status beta"><span class="pc-status-dot"></span>Non audité</span></div>
+      <div class="pc-title"><em>Didici</em></div>
+      <p class="pc-q">"Et si apprendre était une pratique quotidienne, sans friction et sans compte à créer ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">—</span><span class="pc-stat-l">À vérifier</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <div class="projects-group-label">Diagnostic &amp; Mobilité</div>
+
+  <a class="pc" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">
+    <div class="pc-num">06</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Diagnostic</span><span class="pc-tag">Python</span><span class="pc-tag">Vie privée</span><span class="pc-tag">Multi-plateforme</span><span class="pc-status stable"><span class="pc-status-dot"></span>Stable v3.28</span></div>
+      <div class="pc-title">SENTINEL</div>
+      <p class="pc-q">"Connaître son système sans en perdre le contrôle — est-ce encore possible ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">240+</span><span class="pc-stat-l">Métriques · 4 OS</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <a class="pc" href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener">
+    <div class="pc-num">07</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Transport</span><span class="pc-tag">Île-de-France</span><span class="pc-tag">PWA</span><span class="pc-tag">Mobilité</span><span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span></div>
+      <div class="pc-title"><em>Talaria</em></div>
+      <p class="pc-q">"Les transports en commun d'Île-de-France, sans compte, sans pub, sans collecte — depuis n'importe quel mobile."</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">IDFM</span><span class="pc-stat-l">PRIM · OSM · Météo</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <div class="projects-group-label">Infrastructure &amp; Concept</div>
+
+  <a class="pc" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">
+    <div class="pc-num">08</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Hardware</span><span class="pc-tag">Automatisation</span><span class="pc-tag">Raspberry Pi</span><span class="pc-status stable"><span class="pc-status-dot"></span>Actif NYC</span></div>
+      <div class="pc-title">π<em>.stream</em></div>
+      <p class="pc-q">"Jusqu'où peut-on aller seul, avec du hardware bas de gamme et une architecture bien pensée ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">24/7</span><span class="pc-stat-l">NYC → Paris</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <a class="pc" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">
+    <div class="pc-num">09</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Concept</span><span class="pc-tag">e-ink</span><span class="pc-tag">Droit</span><span class="pc-status concept"><span class="pc-status-dot"></span>Concept</span></div>
+      <div class="pc-title">Légale<em>Ink</em></div>
+      <p class="pc-q">"Et si la conformité légale devenait aussi invisible qu'une mise à jour système ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">RGPD</span><span class="pc-stat-l">Pitch · Prototype</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <a class="pc" href="https://github.com/shamsetdean/vacuum" target="_blank" rel="noopener">
+    <div class="pc-num">10</div>
+    <div class="pc-body">
+      <div class="pc-tags"><span class="pc-tag">Carte</span><span class="pc-tag">Signalement</span><span class="pc-tag">Firebase</span><span class="pc-tag">OSM</span><span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span></div>
+      <div class="pc-title">Vacuum</div>
+      <p class="pc-q">"Trouver une place de parking en temps réel — par la communauté, pour la communauté, sans compte."</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">Live</span><span class="pc-stat-l">Firebase · OSM</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+</section>
+
+<div id="interlude">
+  <div class="int-bg-word" aria-hidden="true" id="ibw">Lab</div>
+  <div class="int-inner">
+    <p class="int-label" id="il">Ce qui les relie</p>
+    <blockquote class="int-q" id="iq">
+      "Ce n'est pas un portfolio.<br>
+      C'est une <em>conviction</em> :<br>
+      bâtir ce qu'on rêve de voir exister."
+    </blockquote>
+  </div>
+</div>
+
+<section id="principes">
+  <div class="pr-header" id="prh">
+    <h2>Un seul <em>fil conducteur</em></h2>
+    <p>Dix projets distincts. Dix domaines différents. Une même architecture.</p>
+  </div>
+  <div class="pr-grid">
+    <div class="pr" id="pr0"><span class="pr-n">I</span><h4>Souveraineté</h4><p>Aucun projet ne collecte ni ne transmet de données. Ce n'est pas un paramètre — c'est une architecture de départ.</p></div>
+    <div class="pr" id="pr1"><span class="pr-n">II</span><h4>Zéro dépendance</h4><p>HTML, CSS, Python, Raspberry Pi. Chaque outil compris en totalité par son auteur. Aucune boîte noire acceptée.</p></div>
+    <div class="pr" id="pr2"><span class="pr-n">III</span><h4>Hébergement libre</h4><p>GitHub Pages ou Pi local. Zéro coût d'infrastructure, zéro plateforme imposée, déploiement en un push.</p></div>
+    <div class="pr" id="pr3"><span class="pr-n">IV</span><h4>Forme = message</h4><p>Un site sur la maîtrise numérique qui est lui-même maîtrisé. La forme ne vient pas après le fond.</p></div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft-brand">anthropotech /lab</span>
+  <ul class="ft-links">
+    <li><a href="https://shamsetdean.github.io/humiAn/" target="_blank">Hum{i}An</a></li>
+    <li><a href="https://shamsetdean.github.io/codex/" target="_blank">Codex</a></li>
+    <li><a href="https://fabulae.vercel.app/" target="_blank">Fabulae</a></li>
+    <li><a href="https://shamsetdean.github.io/scribe/" target="_blank">Scribe</a></li>
+    <li><a href="https://shamsetdean.github.io/didici/" target="_blank">Didici</a></li>
+    <li><a href="https://shamsetdean.github.io/sentinel/" target="_blank">Sentinel</a></li>
+    <li><a href="https://talaria-iota.vercel.app/" target="_blank">Talaria</a></li>
+    <li><a href="https://shamsetdean.github.io/pi-stream/" target="_blank">π.stream</a></li>
+    <li><a href="https://shamsetdean.github.io/legaleink/" target="_blank">LégaleInk</a></li>
+    <li><a href="https://github.com/shamsetdean/vacuum" target="_blank">Vacuum</a></li>
+    <li><a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank">LinkedIn</a></li>
+    <li><a href="https://github.com/shamsetdean" target="_blank">GitHub</a></li>
+  </ul>
+  <span class="ft-copy">© 2026 Shams Guettaf</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// LENIS — injecté après paint complet
+window.addEventListener('load', () => {
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js';
+  s.onload = () => {
+    const lenis = new Lenis({ lerp: .085, smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  };
+  document.head.appendChild(s);
+});
+
+// CURSOR — rAF pur, zéro transition sur le point central
+const cur = document.getElementById('cur'), curR = document.getElementById('cur-r');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+(function loop() {
+  cur.style.transform  = `translate(${mx}px,${my}px)`;
+  rx += (mx - rx) * .1; ry += (my - ry) * .1;
+  curR.style.transform = `translate(${rx - 16}px,${ry - 16}px)`;
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('ch'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('ch'));
+});
+
+// PARALLAX HERO — throttlé via rAF, overwrite pour éviter accumulation
+let rafPending = false, lastX = 0, lastY = 0;
+document.addEventListener('mousemove', e => {
+  lastX = e.clientX; lastY = e.clientY;
+  if (rafPending) return;
+  rafPending = true;
+  requestAnimationFrame(() => {
+    const x = (lastX / window.innerWidth  - .5);
+    const y = (lastY / window.innerHeight - .5);
+    gsap.to('#st',    { x: x * 14,  y: y * 7,   duration: 1.6, ease: 'power2.out', overwrite: true });
+    gsap.to('#sbg',   { x: x * -24, y: y * -14, duration: 2.2, ease: 'power2.out', overwrite: true });
+    gsap.to('#sdots', { x: x * 16,  y: y * 10,  duration: 2,   ease: 'power2.out', overwrite: true });
+    rafPending = false;
+  });
+}, { passive: true });
+
+// HERO INTRO
+gsap.set('#se', { y: 10, opacity: 0 });
+const intro = gsap.timeline({ delay: .08 });
+intro.to(['#w1','#w2','#w3','#w4','#w5','#w6'], { y: '0%', duration: 1.3, ease: 'expo.out', stagger: .08 }, .4);
+intro.to('#se',      { opacity: 1, y: 0, duration: .9, ease: 'expo.out' }, .35);
+intro.to('#ssub',    { opacity: 1, duration: 1, ease: 'power2.out' }, 1.4);
+intro.to('#sscroll', { opacity: 1, duration: .7, ease: 'power2.out' }, 1.9);
+intro.to('#sdots',   { opacity: 1, duration: 1,  ease: 'power2.out' }, 2);
+intro.to('#nav',     { opacity: 1, duration: .8, ease: 'power2.out' }, 2.1);
+intro.to('#ticker',  { opacity: 1, duration: .7, ease: 'power2.out' }, 2.3);
+
+// PROJECTS HEADER
+gsap.to('#ph', {
+  scrollTrigger: { trigger: '#ph', start: 'top 82%' },
+  opacity: 1, y: 0, duration: .9, ease: 'expo.out'
+});
+
+// CARDS — entrée simple, pas d'effet sable (perf)
+document.querySelectorAll('.pc').forEach((el, i) => {
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+    opacity: 1, y: 0, duration: .85, ease: 'expo.out', delay: i * .028
+  });
+});
+
+// INTERLUDE
+gsap.set('#il', { y: 8, opacity: 0 });
+gsap.to('#il', {
+  scrollTrigger: { trigger: '#interlude', start: 'top 74%' },
+  opacity: 1, y: 0, duration: .85, ease: 'expo.out'
+});
+gsap.to('#iq', {
+  scrollTrigger: { trigger: '#interlude', start: 'top 70%' },
+  opacity: 1, duration: 1.4, ease: 'power2.out', delay: .18
+});
+gsap.to('#ibw', {
+  scrollTrigger: { trigger: '#interlude', start: 'top bottom', end: 'bottom top', scrub: 1.2 },
+  x: -50, ease: 'none'
+});
+
+// PRINCIPES
+gsap.set('#prh', { y: 14, opacity: 0 });
+gsap.to('#prh', {
+  scrollTrigger: { trigger: '#prh', start: 'top 80%' },
+  opacity: 1, y: 0, duration: .9, ease: 'expo.out'
+});
+['pr0','pr1','pr2','pr3'].forEach((id, i) => {
+  gsap.to(`#${id}`, {
+    scrollTrigger: { trigger: '#principes', start: 'top 68%' },
+    opacity: 1, y: 0, duration: .85, ease: 'expo.out', delay: .1 + i * .09
+  });
+});
+</script>
+</body>
+</html>

@@ -5,11 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anthropotech · Lab</title>
 <meta name="description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
-
-<!-- Favicon SVG -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23f8f7f4'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-size='18' font-style='italic' fill='%233d5a80'%3EA%3C/text%3E%3C/svg%3E">
-
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shamsetdean.github.io/anthropotechlab/">
 <meta property="og:title" content="Anthropotech · Lab">
@@ -19,8 +15,6 @@
 <meta property="og:image:height" content="512">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Anthropotech · Lab">
-
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@shamsetdean">
 <meta name="twitter:title" content="Anthropotech · Lab">
@@ -69,7 +63,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── GRAIN ── */
 body::before {
   content: '';
   position: fixed; inset: 0;
@@ -78,13 +71,12 @@ body::before {
   pointer-events: none; z-index: 9000;
 }
 
-/* ── CURSOR ── */
 #cur { position: fixed; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; top: 0; left: 0; transition: width .3s var(--ease), height .3s var(--ease), background .3s; }
 #cur-r { position: fixed; width: 34px; height: 34px; border: 1px solid rgba(26,25,22,.16); border-radius: 50%; pointer-events: none; z-index: 9998; top: 0; left: 0; transition: width .5s var(--ease), height .5s var(--ease), border-color .3s; }
 .ch #cur { width: 9px; height: 9px; background: var(--blue); }
 .ch #cur-r { width: 50px; height: 50px; border-color: rgba(36,89,232,.22); }
 
-/* ── NAV ── */
+/* NAV */
 #nav {
   position: fixed; top: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 500;
   display: flex; justify-content: space-between; align-items: center;
@@ -104,15 +96,13 @@ body::before {
 .nav-link { font-weight: 300; font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3); text-decoration: none; transition: color .3s; }
 .nav-link:hover { color: var(--ink); }
 
-/* ── HERO / STAGE ── */
+/* HERO */
 #stage {
   min-height: 100vh;
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 0 3rem 8vh;
   position: relative; overflow: hidden;
 }
-
-/* Breathing background */
 .stage-bg {
   position: absolute; inset: 0;
   background:
@@ -124,8 +114,6 @@ body::before {
   from { opacity: .6; transform: scale(1); }
   to   { opacity: 1;  transform: scale(1.04); }
 }
-
-/* Subtle grid */
 .stage-grid {
   position: absolute; inset: 0;
   background-image:
@@ -134,8 +122,6 @@ body::before {
   background-size: 72px 72px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
 }
-
-/* Floating dot grid accent */
 .stage-dots {
   position: absolute; top: 15%; right: 8%; width: 180px; height: 180px;
   background-image: radial-gradient(circle, rgba(26,25,22,.12) 1px, transparent 1px);
@@ -144,9 +130,7 @@ body::before {
   animation: float-in 2s var(--ease) 2.5s forwards;
 }
 @keyframes float-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
 .stage-inner { position: relative; z-index: 1; max-width: 1100px; }
-
 .stage-eyebrow {
   font-size: .68rem; font-weight: 400; letter-spacing: .28em; text-transform: uppercase;
   color: var(--ink3); margin-bottom: 2.4rem;
@@ -154,8 +138,6 @@ body::before {
   opacity: 0; transform: translateY(10px);
 }
 .stage-eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--blue); flex-shrink: 0; }
-
-/* Animated title — chars */
 .stage-title {
   font-family: var(--serif);
   font-size: clamp(3rem, 8.5vw, 10rem);
@@ -166,13 +148,11 @@ body::before {
 .stage-title .word span { display: block; transform: translateY(108%); }
 .stage-title em { font-style: italic; color: var(--ink2); }
 .stage-title .break { display: block; }
-
 .stage-sub {
   margin-top: 2.8rem; font-weight: 300; font-size: 1.05rem;
   color: var(--ink3); line-height: 1.88; max-width: 400px;
   opacity: 0;
 }
-
 .stage-scroll {
   position: absolute; right: 3rem; bottom: 8vh;
   display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -181,7 +161,7 @@ body::before {
 .stage-scroll-line { width: 1px; height: 58px; background: linear-gradient(to bottom, var(--ink4), transparent); }
 .stage-scroll span { font-size: .55rem; letter-spacing: .24em; text-transform: uppercase; color: var(--ink4); writing-mode: vertical-rl; }
 
-/* ── TICKER ── */
+/* TICKER */
 #ticker {
   border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
   padding: 1.1rem 0; overflow: hidden; white-space: nowrap;
@@ -200,9 +180,8 @@ body::before {
 }
 .ticker-dot { color: var(--blue); }
 
-/* ── PROJECTS — card layout ── */
+/* PROJECTS */
 #projects { padding: 7rem 3rem; }
-
 .projects-header {
   display: flex; justify-content: space-between; align-items: baseline;
   margin-bottom: 5rem; opacity: 0; transform: translateY(16px);
@@ -210,7 +189,7 @@ body::before {
 .ph-title { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic; color: var(--ink2); }
 .ph-count { font-weight: 300; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink4); }
 
-/* Project card — glass */
+/* Project card */
 .pc {
   display: grid; grid-template-columns: 64px 1fr auto;
   gap: 3rem; align-items: start;
@@ -235,12 +214,24 @@ body::before {
 .pc:hover .pc-title { letter-spacing: -.015em; }
 .pc:hover .pc-arrow { transform: translate(5px, -5px); color: var(--blue); }
 
+/* Badge état */
+.pc-status {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .55rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px;
+  border: 1px solid;
+}
+.pc-status.stable   { color: #3a7d44; background: rgba(58,125,68,.08); border-color: rgba(58,125,68,.2); }
+.pc-status.beta     { color: #b07d2a; background: rgba(200,162,106,.1); border-color: rgba(200,162,106,.3); }
+.pc-status.concept  { color: var(--ink3); background: rgba(158,154,144,.08); border-color: rgba(158,154,144,.2); }
+.pc-status.actif    { color: var(--blue); background: rgba(61,90,128,.07); border-color: rgba(61,90,128,.2); }
+.pc-status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
 .pc-num {
   font-family: var(--serif); font-size: 3rem; font-weight: 400;
   color: var(--ink4); line-height: 1;
   transition: color .4s; padding-top: .2rem;
 }
-.pc-body { }
 .pc-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem; }
 .pc-tag { font-size: .58rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink3); background: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.9); padding: 4px 12px; border-radius: 999px; backdrop-filter: blur(8px); }
 .pc-title {
@@ -261,7 +252,15 @@ body::before {
 .pc-stat-l { font-size: .55rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--ink4); display: block; margin-top: 3px; }
 .pc-arrow { font-size: 1.1rem; color: var(--ink4); transition: transform .4s var(--ease), color .3s; margin-top: .5rem; }
 
-/* ── INTERLUDE — plein écran typographique ── */
+/* Groupe section */
+.projects-group-label {
+  font-size: .62rem; font-weight: 400; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--ink4); margin: 4rem 0 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.projects-group-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+/* INTERLUDE */
 #interlude {
   min-height: 80vh; display: flex; align-items: center;
   padding: 8rem 3rem; position: relative; overflow: hidden;
@@ -300,17 +299,15 @@ body::before {
 }
 .int-q em { font-style: normal; color: var(--blue); }
 
-/* ── PRINCIPES ── */
+/* PRINCIPES */
 #principes { padding: 10rem 3rem; }
 .pr-header { text-align: center; margin-bottom: 7rem; opacity: 0; }
 .pr-header h2 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 4rem); font-weight: 400; letter-spacing: -.02em; margin-bottom: .5rem; }
 .pr-header h2 em { font-style: italic; color: var(--ink2); }
 .pr-header p { font-weight: 300; font-size: 1rem; color: var(--ink3); }
-
-.pr-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; border-top: none; margin-top: 0; }
+.pr-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
 .pr {
   padding: 2.5rem 2rem;
-  border-right: none;
   border-radius: var(--r-lg);
   background: var(--glass);
   backdrop-filter: blur(16px) saturate(1.3);
@@ -319,14 +316,12 @@ body::before {
   box-shadow: var(--glass-shadow);
   opacity: 0; transform: translateY(20px);
 }
-.pr:last-child { border-right: none; padding-right: 2rem; }
 .pr-n { font-family: var(--serif); font-style: italic; font-size: 2.5rem; font-weight: 400; color: var(--ink4); display: block; line-height: 1; margin-bottom: 1.2rem; }
 .pr h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: .6rem; }
 .pr p { font-weight: 300; font-size: .88rem; color: var(--ink2); line-height: 1.8; }
 
-/* ── FOOTER ── */
+/* FOOTER */
 footer {
-  border-top: none;
   margin: 0 1.5rem 1.5rem;
   padding: 2rem 2.5rem;
   display: flex; justify-content: space-between; align-items: center;
@@ -344,7 +339,7 @@ footer {
 .ft-links a:hover { color: var(--ink); }
 .ft-copy { font-weight: 300; font-size: .6rem; letter-spacing: .1em; color: var(--ink4); }
 
-/* ── MOBILE ── */
+/* MOBILE */
 @media (max-width: 900px) {
   #nav { top: .8rem; width: calc(100% - 2rem); padding: .8rem 1.4rem; border-radius: var(--r-xl); }
   #stage { padding: 0 1.5rem 8vh; }
@@ -381,7 +376,6 @@ footer {
   <div class="stage-bg"></div>
   <div class="stage-grid"></div>
   <div class="stage-dots"></div>
-
   <div class="stage-inner">
     <p class="stage-eyebrow" id="se">Shams Guettaf · Paris · 2025–2026</p>
     <h1 class="stage-title" id="st">
@@ -399,7 +393,6 @@ footer {
     </h1>
     <p class="stage-sub" id="ssub">Un laboratoire numérique.</p>
   </div>
-
   <div class="stage-scroll" id="sscroll">
     <div class="stage-scroll-line"></div>
     <span>Descendre</span>
@@ -428,55 +421,166 @@ footer {
 <section id="projects">
   <div class="projects-header" id="ph">
     <span class="ph-title">Les expériences</span>
-    <span class="ph-count">06 projets</span>
+    <span class="ph-count">10 projets</span>
   </div>
 
+  <!-- ── ÉDITORIAL & CULTURE ── -->
+  <div class="projects-group-label">Éditorial & Culture</div>
+
+  <!-- 01 HumiAn -->
   <a class="pc" href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener">
     <div class="pc-num">01</div>
     <div class="pc-body">
-      <div class="pc-tags"><span class="pc-tag">Éditorial</span><span class="pc-tag">IA</span><span class="pc-tag">Société</span></div>
+      <div class="pc-tags">
+        <span class="pc-tag">Éditorial</span>
+        <span class="pc-tag">IA</span>
+        <span class="pc-tag">Société</span>
+        <span class="pc-status actif"><span class="pc-status-dot"></span>Actif</span>
+      </div>
       <div class="pc-title">Hum<em>{i}</em>An</div>
       <p class="pc-q">"Que reste-t-il de la pensée critique dans un monde où l'IA produit de la pensée à la demande ?"</p>
     </div>
     <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">43</span><span class="pc-stat-l">Articles</span></div>
+      <div class="pc-stat"><span class="pc-stat-v">43+</span><span class="pc-stat-l">Articles</span></div>
       <span class="pc-arrow">↗</span>
     </div>
   </a>
 
-  <a class="pc" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">
-
+  <!-- 02 Codex -->
+  <a class="pc" href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener">
     <div class="pc-num">02</div>
     <div class="pc-body">
-      <div class="pc-tags"><span class="pc-tag">Diagnostic</span><span class="pc-tag">Python</span><span class="pc-tag">Vie privée</span></div>
+      <div class="pc-tags">
+        <span class="pc-tag">Culture</span>
+        <span class="pc-tag">Domaine public</span>
+        <span class="pc-tag">Littérature</span>
+        <span class="pc-status stable"><span class="pc-status-dot"></span>Stable</span>
+      </div>
+      <div class="pc-title">Codex</div>
+      <p class="pc-q">"Le patrimoine culturel commun devrait-il appartenir à celui qui construit la meilleure interface ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">458</span><span class="pc-stat-l">Œuvres libres</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- 03 Fabulae -->
+  <a class="pc" href="https://fabulae.vercel.app/" target="_blank" rel="noopener">
+    <div class="pc-num">03</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Séries</span>
+        <span class="pc-tag">TMDB</span>
+        <span class="pc-tag">PWA</span>
+        <span class="pc-tag">Mobile-first</span>
+        <span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span>
+      </div>
+      <div class="pc-title"><em>Fabulae</em></div>
+      <p class="pc-q">"Ton Top 3 des séries du moment — classé, partagé, sans compte, sans collecte."</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">TMDB</span><span class="pc-stat-l">API officielle</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- ── OUTILS & AUTONOMIE ── -->
+  <div class="projects-group-label">Outils & Autonomie</div>
+
+  <!-- 04 Scribe -->
+  <a class="pc" href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener">
+    <div class="pc-num">04</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Emploi</span>
+        <span class="pc-tag">CV</span>
+        <span class="pc-tag">Autonomie</span>
+        <span class="pc-status stable"><span class="pc-status-dot"></span>Stable</span>
+      </div>
+      <div class="pc-title">Scribe</div>
+      <p class="pc-q">"Peut-on concevoir un outil dont le modèle économique est simplement d'être utile ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">100%</span><span class="pc-stat-l">Local — zéro tracker</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- 05 Didici -->
+  <a class="pc" href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener">
+    <div class="pc-num">05</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Apprentissage</span>
+        <span class="pc-tag">Éducation</span>
+        <span class="pc-status beta"><span class="pc-status-dot"></span>Non audité</span>
+      </div>
+      <div class="pc-title"><em>Didici</em></div>
+      <p class="pc-q">"Et si apprendre était une pratique quotidienne, sans friction et sans compte à créer ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">—</span><span class="pc-stat-l">À vérifier</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- ── DIAGNOSTIC & MOBILITÉ ── -->
+  <div class="projects-group-label">Diagnostic & Mobilité</div>
+
+  <!-- 06 SENTINEL -->
+  <a class="pc" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">
+    <div class="pc-num">06</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Diagnostic</span>
+        <span class="pc-tag">Python</span>
+        <span class="pc-tag">Vie privée</span>
+        <span class="pc-tag">Multi-plateforme</span>
+        <span class="pc-status stable"><span class="pc-status-dot"></span>Stable v3.28</span>
+      </div>
       <div class="pc-title">SENTINEL</div>
       <p class="pc-q">"Connaître son système sans en perdre le contrôle — est-ce encore possible ?"</p>
     </div>
     <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">240+</span><span class="pc-stat-l">Métriques</span></div>
+      <div class="pc-stat"><span class="pc-stat-v">240+</span><span class="pc-stat-l">Métriques · 4 OS</span></div>
       <span class="pc-arrow">↗</span>
     </div>
   </a>
 
-  <a class="pc" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">
-
-    <div class="pc-num">03</div>
+  <!-- 07 Talaria -->
+  <a class="pc" href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener">
+    <div class="pc-num">07</div>
     <div class="pc-body">
-      <div class="pc-tags"><span class="pc-tag">Concept</span><span class="pc-tag">e-ink</span><span class="pc-tag">Droit</span></div>
-      <div class="pc-title">Légale<em>Ink</em></div>
-      <p class="pc-q">"Et si la conformité légale devenait aussi invisible qu'une mise à jour système ?"</p>
+      <div class="pc-tags">
+        <span class="pc-tag">Transport</span>
+        <span class="pc-tag">Île-de-France</span>
+        <span class="pc-tag">PWA</span>
+        <span class="pc-tag">Mobilité</span>
+        <span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span>
+      </div>
+      <div class="pc-title"><em>Talaria</em></div>
+      <p class="pc-q">"Les transports en commun d'Île-de-France, sans compte, sans pub, sans collecte — depuis n'importe quel mobile."</p>
     </div>
     <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">RGPD</span><span class="pc-stat-l">Conforme</span></div>
+      <div class="pc-stat"><span class="pc-stat-v">IDFM</span><span class="pc-stat-l">PRIM · OSM · Météo</span></div>
       <span class="pc-arrow">↗</span>
     </div>
   </a>
 
-  <a class="pc" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">
+  <!-- ── INFRASTRUCTURE & CONCEPT ── -->
+  <div class="projects-group-label">Infrastructure & Concept</div>
 
-    <div class="pc-num">04</div>
+  <!-- 08 Pi.stream -->
+  <a class="pc" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">
+    <div class="pc-num">08</div>
     <div class="pc-body">
-      <div class="pc-tags"><span class="pc-tag">Hardware</span><span class="pc-tag">Automatisation</span><span class="pc-tag">Distance</span></div>
+      <div class="pc-tags">
+        <span class="pc-tag">Hardware</span>
+        <span class="pc-tag">Automatisation</span>
+        <span class="pc-tag">Raspberry Pi</span>
+        <span class="pc-status stable"><span class="pc-status-dot"></span>Actif NYC</span>
+      </div>
       <div class="pc-title">π<em>.stream</em></div>
       <p class="pc-q">"Jusqu'où peut-on aller seul, avec du hardware bas de gamme et une architecture bien pensée ?"</p>
     </div>
@@ -486,33 +590,45 @@ footer {
     </div>
   </a>
 
-  <a class="pc" href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener">
-
-    <div class="pc-num">05</div>
+  <!-- 09 LégaleInk -->
+  <a class="pc" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">
+    <div class="pc-num">09</div>
     <div class="pc-body">
-      <div class="pc-tags"><span class="pc-tag">Outil</span><span class="pc-tag">Emploi</span><span class="pc-tag">Autonomie</span></div>
-      <div class="pc-title">Scribe</div>
-      <p class="pc-q">"Peut-on concevoir un outil dont le modèle économique est simplement d'être utile ?"</p>
+      <div class="pc-tags">
+        <span class="pc-tag">Concept</span>
+        <span class="pc-tag">e-ink</span>
+        <span class="pc-tag">Droit</span>
+        <span class="pc-status concept"><span class="pc-status-dot"></span>Concept</span>
+      </div>
+      <div class="pc-title">Légale<em>Ink</em></div>
+      <p class="pc-q">"Et si la conformité légale devenait aussi invisible qu'une mise à jour système ?"</p>
     </div>
     <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">100%</span><span class="pc-stat-l">Local</span></div>
+      <div class="pc-stat"><span class="pc-stat-v">RGPD</span><span class="pc-stat-l">Pitch · Prototype</span></div>
       <span class="pc-arrow">↗</span>
     </div>
   </a>
 
-  <a class="pc" href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener">
-
-    <div class="pc-num">06</div>
+  <!-- 10 Vacuum -->
+  <a class="pc" href="https://github.com/shamsetdean/vacuum" target="_blank" rel="noopener">
+    <div class="pc-num">10</div>
     <div class="pc-body">
-      <div class="pc-tags"><span class="pc-tag">Culture</span><span class="pc-tag">Domaine public</span><span class="pc-tag">Littérature</span></div>
-      <div class="pc-title">Codex</div>
-      <p class="pc-q">"Le patrimoine culturel commun devrait-il appartenir à celui qui construit la meilleure interface ?"</p>
+      <div class="pc-tags">
+        <span class="pc-tag">Carte</span>
+        <span class="pc-tag">Signalement</span>
+        <span class="pc-tag">Firebase</span>
+        <span class="pc-tag">OSM</span>
+        <span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span>
+      </div>
+      <div class="pc-title">Vacuum</div>
+      <p class="pc-q">"Trouver une place de parking en temps réel — par la communauté, pour la communauté, sans compte."</p>
     </div>
     <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">∞</span><span class="pc-stat-l">Œuvres libres</span></div>
+      <div class="pc-stat"><span class="pc-stat-v">Live</span><span class="pc-stat-l">Firebase · OSM</span></div>
       <span class="pc-arrow">↗</span>
     </div>
   </a>
+
 </section>
 
 <!-- INTERLUDE -->
@@ -532,7 +648,7 @@ footer {
 <section id="principes">
   <div class="pr-header" id="prh">
     <h2>Un seul <em>fil conducteur</em></h2>
-    <p>Quatre projets distincts. Quatre domaines différents. Une même architecture.</p>
+    <p>Dix projets distincts. Dix domaines différents. Une même architecture.</p>
   </div>
   <div class="pr-grid">
     <div class="pr" id="pr0"><span class="pr-n">I</span><h4>Souveraineté</h4><p>Aucun projet ne collecte ni ne transmet de données. Ce n'est pas un paramètre — c'est une architecture de départ.</p></div>
@@ -546,11 +662,15 @@ footer {
   <span class="ft-brand">anthropotech /lab</span>
   <ul class="ft-links">
     <li><a href="https://shamsetdean.github.io/humiAn/" target="_blank">Hum{i}An</a></li>
-    <li><a href="https://shamsetdean.github.io/sentinel/" target="_blank">Sentinel</a></li>
-    <li><a href="https://shamsetdean.github.io/legaleink/" target="_blank">LégaleInk</a></li>
-    <li><a href="https://shamsetdean.github.io/pi-stream/" target="_blank">π.stream</a></li>
-    <li><a href="https://shamsetdean.github.io/scribe/" target="_blank">Scribe</a></li>
     <li><a href="https://shamsetdean.github.io/codex/" target="_blank">Codex</a></li>
+    <li><a href="https://fabulae.vercel.app/" target="_blank">Fabulae</a></li>
+    <li><a href="https://shamsetdean.github.io/scribe/" target="_blank">Scribe</a></li>
+    <li><a href="https://shamsetdean.github.io/didici/" target="_blank">Didici</a></li>
+    <li><a href="https://shamsetdean.github.io/sentinel/" target="_blank">Sentinel</a></li>
+    <li><a href="https://talaria-iota.vercel.app/" target="_blank">Talaria</a></li>
+    <li><a href="https://shamsetdean.github.io/pi-stream/" target="_blank">π.stream</a></li>
+    <li><a href="https://shamsetdean.github.io/legaleink/" target="_blank">LégaleInk</a></li>
+    <li><a href="https://github.com/shamsetdean/vacuum" target="_blank">Vacuum</a></li>
     <li><a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank">LinkedIn</a></li>
     <li><a href="https://github.com/shamsetdean" target="_blank">GitHub</a></li>
   </ul>
@@ -562,7 +682,6 @@ footer {
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-// ── LENIS smooth scroll
 const ls = document.createElement('script');
 ls.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js';
 ls.onload = () => {
@@ -573,7 +692,7 @@ ls.onload = () => {
 };
 document.head.appendChild(ls);
 
-// ── CURSOR
+// CURSOR
 const cur = document.getElementById('cur'), curR = document.getElementById('cur-r');
 let mx=0, my=0, rx=0, ry=0;
 document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
@@ -588,23 +707,17 @@ document.querySelectorAll('a').forEach(el => {
   el.addEventListener('mouseleave', () => document.body.classList.remove('ch'));
 });
 
-// ── HERO SEQUENCE
+// HERO
 const intro = gsap.timeline({ delay: .1 });
 const words = ['w1','w2','w3','w4','w5','w6'];
-
-// stagger words
-intro.to(words.map(id => `#${id}`), {
-  y: '0%', duration: 1.4, ease: 'expo.out', stagger: .09
-}, .5);
+intro.to(words.map(id => `#${id}`), { y: '0%', duration: 1.4, ease: 'expo.out', stagger: .09 }, .5);
 intro.to('#se', { opacity:1, y:0, duration:.9, ease:'expo.out' }, .4);
 intro.to('#ssub', { opacity:1, duration:1.1, ease:'power2.out' }, 1.5);
 intro.to('#sscroll', { opacity:1, duration:.8, ease:'power2.out' }, 2);
 intro.to('#nav', { opacity:1, duration:.9, ease:'power2.out' }, 2.2);
 intro.to('#ticker', { opacity:1, duration:.8, ease:'power2.out' }, 2.4);
-
 gsap.set('#se', { y: 12 });
 
-// ── PARALLAX HERO
 document.addEventListener('mousemove', e => {
   const x = (e.clientX / window.innerWidth - .5);
   const y = (e.clientY / window.innerHeight - .5);
@@ -613,23 +726,20 @@ document.addEventListener('mousemove', e => {
   gsap.to('.stage-dots', { x: x*20, y: y*14, duration:1.8, ease:'power2.out' });
 });
 
-// ── PROJECTS HEADER
+// PROJECTS HEADER
 gsap.to('#ph', {
   scrollTrigger: { trigger: '#ph', start: 'top 80%' },
   opacity: 1, y: 0, duration: 1, ease: 'expo.out'
 });
 
-// ── PROJECT CARDS + EFFET SABLE
+// PROJECT CARDS + EFFET SABLE
 document.querySelectorAll('.pc').forEach((el, i) => {
   gsap.to(el, {
     scrollTrigger: { trigger: el, start: 'top 82%', toggleActions: 'play none none none' },
     opacity: 1, y: 0, duration: 1.1, ease: 'expo.out', delay: i * .04
   });
-
-  // Découpe le titre en spans par lettre
   const title = el.querySelector('.pc-title');
   const rawHTML = title.innerHTML;
-  // Préserver les balises em — on split le texte visible uniquement
   let result = '';
   let inTag = false;
   for (let i = 0; i < rawHTML.length; i++) {
@@ -641,62 +751,44 @@ document.querySelectorAll('.pc').forEach((el, i) => {
     result += `<span class="sc" style="display:inline-block">${ch}</span>`;
   }
   title.innerHTML = result;
-
   const chars = title.querySelectorAll('.sc');
-
   el.addEventListener('mouseenter', () => {
     chars.forEach(ch => {
       const angle = (Math.random() - .5) * 80;
       const dist  = 4 + Math.random() * 16;
       const dx    = Math.cos(angle) * dist;
       const dy    = Math.sin(angle) * dist - Math.random() * 8;
-      const delay = Math.random() * .35;
-      gsap.to(ch, {
-        x: dx, y: dy,
-        rotation: (Math.random() - .5) * 18,
-        opacity: .35 + Math.random() * .45,
-        duration: .9 + Math.random() * .4,
-        ease: 'power1.out',
-        delay
-      });
+      gsap.to(ch, { x: dx, y: dy, rotation: (Math.random()-.5)*18, opacity: .35+Math.random()*.45, duration: .9+Math.random()*.4, ease: 'power1.out', delay: Math.random()*.35 });
     });
   });
-
   el.addEventListener('mouseleave', () => {
     chars.forEach(ch => {
-      const delay = Math.random() * .3;
-      gsap.to(ch, {
-        x: 0, y: 0, rotation: 0, opacity: 1,
-        duration: 1.1 + Math.random() * .4,
-        ease: 'elastic.out(1, .45)',
-        delay
-      });
+      gsap.to(ch, { x:0, y:0, rotation:0, opacity:1, duration: 1.1+Math.random()*.4, ease: 'elastic.out(1,.45)', delay: Math.random()*.3 });
     });
   });
 });
 
-// ── INTERLUDE
+// INTERLUDE
+gsap.set('#il', { y: 10 });
 gsap.to('#il', {
   scrollTrigger: { trigger: '#interlude', start: 'top 72%' },
   opacity: 1, y: 0, duration: .9, ease: 'expo.out'
 });
-gsap.set('#il', { y: 10 });
 gsap.to('#iq', {
   scrollTrigger: { trigger: '#interlude', start: 'top 68%' },
   opacity: 1, filter: 'blur(0px)', duration: 1.8, ease: 'expo.out', delay: .2
 });
-// Parallax bg word on scroll
 gsap.to('.int-bg-word', {
   scrollTrigger: { trigger: '#interlude', start: 'top bottom', end: 'bottom top', scrub: 1.5 },
   x: -60, ease: 'none'
 });
 
-// ── PRINCIPES
+// PRINCIPES
+gsap.set('#prh', { y: 16 });
 gsap.to('#prh', {
   scrollTrigger: { trigger: '#prh', start: 'top 78%' },
   opacity: 1, y: 0, duration: 1, ease: 'expo.out'
 });
-gsap.set('#prh', { y: 16 });
 ['pr0','pr1','pr2','pr3'].forEach((id, i) => {
   gsap.to(`#${id}`, {
     scrollTrigger: { trigger: '#principes', start: 'top 65%' },

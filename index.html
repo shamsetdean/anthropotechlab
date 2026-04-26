@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropotech · Lab</title>
+<meta name="description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23f8f7f4'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-size='18' font-style='italic' fill='%233d5a80'%3EA%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shamsetdean.github.io/anthropotechlab/">
+<meta property="og:title" content="Anthropotech · Lab">
+<meta property="og:description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
+<meta property="og:image" content="https://shamsetdean.github.io/humiAn/icons/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Anthropotech · Lab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@shamsetdean">
+<meta name="twitter:title" content="Anthropotech · Lab">
+<meta name="twitter:description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
+<meta name="twitter:image" content="https://shamsetdean.github.io/humiAn/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f8f7f4;
+  --bg2: #f2f0eb;
+  --bg3: #ece9e2;
+  --ink: #1a1916;
+  --ink2: #5a574f;
+  --ink3: #9e9a90;
+  --ink4: #ccc9c1;
+  --blue: #3d5a80;
+  --blue-soft: rgba(61,90,128,.07);
+  --red: #c0392b;
+  --gold: #c8a26a;
+  --rule: rgba(26,25,22,.07);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --ease: cubic-bezier(.16,1,.3,1);
+  --ease2: cubic-bezier(.4,0,.2,1);
+  --glass: rgba(255,255,255,0.55);
+  --glass-border: rgba(255,255,255,0.75);
+  --glass-shadow: 0 8px 32px rgba(26,25,22,.08), 0 1px 0 rgba(255,255,255,.9) inset;
+  --r-sm: 14px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-xl: 40px;
+}
+
+html { overflow-x: hidden; scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .028; mix-blend-mode: multiply;
+  pointer-events: none; z-index: 9000;
+}
+
+#cur { position: fixed; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; top: 0; left: 0; transition: width .3s var(--ease), height .3s var(--ease), background .3s; }
+#cur-r { position: fixed; width: 34px; height: 34px; border: 1px solid rgba(26,25,22,.16); border-radius: 50%; pointer-events: none; z-index: 9998; top: 0; left: 0; transition: width .5s var(--ease), height .5s var(--ease), border-color .3s; }
+.ch #cur { width: 9px; height: 9px; background: var(--blue); }
+.ch #cur-r { width: 50px; height: 50px; border-color: rgba(36,89,232,.22); }
+
+/* NAV */
+#nav {
+  position: fixed; top: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 500;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 2rem;
+  width: calc(100% - 4rem); max-width: 1100px;
+  background: var(--glass);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--glass-shadow);
+  opacity: 0;
+}
+.nav-logo { font-family: var(--sans); font-weight: 400; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ink2); text-decoration: none; transition: color .3s; }
+.nav-logo:hover { color: var(--ink); }
+.nav-r { display: flex; align-items: center; gap: 2rem; }
+.nav-link { font-weight: 300; font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3); text-decoration: none; transition: color .3s; }
+.nav-link:hover { color: var(--ink); }
+
+/* HERO */
+#stage {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 3rem 8vh;
+  position: relative; overflow: hidden;
+}
+.stage-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 75% 30%, rgba(36,89,232,.05) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(200,162,106,.04) 0%, transparent 60%);
+  /* animation breathe désactivée pour fluidité */
+}
+@keyframes breathe {
+  from { opacity: .6; transform: scale(1); }
+  to   { opacity: 1;  transform: scale(1.04); }
+}
+.stage-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(26,25,22,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,25,22,.03) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+.stage-dots {
+  position: absolute; top: 15%; right: 8%; width: 180px; height: 180px;
+  background-image: radial-gradient(circle, rgba(26,25,22,.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0;
+  /* animation float-in désactivée pour fluidité */
+}
+@keyframes float-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.stage-inner { position: relative; z-index: 1; max-width: 1100px; }
+.stage-eyebrow {
+  font-size: .68rem; font-weight: 400; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 2.4rem;
+  display: flex; align-items: center; gap: .9rem;
+  opacity: 0; transform: translateY(10px);
+}
+.stage-eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--blue); flex-shrink: 0; }
+.stage-title {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 8.5vw, 10rem);
+  font-weight: 400; line-height: 1.04; letter-spacing: -.02em;
+  color: var(--ink);
+}
+.stage-title .word { display: inline-block; overflow: hidden; vertical-align: top; }
+.stage-title .word span { display: block; transform: translateY(108%); }
+.stage-title em { font-style: italic; color: var(--ink2); }
+.stage-title .break { display: block; }
+.stage-sub {
+  margin-top: 2.8rem; font-weight: 300; font-size: 1.05rem;
+  color: var(--ink3); line-height: 1.88; max-width: 400px;
+  opacity: 0;
+}
+.stage-scroll {
+  position: absolute; right: 3rem; bottom: 8vh;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  opacity: 0;
+}
+.stage-scroll-line { width: 1px; height: 58px; background: linear-gradient(to bottom, var(--ink4), transparent); }
+.stage-scroll span { font-size: .55rem; letter-spacing: .24em; text-transform: uppercase; color: var(--ink4); writing-mode: vertical-rl; }
+
+/* TICKER */
+#ticker {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 1.1rem 0; overflow: hidden; white-space: nowrap;
+  background: var(--bg2);
+  opacity: 0;
+}
+.ticker-track {
+  display: inline-flex; gap: 4rem;
+  /* animation tick désactivée pour fluidité */
+}
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker-item {
+  font-family: var(--serif);
+  font-size: 1rem; font-weight: 400; color: var(--ink3);
+  flex-shrink: 0;
+}
+.ticker-dot { color: var(--blue); }
+
+/* PROJECTS */
+#projects { padding: 7rem 3rem; }
+.projects-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 5rem; opacity: 0; transform: translateY(16px);
+}
+.ph-title { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic; color: var(--ink2); }
+.ph-count { font-weight: 300; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink4); }
+
+/* Project card */
+.pc {
+  display: grid; grid-template-columns: 64px 1fr auto;
+  gap: 3rem; align-items: start;
+  padding: 2.8rem 2.5rem;
+  margin-bottom: 1rem;
+  text-decoration: none; color: inherit; position: relative;
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--glass-shadow);
+  opacity: 0; transform: translateY(28px);
+  transition: box-shadow .4s var(--ease), transform .3s var(--ease), background .3s;
+}
+.pc:hover {
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 16px 48px rgba(26,25,22,.12), 0 1px 0 rgba(255,255,255,.95) inset;
+  transform: translateY(-2px);
+}
+.pc:hover .pc-num { color: var(--blue); }
+.pc:hover .pc-title { letter-spacing: -.015em; }
+.pc:hover .pc-arrow { transform: translate(5px, -5px); color: var(--blue); }
+
+/* Badge état */
+.pc-status {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .55rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px;
+  border: 1px solid;
+}
+.pc-status.stable   { color: #3a7d44; background: rgba(58,125,68,.08); border-color: rgba(58,125,68,.2); }
+.pc-status.beta     { color: #b07d2a; background: rgba(200,162,106,.1); border-color: rgba(200,162,106,.3); }
+.pc-status.concept  { color: var(--ink3); background: rgba(158,154,144,.08); border-color: rgba(158,154,144,.2); }
+.pc-status.actif    { color: var(--blue); background: rgba(61,90,128,.07); border-color: rgba(61,90,128,.2); }
+.pc-status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+.pc-num {
+  font-family: var(--serif); font-size: 3rem; font-weight: 400;
+  color: var(--ink4); line-height: 1;
+  transition: color .4s; padding-top: .2rem;
+}
+.pc-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem; }
+.pc-tag { font-size: .58rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink3); background: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.9); padding: 4px 12px; border-radius: 999px; backdrop-filter: blur(8px); }
+.pc-title {
+  font-family: var(--serif); font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+  font-weight: 400; line-height: 1.08; letter-spacing: -.018em;
+  color: var(--ink); margin-bottom: .9rem;
+  transition: letter-spacing .5s var(--ease);
+}
+.pc-title em { font-style: italic; color: var(--ink2); }
+.pc-q {
+  font-family: var(--serif); font-size: 1rem;
+  font-weight: 400; color: var(--ink2); line-height: 1.72;
+  max-width: 500px; border-left: 2px solid var(--rule); padding-left: 1.2rem;
+}
+.pc-right { text-align: right; padding-top: .3rem; display: flex; flex-direction: column; align-items: flex-end; gap: 1.2rem; }
+.pc-stat { }
+.pc-stat-v { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; color: var(--ink4); display: block; line-height: 1; }
+.pc-stat-l { font-size: .55rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--ink4); display: block; margin-top: 3px; }
+.pc-arrow { font-size: 1.1rem; color: var(--ink4); transition: transform .4s var(--ease), color .3s; margin-top: .5rem; }
+
+/* Groupe section */
+.projects-group-label {
+  font-size: .62rem; font-weight: 400; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--ink4); margin: 4rem 0 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.projects-group-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+/* INTERLUDE */
+#interlude {
+  min-height: 80vh; display: flex; align-items: center;
+  padding: 8rem 3rem; position: relative; overflow: hidden;
+  background: var(--bg2);
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.int-bg-word {
+  position: absolute; right: -2%; top: 50%; transform: translateY(-50%);
+  font-family: var(--serif);
+  font-size: clamp(10rem, 22vw, 26rem); font-weight: 700;
+  color: rgba(26,25,22,.035); line-height: 1;
+  user-select: none; pointer-events: none; letter-spacing: -.03em;
+}
+.int-inner {
+  max-width: 750px; position: relative; z-index: 1;
+  background: var(--glass);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--glass-shadow);
+  padding: 4rem;
+}
+.int-label {
+  font-size: .65rem; font-weight: 400; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 2.5rem;
+  display: flex; align-items: center; gap: .9rem; opacity: 0;
+}
+.int-label::before { content: ''; width: 22px; height: 1px; background: var(--blue); }
+.int-q {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3.8vw, 3.8rem);
+  font-weight: 400;
+  color: var(--ink); line-height: 1.2; letter-spacing: -.015em;
+  opacity: 0; filter: blur(6px);
+}
+.int-q em { font-style: normal; color: var(--blue); }
+
+/* PRINCIPES */
+#principes { padding: 10rem 3rem; }
+.pr-header { text-align: center; margin-bottom: 7rem; opacity: 0; }
+.pr-header h2 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 4rem); font-weight: 400; letter-spacing: -.02em; margin-bottom: .5rem; }
+.pr-header h2 em { font-style: italic; color: var(--ink2); }
+.pr-header p { font-weight: 300; font-size: 1rem; color: var(--ink3); }
+.pr-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+.pr {
+  padding: 2.5rem 2rem;
+  border-radius: var(--r-lg);
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  opacity: 0; transform: translateY(20px);
+}
+.pr-n { font-family: var(--serif); font-size: 2.5rem; font-weight: 400; color: var(--ink4); display: block; line-height: 1; margin-bottom: 1.2rem; }
+.pr h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: .6rem; }
+.pr p { font-weight: 300; font-size: .88rem; color: var(--ink2); line-height: 1.8; }
+
+/* FOOTER */
+footer {
+  margin: 0 1.5rem 1.5rem;
+  padding: 2rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1.5rem;
+  background: var(--glass);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--glass-shadow);
+}
+.ft-brand { font-family: var(--serif); font-size: 1rem; color: var(--ink2); }
+.ft-links { display: flex; gap: 1.8rem; flex-wrap: wrap; list-style: none; }
+.ft-links a { font-weight: 300; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3); text-decoration: none; transition: color .3s; }
+.ft-links a:hover { color: var(--ink); }
+.ft-copy { font-weight: 300; font-size: .6rem; letter-spacing: .1em; color: var(--ink4); }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  #nav { top: .8rem; width: calc(100% - 2rem); padding: .8rem 1.4rem; border-radius: var(--r-xl); }
+  #stage { padding: 0 1.5rem 8vh; }
+  .stage-dots, .stage-scroll { display: none; }
+  #projects { padding: 5rem 1.5rem; }
+  .pc { grid-template-columns: 44px 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
+  .pc-right { display: none; }
+  #interlude { padding: 4rem 1.5rem; min-height: auto; }
+  .int-inner { padding: 2.5rem 2rem; }
+  #principes { padding: 6rem 1.5rem; }
+  .pr-grid { grid-template-columns: 1fr 1fr; }
+  .pr { padding: 1.8rem 1.5rem; }
+  footer { margin: 0 1rem 1rem; padding: 1.8rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  #cur, #cur-r { display: none; }
+  body { cursor: auto; }
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<header id="nav">
+  <a href="#" class="nav-logo">anthropotech /lab</a>
+  <div class="nav-r">
+    <a href="#projects" class="nav-link">Projets</a>
+    <a href="https://shamsetdean.github.io/humiAn/" target="_blank" class="nav-link">Magazine</a>
+    <a href="https://github.com/shamsetdean" target="_blank" class="nav-link">GitHub</a>
+  </div>
+</header>
+
+<!-- STAGE -->
+<section id="stage">
+  <div class="stage-bg"></div>
+  <div class="stage-grid"></div>
+  <div class="stage-dots"></div>
+  <div class="stage-inner">
+    <p class="stage-eyebrow" id="se">Shams Guettaf · Paris · 2025–2026</p>
+    <h1 class="stage-title" id="st">
+      <span class="word"><span id="w1">Bâtir</span></span>
+      <span> </span>
+      <span class="word"><span id="w2">ce</span></span>
+      <span> </span>
+      <span class="word"><span id="w3">qui</span></span>
+      <span class="break"></span>
+      <span class="word"><span id="w4">n'<em>existe</em></span></span>
+      <span class="break"></span>
+      <span class="word"><span id="w5">pas</span></span>
+      <span> </span>
+      <span class="word"><span id="w6">encore.</span></span>
+    </h1>
+    <p class="stage-sub" id="ssub">Un laboratoire numérique.</p>
+  </div>
+  <div class="stage-scroll" id="sscroll">
+    <div class="stage-scroll-line"></div>
+    <span>Descendre</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div id="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Privacy by design</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Zéro dépendance</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Hébergement souverain</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Cohérence fond / forme</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Zéro tracker</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Privacy by design</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Zéro dépendance</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Hébergement souverain</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Cohérence fond / forme</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Zéro tracker</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span><span class="ticker-dot">·</span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-header" id="ph">
+    <span class="ph-title">Les expériences</span>
+    <span class="ph-count">10 projets</span>
+  </div>
+
+  <!-- ── ÉDITORIAL & CULTURE ── -->
+  <div class="projects-group-label">Éditorial & Culture</div>
+
+  <!-- 01 HumiAn -->
+  <a class="pc" href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener">
+    <div class="pc-num">01</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Éditorial</span>
+        <span class="pc-tag">IA</span>
+        <span class="pc-tag">Société</span>
+        <span class="pc-status actif"><span class="pc-status-dot"></span>Actif</span>
+      </div>
+      <div class="pc-title">Hum<em>{i}</em>An</div>
+      <p class="pc-q">"Que reste-t-il de la pensée critique dans un monde où l'IA produit de la pensée à la demande ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">43+</span><span class="pc-stat-l">Articles</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- 02 Codex -->
+  <a class="pc" href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener">
+    <div class="pc-num">02</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Culture</span>
+        <span class="pc-tag">Domaine public</span>
+        <span class="pc-tag">Littérature</span>
+        <span class="pc-status stable"><span class="pc-status-dot"></span>Stable</span>
+      </div>
+      <div class="pc-title">Codex</div>
+      <p class="pc-q">"Le patrimoine culturel commun devrait-il appartenir à celui qui construit la meilleure interface ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">458</span><span class="pc-stat-l">Œuvres libres</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- 03 Fabulae -->
+  <a class="pc" href="https://fabulae.vercel.app/" target="_blank" rel="noopener">
+    <div class="pc-num">03</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Séries</span>
+        <span class="pc-tag">TMDB</span>
+        <span class="pc-tag">PWA</span>
+        <span class="pc-tag">Mobile-first</span>
+        <span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span>
+      </div>
+      <div class="pc-title"><em>Fabulae</em></div>
+      <p class="pc-q">"Ton Top 3 des séries du moment — classé, partagé, sans compte, sans collecte."</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">TMDB</span><span class="pc-stat-l">API officielle</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- ── OUTILS & AUTONOMIE ── -->
+  <div class="projects-group-label">Outils & Autonomie</div>
+
+  <!-- 04 Scribe -->
+  <a class="pc" href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener">
+    <div class="pc-num">04</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Emploi</span>
+        <span class="pc-tag">CV</span>
+        <span class="pc-tag">Autonomie</span>
+        <span class="pc-status stable"><span class="pc-status-dot"></span>Stable</span>
+      </div>
+      <div class="pc-title">Scribe</div>
+      <p class="pc-q">"Peut-on concevoir un outil dont le modèle économique est simplement d'être utile ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">100%</span><span class="pc-stat-l">Local — zéro tracker</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- 05 Didici -->
+  <a class="pc" href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener">
+    <div class="pc-num">05</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Apprentissage</span>
+        <span class="pc-tag">Éducation</span>
+        <span class="pc-status beta"><span class="pc-status-dot"></span>Non audité</span>
+      </div>
+      <div class="pc-title"><em>Didici</em></div>
+      <p class="pc-q">"Et si apprendre était une pratique quotidienne, sans friction et sans compte à créer ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">—</span><span class="pc-stat-l">À vérifier</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- ── DIAGNOSTIC & MOBILITÉ ── -->
+  <div class="projects-group-label">Diagnostic & Mobilité</div>
+
+  <!-- 06 SENTINEL -->
+  <a class="pc" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">
+    <div class="pc-num">06</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Diagnostic</span>
+        <span class="pc-tag">Python</span>
+        <span class="pc-tag">Vie privée</span>
+        <span class="pc-tag">Multi-plateforme</span>
+        <span class="pc-status stable"><span class="pc-status-dot"></span>Stable v3.28</span>
+      </div>
+      <div class="pc-title">SENTINEL</div>
+      <p class="pc-q">"Connaître son système sans en perdre le contrôle — est-ce encore possible ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">240+</span><span class="pc-stat-l">Métriques · 4 OS</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- 07 Talaria -->
+  <a class="pc" href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener">
+    <div class="pc-num">07</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Transport</span>
+        <span class="pc-tag">Île-de-France</span>
+        <span class="pc-tag">PWA</span>
+        <span class="pc-tag">Mobilité</span>
+        <span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span>
+      </div>
+      <div class="pc-title"><em>Talaria</em></div>
+      <p class="pc-q">"Les transports en commun d'Île-de-France, sans compte, sans pub, sans collecte — depuis n'importe quel mobile."</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">IDFM</span><span class="pc-stat-l">PRIM · OSM · Météo</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- ── INFRASTRUCTURE & CONCEPT ── -->
+  <div class="projects-group-label">Infrastructure & Concept</div>
+
+  <!-- 08 Pi.stream -->
+  <a class="pc" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">
+    <div class="pc-num">08</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Hardware</span>
+        <span class="pc-tag">Automatisation</span>
+        <span class="pc-tag">Raspberry Pi</span>
+        <span class="pc-status stable"><span class="pc-status-dot"></span>Actif NYC</span>
+      </div>
+      <div class="pc-title">π<em>.stream</em></div>
+      <p class="pc-q">"Jusqu'où peut-on aller seul, avec du hardware bas de gamme et une architecture bien pensée ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">24/7</span><span class="pc-stat-l">NYC → Paris</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- 09 LégaleInk -->
+  <a class="pc" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">
+    <div class="pc-num">09</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Concept</span>
+        <span class="pc-tag">e-ink</span>
+        <span class="pc-tag">Droit</span>
+        <span class="pc-status concept"><span class="pc-status-dot"></span>Concept</span>
+      </div>
+      <div class="pc-title">Légale<em>Ink</em></div>
+      <p class="pc-q">"Et si la conformité légale devenait aussi invisible qu'une mise à jour système ?"</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">RGPD</span><span class="pc-stat-l">Pitch · Prototype</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- 10 Vacuum -->
+  <a class="pc" href="https://github.com/shamsetdean/vacuum" target="_blank" rel="noopener">
+    <div class="pc-num">10</div>
+    <div class="pc-body">
+      <div class="pc-tags">
+        <span class="pc-tag">Carte</span>
+        <span class="pc-tag">Signalement</span>
+        <span class="pc-tag">Firebase</span>
+        <span class="pc-tag">OSM</span>
+        <span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span>
+      </div>
+      <div class="pc-title">Vacuum</div>
+      <p class="pc-q">"Trouver une place de parking en temps réel — par la communauté, pour la communauté, sans compte."</p>
+    </div>
+    <div class="pc-right">
+      <div class="pc-stat"><span class="pc-stat-v">Live</span><span class="pc-stat-l">Firebase · OSM</span></div>
+      <span class="pc-arrow">↗</span>
+    </div>
+  </a>
+
+</section>
+
+<!-- INTERLUDE -->
+<div id="interlude">
+  <div class="int-bg-word" aria-hidden="true">Lab</div>
+  <div class="int-inner">
+    <p class="int-label" id="il">Ce qui les relie</p>
+    <blockquote class="int-q" id="iq">
+      "Ce n'est pas un portfolio.<br>
+      C'est une <em>conviction</em> :<br>
+      bâtir ce qu'on rêve de voir exister."
+    </blockquote>
+  </div>
+</div>
+
+<!-- PRINCIPES -->
+<section id="principes">
+  <div class="pr-header" id="prh">
+    <h2>Un seul <em>fil conducteur</em></h2>
+    <p>Dix projets distincts. Dix domaines différents. Une même architecture.</p>
+  </div>
+  <div class="pr-grid">
+    <div class="pr" id="pr0"><span class="pr-n">I</span><h4>Souveraineté</h4><p>Aucun projet ne collecte ni ne transmet de données. Ce n'est pas un paramètre — c'est une architecture de départ.</p></div>
+    <div class="pr" id="pr1"><span class="pr-n">II</span><h4>Zéro dépendance</h4><p>HTML, CSS, Python, Raspberry Pi. Chaque outil compris en totalité par son auteur. Aucune boîte noire acceptée.</p></div>
+    <div class="pr" id="pr2"><span class="pr-n">III</span><h4>Hébergement libre</h4><p>GitHub Pages ou Pi local. Zéro coût d'infrastructure, zéro plateforme imposée, déploiement en un push.</p></div>
+    <div class="pr" id="pr3"><span class="pr-n">IV</span><h4>Forme = message</h4><p>Un site sur la maîtrise numérique qui est lui-même maîtrisé. La forme ne vient pas après le fond.</p></div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft-brand">anthropotech /lab</span>
+  <ul class="ft-links">
+    <li><a href="https://shamsetdean.github.io/humiAn/" target="_blank">Hum{i}An</a></li>
+    <li><a href="https://shamsetdean.github.io/codex/" target="_blank">Codex</a></li>
+    <li><a href="https://fabulae.vercel.app/" target="_blank">Fabulae</a></li>
+    <li><a href="https://shamsetdean.github.io/scribe/" target="_blank">Scribe</a></li>
+    <li><a href="https://shamsetdean.github.io/didici/" target="_blank">Didici</a></li>
+    <li><a href="https://shamsetdean.github.io/sentinel/" target="_blank">Sentinel</a></li>
+    <li><a href="https://talaria-iota.vercel.app/" target="_blank">Talaria</a></li>
+    <li><a href="https://shamsetdean.github.io/pi-stream/" target="_blank">π.stream</a></li>
+    <li><a href="https://shamsetdean.github.io/legaleink/" target="_blank">LégaleInk</a></li>
+    <li><a href="https://github.com/shamsetdean/vacuum" target="_blank">Vacuum</a></li>
+    <li><a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank">LinkedIn</a></li>
+    <li><a href="https://github.com/shamsetdean" target="_blank">GitHub</a></li>
+  </ul>
+  <span class="ft-copy">© 2026 Shams Guettaf</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+const ls = document.createElement('script');
+ls.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js';
+ls.onload = () => {
+  const lenis = new Lenis({ lerp: .09 });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+};
+document.head.appendChild(ls);
+
+// CURSOR
+const cur = document.getElementById('cur'), curR = document.getElementById('cur-r');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function loop(){
+  cur.style.transform = `translate(${mx-3}px,${my-3}px)`;
+  rx += (mx-rx)*.09; ry += (my-ry)*.09;
+  curR.style.transform = `translate(${rx-17}px,${ry-17}px)`;
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('ch'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('ch'));
+});
+
+// HERO
+const intro = gsap.timeline({ delay: .1 });
+const words = ['w1','w2','w3','w4','w5','w6'];
+intro.to(words.map(id => `#${id}`), { y: '0%', duration: 1.4, ease: 'expo.out', stagger: .09 }, .5);
+intro.to('#se', { opacity:1, y:0, duration:.9, ease:'expo.out' }, .4);
+intro.to('#ssub', { opacity:1, duration:1.1, ease:'power2.out' }, 1.5);
+intro.to('#sscroll', { opacity:1, duration:.8, ease:'power2.out' }, 2);
+intro.to('#nav', { opacity:1, duration:.9, ease:'power2.out' }, 2.2);
+intro.to('#ticker', { opacity:1, duration:.8, ease:'power2.out' }, 2.4);
+gsap.set('#se', { y: 12 });
+
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth - .5);
+  const y = (e.clientY / window.innerHeight - .5);
+  gsap.to('#st', { x: x*18, y: y*9, duration:1.5, ease:'power2.out' });
+  gsap.to('.stage-bg', { x: x*-30, y: y*-18, duration:2, ease:'power2.out' });
+  gsap.to('.stage-dots', { x: x*20, y: y*14, duration:1.8, ease:'power2.out' });
+});
+
+// PROJECTS HEADER
+gsap.to('#ph', {
+  scrollTrigger: { trigger: '#ph', start: 'top 80%' },
+  opacity: 1, y: 0, duration: 1, ease: 'expo.out'
+});
+
+// PROJECT CARDS + EFFET SABLE
+document.querySelectorAll('.pc').forEach((el, i) => {
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 82%', toggleActions: 'play none none none' },
+    opacity: 1, y: 0, duration: 1.1, ease: 'expo.out', delay: i * .04
+  });
+  const title = el.querySelector('.pc-title');
+  const rawHTML = title.innerHTML;
+  let result = '';
+  let inTag = false;
+  for (let i = 0; i < rawHTML.length; i++) {
+    const ch = rawHTML[i];
+    if (ch === '<') { inTag = true; result += ch; continue; }
+    if (ch === '>') { inTag = false; result += ch; continue; }
+    if (inTag) { result += ch; continue; }
+    if (ch === ' ') { result += '<span class="sc" style="display:inline-block"> </span>'; continue; }
+    result += `<span class="sc" style="display:inline-block">${ch}</span>`;
+  }
+  title.innerHTML = result;
+  const chars = title.querySelectorAll('.sc');
+  el.addEventListener('mouseenter', () => {
+    chars.forEach(ch => {
+      const angle = (Math.random() - .5) * 80;
+      const dist  = 4 + Math.random() * 16;
+      const dx    = Math.cos(angle) * dist;
+      const dy    = Math.sin(angle) * dist - Math.random() * 8;
+      gsap.to(ch, { x: dx, y: dy, rotation: (Math.random()-.5)*18, opacity: .35+Math.random()*.45, duration: .9+Math.random()*.4, ease: 'power1.out', delay: Math.random()*.35 });
+    });
+  });
+  el.addEventListener('mouseleave', () => {
+    chars.forEach(ch => {
+      gsap.to(ch, { x:0, y:0, rotation:0, opacity:1, duration: 1.1+Math.random()*.4, ease: 'elastic.out(1,.45)', delay: Math.random()*.3 });
+    });
+  });
+});
+
+// INTERLUDE
+gsap.set('#il', { y: 10 });
+gsap.to('#il', {
+  scrollTrigger: { trigger: '#interlude', start: 'top 72%' },
+  opacity: 1, y: 0, duration: .9, ease: 'expo.out'
+});
+gsap.to('#iq', {
+  scrollTrigger: { trigger: '#interlude', start: 'top 68%' },
+  opacity: 1, filter: 'blur(0px)', duration: 1.8, ease: 'expo.out', delay: .2
+});
+gsap.to('.int-bg-word', {
+  scrollTrigger: { trigger: '#interlude', start: 'top bottom', end: 'bottom top', scrub: 1.5 },
+  x: -60, ease: 'none'
+});
+
+// PRINCIPES
+gsap.set('#prh', { y: 16 });
+gsap.to('#prh', {
+  scrollTrigger: { trigger: '#prh', start: 'top 78%' },
+  opacity: 1, y: 0, duration: 1, ease: 'expo.out'
+});
+['pr0','pr1','pr2','pr3'].forEach((id, i) => {
+  gsap.to(`#${id}`, {
+    scrollTrigger: { trigger: '#principes', start: 'top 65%' },
+    opacity: 1, y: 0, duration: 1, ease: 'expo.out', delay: .15 + i * .1
+  });
+});
+</script>
+</body>
+</html>

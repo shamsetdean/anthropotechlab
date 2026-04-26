@@ -1,0 +1,140 @@
+# robots.txt — anthropotech /lab
+# © 2025-2026 Shams Guettaf — Tous droits réservés / All rights reserved
+#
+# Le contenu de ce site (code, textes, designs, identités) est protégé
+# par le droit d'auteur. Toute exploitation non autorisée — y compris
+# l'entraînement de modèles d'intelligence artificielle — est interdite.
+#
+# This site's content (code, text, design, identities) is protected by
+# copyright. Any unauthorized exploitation — including training of
+# artificial intelligence models — is strictly prohibited.
+
+# ─── Crawlers d'IA / AI training crawlers — BLOCKED ───
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GoogleOther
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: Ai2Bot-Dolma
+Disallow: /
+
+User-agent: DuckAssistBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: ISSCyberRiskCrawler
+Disallow: /
+
+User-agent: Kangaroo Bot
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# ─── Moteurs de recherche classiques — autorisés ───
+# (indexation OK, mais pas d'usage IA grâce à Google-Extended ci-dessus)
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Qwantify
+Allow: /
+
+# ─── Par défaut, tout le reste est bloqué ───
+
+User-agent: *
+Disallow: /

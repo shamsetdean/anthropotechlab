@@ -5,796 +5,1533 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anthropotech · Lab</title>
 <meta name="description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
+<meta name="theme-color" content="#f8f7f4">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23f8f7f4'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-size='18' font-style='italic' fill='%233d5a80'%3EA%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shamsetdean.github.io/anthropotechlab/">
 <meta property="og:title" content="Anthropotech · Lab">
 <meta property="og:description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
-<meta property="og:image" content="https://shamsetdean.github.io/humiAn/icons/icon-512.png">
-<meta property="og:image:width" content="512">
-<meta property="og:image:height" content="512">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Anthropotech · Lab">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@shamsetdean">
-<meta name="twitter:title" content="Anthropotech · Lab">
-<meta name="twitter:description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
-<meta name="twitter:image" content="https://shamsetdean.github.io/humiAn/icons/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* ──────────────────────────────────────────────────────────────
+   ANTHROPOTECH · LAB / v2 / Stylesheet
+   ────────────────────────────────────────────────────────────── */
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #f8f7f4;
-  --bg2: #f2f0eb;
-  --bg3: #ece9e2;
-  --ink: #1a1916;
-  --ink2: #5a574f;
-  --ink3: #9e9a90;
-  --ink4: #ccc9c1;
-  --blue: #3d5a80;
-  --blue-soft: rgba(61,90,128,.07);
-  --red: #c0392b;
-  --gold: #c8a26a;
-  --rule: rgba(26,25,22,.07);
-  --serif: 'Playfair Display', Georgia, serif;
-  --sans: 'Inter', system-ui, sans-serif;
-  --ease: cubic-bezier(.16,1,.3,1);
-  --ease2: cubic-bezier(.4,0,.2,1);
-  --glass: rgba(255,255,255,0.55);
-  --glass-border: rgba(255,255,255,0.75);
-  --glass-shadow: 0 8px 32px rgba(26,25,22,.08), 0 1px 0 rgba(255,255,255,.9) inset;
-  --r-sm: 14px;
-  --r-md: 20px;
-  --r-lg: 28px;
-  --r-xl: 40px;
+  /* Palette — chaude papier + bleu encre + accents */
+  --bg:        #f4f2ec;
+  --bg-warm:   #ede9df;
+  --bg-deep:   #e4dfd1;
+  --paper:     #faf8f3;
+
+  --ink:       #14130f;
+  --ink-2:     #4a4740;
+  --ink-3:     #8a8478;
+  --ink-4:     #b8b2a4;
+  --ink-5:     #d8d2c2;
+
+  --blue:      #2a4d77;
+  --blue-2:    #3d5a80;
+  --blue-soft: rgba(42,77,119,.08);
+
+  --red:       #a8392b;
+  --gold:      #b8893f;
+  --green:     #4a6b3f;
+
+  --rule:      rgba(20,19,15,.10);
+  --rule-2:    rgba(20,19,15,.05);
+
+  /* Typo */
+  --serif: 'Playfair Display', 'Iowan Old Style', Georgia, serif;
+  --sans:  'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono:  'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Mesures */
+  --gutter: 1.75rem;
+  --max:    1280px;
+  --rule-w: 1px;
 }
 
-html { overflow-x: hidden; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--sans);
-  font-weight: 300;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
   overflow-x: hidden;
-  cursor: none;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Grille de fond très subtile (papier millimétré) */
+  background-image:
+    linear-gradient(to right, rgba(20,19,15,.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20,19,15,.025) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
+/* Texture papier / grain */
 body::before {
   content: '';
   position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: .028; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: .04; mix-blend-mode: multiply;
   pointer-events: none; z-index: 9000;
 }
 
-#cur { position: fixed; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; top: 0; left: 0; transition: width .3s var(--ease), height .3s var(--ease), background .3s; }
-#cur-r { position: fixed; width: 34px; height: 34px; border: 1px solid rgba(26,25,22,.16); border-radius: 50%; pointer-events: none; z-index: 9998; top: 0; left: 0; transition: width .5s var(--ease), height .5s var(--ease), border-color .3s; }
-.ch #cur { width: 9px; height: 9px; background: var(--blue); }
-.ch #cur-r { width: 50px; height: 50px; border-color: rgba(36,89,232,.22); }
+::selection { background: var(--blue); color: var(--paper); }
 
-/* NAV */
+/* Focus visible — accessibilité */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ──────────────────────────────────────────────────────────────
+   PRIMITIVES — type, mono, data
+   ────────────────────────────────────────────────────────────── */
+
+.mono { font-family: var(--mono); font-feature-settings: 'ss01', 'cv01'; }
+.serif { font-family: var(--serif); }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.coord {
+  font-family: var(--mono);
+  font-size: 10.5px; font-weight: 400;
+  color: var(--ink-4);
+  letter-spacing: .04em;
+}
+
+/* Skip link (a11y) */
+.skip {
+  position: absolute; left: 1rem; top: -40px;
+  background: var(--ink); color: var(--paper);
+  padding: .6rem 1rem; font: 500 12px var(--mono);
+  z-index: 9999; transition: top .2s;
+}
+.skip:focus { top: 1rem; }
+
+/* ──────────────────────────────────────────────────────────────
+   NAVIGATION
+   ────────────────────────────────────────────────────────────── */
+
 #nav {
-  position: fixed; top: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 500;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1rem 2rem;
-  width: calc(100% - 4rem); max-width: 1100px;
-  background: var(--glass);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--r-xl);
-  box-shadow: var(--glass-shadow);
-  opacity: 0;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 1rem var(--gutter);
+  background: rgba(244,242,236,.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: var(--rule-w) solid var(--rule);
+  animation: fade-down .8s ease both;
 }
-.nav-logo { font-family: var(--sans); font-weight: 400; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ink2); text-decoration: none; transition: color .3s; }
-.nav-logo:hover { color: var(--ink); }
-.nav-r { display: flex; align-items: center; gap: 2rem; }
-.nav-link { font-weight: 300; font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3); text-decoration: none; transition: color .3s; }
-.nav-link:hover { color: var(--ink); }
 
-/* HERO */
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--ink);
+  display: flex; align-items: center; gap: .55rem;
+}
+.nav-logo::before {
+  content: ''; width: 8px; height: 8px;
+  background: var(--blue);
+  display: inline-block;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .35; transform: scale(.7); }
+}
+
+.nav-meta {
+  justify-self: center;
+  display: none;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-3);
+  letter-spacing: .08em;
+  gap: 1.4rem;
+}
+.nav-meta span { display: inline-flex; align-items: center; gap: .4rem; }
+.nav-meta span::before { content: ''; width: 4px; height: 4px; background: var(--ink-4); border-radius: 50%; }
+
+.nav-r { display: flex; gap: 1.6rem; align-items: center; }
+.nav-link {
+  font-family: var(--mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-2);
+  padding: .35rem .15rem;
+  border-bottom: 1px solid transparent;
+  transition: color .25s ease, border-color .25s ease;
+}
+.nav-link:hover { color: var(--ink); border-bottom-color: var(--blue); }
+.nav-link[data-ext]::after {
+  content: '↗';
+  margin-left: .3rem; font-size: 10px;
+  display: inline-block;
+  transition: transform .3s ease;
+}
+.nav-link[data-ext]:hover::after { transform: translate(2px,-2px); }
+
+@media (min-width: 900px) { .nav-meta { display: inline-flex; } }
+
+/* ──────────────────────────────────────────────────────────────
+   HERO / STAGE
+   ────────────────────────────────────────────────────────────── */
+
 #stage {
+  position: relative;
   min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 0 3rem 8vh;
-  position: relative; overflow: hidden;
+  padding: 9rem var(--gutter) 6rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: end;
+  gap: 3rem;
+  border-bottom: var(--rule-w) solid var(--rule);
+  overflow: hidden;
 }
-.stage-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 75% 30%, rgba(36,89,232,.05) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(200,162,106,.04) 0%, transparent 60%);
-  /* animation breathe désactivée pour fluidité */
-}
-@keyframes breathe {
-  from { opacity: .6; transform: scale(1); }
-  to   { opacity: 1;  transform: scale(1.04); }
-}
-.stage-grid {
-  position: absolute; inset: 0;
+
+/* Marge graduée à gauche (règle technique) */
+#stage::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: var(--gutter);
   background-image:
-    linear-gradient(rgba(26,25,22,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26,25,22,.03) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
+  background-size: 100% 24px;
+  background-position: 0 6rem;
+  opacity: .55;
+  pointer-events: none;
 }
-.stage-dots {
-  position: absolute; top: 15%; right: 8%; width: 180px; height: 180px;
-  background-image: radial-gradient(circle, rgba(26,25,22,.12) 1px, transparent 1px);
-  background-size: 18px 18px;
-  opacity: 0;
-  /* animation float-in désactivée pour fluidité */
+
+/* Crop marks (coins techniques) */
+.crop {
+  position: absolute;
+  width: 18px; height: 18px;
+  border-color: var(--ink-3);
+  pointer-events: none;
+  z-index: 1;
 }
-@keyframes float-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.stage-inner { position: relative; z-index: 1; max-width: 1100px; }
-.stage-eyebrow {
-  font-size: .68rem; font-weight: 400; letter-spacing: .28em; text-transform: uppercase;
-  color: var(--ink3); margin-bottom: 2.4rem;
-  display: flex; align-items: center; gap: .9rem;
-  opacity: 0; transform: translateY(10px);
+.crop.tl { top: 6rem; left: var(--gutter); border-top: 1px solid; border-left: 1px solid; }
+.crop.tr { top: 6rem; right: var(--gutter); border-top: 1px solid; border-right: 1px solid; }
+.crop.bl { bottom: 4rem; left: var(--gutter); border-bottom: 1px solid; border-left: 1px solid; }
+.crop.br { bottom: 4rem; right: var(--gutter); border-bottom: 1px solid; border-right: 1px solid; }
+
+.stage-coords {
+  position: absolute; top: 5.4rem; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 1.2rem;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+  z-index: 2;
 }
-.stage-eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--blue); flex-shrink: 0; }
+.stage-coords span::before { content: ''; display: inline-block; width: 6px; height: 1px; background: var(--ink-4); margin-right: .35rem; vertical-align: middle; }
+
+.stage-inner {
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1000px) {
+  .stage-inner {
+    grid-template-columns: 1fr 320px;
+    gap: 4rem;
+    align-items: end;
+  }
+}
+
+.stage-id {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: .1em;
+  display: flex; align-items: center; gap: .8rem;
+  margin-bottom: 1.5rem;
+  animation: fade-up .8s .2s ease both;
+}
+.stage-id::before {
+  content: ''; width: 32px; height: 1px; background: var(--blue);
+  flex-shrink: 0;
+}
+
 .stage-title {
   font-family: var(--serif);
-  font-size: clamp(3rem, 8.5vw, 10rem);
-  font-weight: 400; line-height: 1.04; letter-spacing: -.02em;
+  font-size: clamp(2.6rem, 8vw, 7.5rem);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.025em;
   color: var(--ink);
+  animation: fade-up 1.1s .35s ease both;
 }
-.stage-title .word { display: inline-block; overflow: hidden; vertical-align: top; }
-.stage-title .word span { display: block; transform: translateY(108%); }
-.stage-title em { font-style: italic; color: var(--ink2); }
-.stage-title .break { display: block; }
-.stage-sub {
-  margin-top: 2.8rem; font-weight: 300; font-size: 1.05rem;
-  color: var(--ink3); line-height: 1.88; max-width: 400px;
-  opacity: 0;
-}
-.stage-scroll {
-  position: absolute; right: 3rem; bottom: 8vh;
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  opacity: 0;
-}
-.stage-scroll-line { width: 1px; height: 58px; background: linear-gradient(to bottom, var(--ink4), transparent); }
-.stage-scroll span { font-size: .55rem; letter-spacing: .24em; text-transform: uppercase; color: var(--ink4); writing-mode: vertical-rl; }
+.stage-title em { font-style: italic; color: var(--blue); }
+.stage-title .br { display: block; }
 
-/* TICKER */
-#ticker {
-  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
-  padding: 1.1rem 0; overflow: hidden; white-space: nowrap;
-  background: var(--bg2);
-  opacity: 0;
+.stage-side {
+  display: grid;
+  gap: 1.6rem;
+  align-self: end;
+  padding-bottom: .4rem;
+  animation: fade-up .9s .55s ease both;
 }
+
+.spec {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .9rem 1.2rem;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.6;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.4rem;
+}
+.spec dt { color: var(--ink-3); letter-spacing: .06em; }
+.spec dd { color: var(--ink); }
+.spec dd .em { color: var(--blue); }
+
+.stage-foot {
+  margin-top: 2rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid var(--rule);
+  display: flex; flex-wrap: wrap; gap: 1.5rem;
+  font-family: var(--mono);
+  font-size: 11px; color: var(--ink-3);
+  animation: fade-up .9s .8s ease both;
+}
+.stage-foot a {
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--ink-4);
+  padding-bottom: 1px;
+  transition: color .25s, border-color .25s;
+}
+.stage-foot a:hover { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ──────────────────────────────────────────────────────────────
+   TICKER
+   ────────────────────────────────────────────────────────────── */
+
+#ticker {
+  background: var(--bg-warm);
+  border-bottom: var(--rule-w) solid var(--rule);
+  padding: .85rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+#ticker::before, #ticker::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2;
+  pointer-events: none;
+}
+#ticker::before { left: 0; background: linear-gradient(to right, var(--bg-warm), transparent); }
+#ticker::after  { right: 0; background: linear-gradient(to left, var(--bg-warm), transparent); }
+
 .ticker-track {
-  display: inline-flex; gap: 4rem;
-  /* animation tick désactivée pour fluidité */
+  display: inline-flex; gap: 3rem;
+  animation: tick 60s linear infinite;
+  padding-left: 3rem;
 }
 @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .ticker-item {
-  font-family: var(--serif);
-  font-size: 1rem; font-weight: 400; color: var(--ink3);
+  font-family: var(--mono);
+  font-size: 12px; font-weight: 400;
+  color: var(--ink-2);
+  letter-spacing: .04em;
   flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: .9rem;
 }
-.ticker-dot { color: var(--blue); }
-
-/* PROJECTS */
-#projects { padding: 7rem 3rem; }
-.projects-header {
-  display: flex; justify-content: space-between; align-items: baseline;
-  margin-bottom: 5rem; opacity: 0; transform: translateY(16px);
+.ticker-item::after {
+  content: '◆';
+  color: var(--blue);
+  font-size: 8px;
+  margin-left: 3rem;
 }
-.ph-title { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic; color: var(--ink2); }
-.ph-count { font-weight: 300; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink4); }
 
-/* Project card */
+/* ──────────────────────────────────────────────────────────────
+   PROJECTS
+   ────────────────────────────────────────────────────────────── */
+
+#projects {
+  padding: 5rem var(--gutter) 6rem;
+  max-width: var(--max);
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+@media (min-width: 800px) {
+  .section-head { grid-template-columns: 1fr 1fr 1fr; align-items: end; gap: 2rem; }
+}
+
+.section-head .lab {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: .14em; text-transform: uppercase;
+  display: flex; align-items: center; gap: .8rem;
+}
+.section-head .lab::before {
+  content: ''; width: 14px; height: 1px; background: var(--blue);
+}
+.section-head .ttl {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+.section-head .ttl em { font-style: italic; color: var(--ink-2); }
+.section-head .meta {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-3);
+  display: grid;
+  gap: .35rem;
+}
+.section-head .meta strong { color: var(--ink); font-weight: 500; }
+
+/* Group label */
+.proj-group {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.2rem;
+  align-items: center;
+  margin: 3.5rem 0 1.5rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.proj-group:first-of-type { margin-top: 0; }
+.proj-group .ix { color: var(--ink-4); }
+.proj-group .lin { height: 1px; background: var(--rule); }
+.proj-group .ct { color: var(--ink-2); }
+
+/* PROJECT CARD */
 .pc {
-  display: grid; grid-template-columns: 64px 1fr auto;
-  gap: 3rem; align-items: start;
-  padding: 2.8rem 2.5rem;
-  margin-bottom: 1rem;
-  text-decoration: none; color: inherit; position: relative;
-  background: var(--glass);
-  backdrop-filter: blur(16px) saturate(1.3);
-  -webkit-backdrop-filter: blur(16px) saturate(1.3);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--r-lg);
-  box-shadow: var(--glass-shadow);
-  opacity: 0; transform: translateY(28px);
-  transition: box-shadow .4s var(--ease), transform .3s var(--ease), background .3s;
-}
-.pc:hover {
-  background: rgba(255,255,255,.72);
-  box-shadow: 0 16px 48px rgba(26,25,22,.12), 0 1px 0 rgba(255,255,255,.95) inset;
-  transform: translateY(-2px);
-}
-.pc:hover .pc-num { color: var(--blue); }
-.pc:hover .pc-title { letter-spacing: -.015em; }
-.pc:hover .pc-arrow { transform: translate(5px, -5px); color: var(--blue); }
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 0;
+  margin-bottom: -1px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s ease, transform .35s cubic-bezier(.2,.7,.2,1);
 
-/* Badge état */
+  opacity: 0;
+  animation: card-in .9s ease forwards;
+  animation-timeline: view();
+  animation-range: cover 0% cover 30%;
+}
+@supports not (animation-timeline: view()) {
+  .pc { opacity: 1; }
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pc:hover {
+  border-color: var(--ink-2);
+  z-index: 5;
+}
+
+@media (min-width: 800px) {
+  .pc {
+    grid-template-columns: 220px 1fr 200px;
+    align-items: stretch;
+  }
+}
+
+/* Carte: vignette */
+.pc-thumb {
+  position: relative;
+  aspect-ratio: 16/10;
+  background: var(--bg-warm);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+}
+@media (min-width: 800px) {
+  .pc-thumb { aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--rule); }
+}
+.pc-thumb-art {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.pc:hover .pc-thumb-art { transform: scale(1.04); }
+.pc-thumb-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(20,19,15,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,19,15,.06) 1px, transparent 1px);
+  background-size: 14px 14px;
+  pointer-events: none;
+}
+.pc-thumb-coord {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: 9px; color: var(--ink-3);
+  letter-spacing: .06em;
+}
+.pc-thumb-coord.tl { top: 8px; left: 10px; }
+.pc-thumb-coord.br { bottom: 8px; right: 10px; }
+
+/* Glyphes uniques par projet (CSS only) */
+.glyph {
+  width: 86px; height: 86px;
+  position: relative;
+  color: var(--blue);
+  transition: transform .9s cubic-bezier(.2,.7,.2,1), color .3s;
+}
+.pc:hover .glyph { transform: rotate(8deg); color: var(--ink); }
+
+/* glyph 01 — humiAn : cercle + lettre */
+.glyph-01::before {
+  content: '{i}';
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-style: italic;
+  font-size: 36px; color: var(--blue);
+  animation: i-pulse 2.6s ease-in-out infinite;
+}
+.glyph-01::after {
+  content: ''; position: absolute; inset: 8px;
+  border: 1px solid currentColor; border-radius: 50%;
+  border-right-color: transparent;
+  animation: spin 18s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes i-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .7; transform: scale(.94); } }
+
+/* glyph 02 — codex : livre ouvert (SVG) */
+.glyph-02 { width: 96px; height: 86px; animation: book-breathe 5s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes book-breathe { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+.glyph-02 svg { width: 100%; height: 100%; overflow: visible; }
+.glyph-02 .pages { transition: transform .8s cubic-bezier(.2,.7,.2,1); transform-origin: 50% 100%; }
+.pc:hover .glyph-02 .pl { transform: rotate(-3deg); transform-origin: 100% 100%; }
+.pc:hover .glyph-02 .pr { transform: rotate(3deg); transform-origin: 0% 100%; }
+.glyph-02 .pl, .glyph-02 .pr { transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+
+/* glyph 03 — fabulae : masque de théâtre (SVG) */
+.glyph-03 { width: 86px; height: 86px; animation: mask-tilt 4.5s ease-in-out infinite; transform-origin: 50% 50%; }
+@keyframes mask-tilt { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+.glyph-03 svg { width: 100%; height: 100%; overflow: visible; }
+.glyph-03 .smile, .glyph-03 .frown { transition: opacity .6s ease, transform .6s ease; }
+.glyph-03 .frown { opacity: 0; }
+.pc:hover .glyph-03 .smile { opacity: 0; }
+.pc:hover .glyph-03 .frown { opacity: 1; }
+
+/* glyph 04 — scribe : stylo plume (SVG) */
+.glyph-04 { width: 86px; height: 86px; animation: pen-write 3.5s ease-in-out infinite; transform-origin: 80% 20%; }
+@keyframes pen-write { 0%, 100% { transform: translate(0,0) rotate(0); } 25% { transform: translate(-2px, 1px) rotate(-1.5deg); } 75% { transform: translate(2px, -1px) rotate(1.5deg); } }
+.glyph-04 svg { width: 100%; height: 100%; overflow: visible; }
+.glyph-04 .nib { transition: transform .9s cubic-bezier(.2,.7,.2,1); transform-origin: 50% 100%; }
+.pc:hover .glyph-04 .nib { transform: translate(2px, -2px) rotate(-4deg); }
+
+/* glyph 05 — didici : flèche apprentissage */
+.glyph-05 {
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-style: italic;
+  font-size: 60px;
+  letter-spacing: -.05em;
+  animation: didici-bob 3.2s ease-in-out infinite;
+}
+.glyph-05::before { content: 'd∴'; color: var(--blue); }
+@keyframes didici-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
+/* glyph 06 — sentinel : œil / réticule */
+.glyph-06 {
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  position: relative;
+}
+.glyph-06::before, .glyph-06::after {
+  content: ''; position: absolute; background: currentColor;
+}
+.glyph-06::before { left: -10px; right: -10px; top: 50%; height: 1px; animation: scan-x 4s ease-in-out infinite; }
+.glyph-06::after { top: -10px; bottom: -10px; left: 50%; width: 1px; animation: scan-y 4s ease-in-out infinite; }
+@keyframes scan-x { 0%, 100% { transform: translateY(-6px); } 50% { transform: translateY(6px); } }
+@keyframes scan-y { 0%, 100% { transform: translateX(-6px); } 50% { transform: translateX(6px); } }
+.glyph-06 i {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 22px; height: 22px; border-radius: 50%;
+  background: currentColor;
+  animation: blink 3s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 90%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+  95% { transform: translate(-50%,-50%) scale(.05); opacity: .5; }
+}
+
+/* glyph 07 — talaria : transit */
+.glyph-07 {
+  display: flex; align-items: center; gap: 4px;
+}
+.glyph-07::before, .glyph-07::after {
+  content: ''; width: 18px; height: 18px; background: currentColor;
+}
+.glyph-07::before { border-radius: 50%; }
+.glyph-07 i { flex: 1; height: 1px; background: currentColor; position: relative; }
+.glyph-07 i::after {
+  content: ''; position: absolute; top: -3px; left: 0;
+  width: 8px; height: 8px; background: currentColor; border-radius: 50%;
+  animation: tslide 3.4s ease-in-out infinite;
+}
+@keyframes tslide {
+  0% { left: 0; }
+  100% { left: calc(100% - 8px); }
+}
+
+/* glyph 08 — π.stream : pi + onde */
+.glyph-08 {
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-size: 64px; font-style: italic;
+  position: relative;
+}
+.glyph-08::before { content: 'π'; color: var(--blue); animation: pi-pulse 2.4s ease-in-out infinite; }
+@keyframes pi-pulse { 0%, 100% { opacity: 1; transform: translateY(0); } 50% { opacity: .8; transform: translateY(-2px); } }
+.glyph-08::after {
+  content: ''; position: absolute; bottom: 12px; left: 0; right: 0;
+  height: 8px;
+  background-image: radial-gradient(circle at center, currentColor 1.5px, transparent 2px);
+  background-size: 8px 8px;
+  opacity: .4;
+}
+
+/* glyph 09 — légaleink : goutte d'encre (SVG) */
+.glyph-09 { width: 86px; height: 86px; }
+.glyph-09 svg { width: 100%; height: 100%; overflow: visible; }
+.glyph-09 .drop { transform-origin: 50% 50%; animation: drop-pulse 3s ease-in-out infinite; }
+.glyph-09 .ripple { transform-origin: 50% 90%; opacity: 0; animation: drop-ripple 3s ease-out infinite; }
+@keyframes drop-pulse { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+@keyframes drop-ripple { 0%, 60% { transform: scale(.4); opacity: 0; } 70% { opacity: .5; } 100% { transform: scale(1.3); opacity: 0; } }
+
+/* glyph 10 — vacuum : grille places */
+.glyph-10 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  width: 80px; height: 60px;
+}
+.glyph-10 i { background: currentColor; opacity: .15; }
+.glyph-10 i:nth-child(2),
+.glyph-10 i:nth-child(7),
+.glyph-10 i:nth-child(11) { opacity: .85; animation: vacflick 4s ease-in-out infinite; }
+.glyph-10 i:nth-child(7) { animation-delay: 1s; }
+.glyph-10 i:nth-child(11) { animation-delay: 2.2s; }
+@keyframes vacflick {
+  0%, 80%, 100% { opacity: .85; }
+  85%, 95% { opacity: .15; }
+}
+
+/* Carte: corps */
+.pc-body {
+  padding: 1.8rem 1.6rem 1.4rem;
+  display: grid;
+  align-content: start;
+  gap: .7rem;
+}
+
+.pc-id {
+  display: flex; align-items: center; gap: .9rem;
+  font-family: var(--mono);
+  font-size: 11px; color: var(--ink-3);
+  letter-spacing: .1em;
+}
+.pc-id .num { color: var(--ink); font-weight: 500; }
+.pc-id .dash { color: var(--ink-4); }
+
+.pc-tags { display: flex; gap: .35rem; flex-wrap: wrap; align-items: center; }
+.pc-tag {
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-2);
+  background: var(--bg-warm);
+  border: 1px solid var(--rule);
+  padding: 3px 8px;
+}
+
 .pc-status {
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 8px;
   display: inline-flex; align-items: center; gap: 5px;
-  font-size: .55rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase;
-  padding: 3px 10px; border-radius: 999px;
   border: 1px solid;
 }
-.pc-status.stable   { color: #3a7d44; background: rgba(58,125,68,.08); border-color: rgba(58,125,68,.2); }
-.pc-status.beta     { color: #b07d2a; background: rgba(200,162,106,.1); border-color: rgba(200,162,106,.3); }
-.pc-status.concept  { color: var(--ink3); background: rgba(158,154,144,.08); border-color: rgba(158,154,144,.2); }
-.pc-status.actif    { color: var(--blue); background: rgba(61,90,128,.07); border-color: rgba(61,90,128,.2); }
-.pc-status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-
-.pc-num {
-  font-family: var(--serif); font-size: 3rem; font-weight: 400;
-  color: var(--ink4); line-height: 1;
-  transition: color .4s; padding-top: .2rem;
+.pc-status::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor;
 }
-.pc-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem; }
-.pc-tag { font-size: .58rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink3); background: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.9); padding: 4px 12px; border-radius: 999px; backdrop-filter: blur(8px); }
+.pc-status.stable  { color: var(--green); background: rgba(74,107,63,.07); border-color: rgba(74,107,63,.25); }
+.pc-status.beta    { color: var(--gold);  background: rgba(184,137,63,.07); border-color: rgba(184,137,63,.25); }
+.pc-status.concept { color: var(--ink-3); background: rgba(138,132,120,.07); border-color: rgba(138,132,120,.25); }
+.pc-status.actif   { color: var(--blue);  background: var(--blue-soft);     border-color: rgba(42,77,119,.25); }
+.pc-status.actif::before { animation: pulse 2.4s ease-in-out infinite; }
+
 .pc-title {
-  font-family: var(--serif); font-size: clamp(1.7rem, 3.2vw, 2.8rem);
-  font-weight: 400; line-height: 1.08; letter-spacing: -.018em;
-  color: var(--ink); margin-bottom: .9rem;
-  transition: letter-spacing .5s var(--ease);
-}
-.pc-title em { font-style: italic; color: var(--ink2); }
-.pc-q {
-  font-family: var(--serif); font-size: 1rem;
-  font-weight: 400; color: var(--ink2); line-height: 1.72;
-  max-width: 500px; border-left: 2px solid var(--rule); padding-left: 1.2rem;
-}
-.pc-right { text-align: right; padding-top: .3rem; display: flex; flex-direction: column; align-items: flex-end; gap: 1.2rem; }
-.pc-stat { }
-.pc-stat-v { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; color: var(--ink4); display: block; line-height: 1; }
-.pc-stat-l { font-size: .55rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--ink4); display: block; margin-top: 3px; }
-.pc-arrow { font-size: 1.1rem; color: var(--ink4); transition: transform .4s var(--ease), color .3s; margin-top: .5rem; }
-
-/* Groupe section */
-.projects-group-label {
-  font-size: .62rem; font-weight: 400; letter-spacing: .26em; text-transform: uppercase;
-  color: var(--ink4); margin: 4rem 0 1.5rem;
-  display: flex; align-items: center; gap: 1rem;
-}
-.projects-group-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
-
-/* INTERLUDE */
-#interlude {
-  min-height: 80vh; display: flex; align-items: center;
-  padding: 8rem 3rem; position: relative; overflow: hidden;
-  background: var(--bg2);
-  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
-}
-.int-bg-word {
-  position: absolute; right: -2%; top: 50%; transform: translateY(-50%);
   font-family: var(--serif);
-  font-size: clamp(10rem, 22vw, 26rem); font-weight: 700;
-  color: rgba(26,25,22,.035); line-height: 1;
-  user-select: none; pointer-events: none; letter-spacing: -.03em;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 400; line-height: 1.1;
+  letter-spacing: -.018em;
+  color: var(--ink);
+  margin: .4rem 0 .25rem;
+}
+.pc-title em { font-style: italic; color: var(--blue); }
+
+.pc-q {
+  font-family: var(--serif);
+  font-size: .98rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-2);
+  line-height: 1.65;
+  border-left: 1px solid var(--ink-4);
+  padding-left: .9rem;
+  margin-top: .4rem;
+}
+.pc-q::before { content: '« '; color: var(--ink-4); }
+.pc-q::after { content: ' »'; color: var(--ink-4); }
+
+/* Carte: side data */
+.pc-side {
+  border-top: 1px solid var(--rule);
+  padding: 1.4rem 1.6rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: end;
+}
+@media (min-width: 800px) {
+  .pc-side {
+    border-top: 0;
+    border-left: 1px solid var(--rule);
+    grid-template-columns: 1fr;
+    align-items: start;
+    align-content: space-between;
+  }
+}
+
+.pc-stat {
+  display: grid;
+  gap: .25rem;
+  align-content: start;
+}
+.pc-stat-v {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.pc-stat-v.small { font-size: 1.4rem; }
+.pc-stat-l {
+  font-family: var(--mono);
+  font-size: 10px; color: var(--ink-3);
+  letter-spacing: .1em; text-transform: uppercase;
+}
+
+.pc-cta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink);
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding-top: .6rem;
+  border-top: 1px solid var(--rule);
+  width: 100%;
+  justify-content: space-between;
+}
+.pc-cta .arrow {
+  font-size: 16px;
+  color: var(--ink-3);
+  transition: transform .3s ease, color .3s ease;
+}
+.pc:hover .pc-cta .arrow {
+  transform: translate(4px, -4px);
+  color: var(--blue);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   INTERLUDE
+   ────────────────────────────────────────────────────────────── */
+
+#interlude {
+  position: relative;
+  padding: 8rem var(--gutter);
+  background: var(--bg-warm);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+}
+.int-bg {
+  position: absolute;
+  right: -3%; top: 50%; transform: translateY(-50%);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(10rem, 22vw, 24rem);
+  font-weight: 400;
+  color: rgba(20,19,15,.04);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -.04em;
 }
 .int-inner {
-  max-width: 750px; position: relative; z-index: 1;
-  background: var(--glass);
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--r-xl);
-  box-shadow: var(--glass-shadow);
-  padding: 4rem;
+  max-width: 820px;
+  position: relative; z-index: 1;
+  margin: 0 auto;
 }
 .int-label {
-  font-size: .65rem; font-weight: 400; letter-spacing: .24em; text-transform: uppercase;
-  color: var(--ink3); margin-bottom: 2.5rem;
-  display: flex; align-items: center; gap: .9rem; opacity: 0;
+  display: flex; align-items: center; gap: .8rem;
+  font-family: var(--mono);
+  font-size: 11px; color: var(--ink-3);
+  letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: 2rem;
 }
-.int-label::before { content: ''; width: 22px; height: 1px; background: var(--blue); }
+.int-label::before { content: ''; width: 24px; height: 1px; background: var(--blue); }
 .int-q {
   font-family: var(--serif);
-  font-size: clamp(1.5rem, 3.8vw, 3.8rem);
-  font-weight: 400;
-  color: var(--ink); line-height: 1.2; letter-spacing: -.015em;
-  opacity: 0; filter: blur(6px);
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  font-weight: 400; line-height: 1.18;
+  letter-spacing: -.015em;
+  color: var(--ink);
 }
-.int-q em { font-style: normal; color: var(--blue); }
+.int-q em { font-style: italic; color: var(--blue); }
+.int-foot {
+  margin-top: 3rem;
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 11px; color: var(--ink-3);
+  letter-spacing: .06em;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+}
+.int-foot span { display: inline-flex; align-items: center; gap: .5rem; }
+.int-foot span::before { content: '/'; color: var(--ink-4); }
 
-/* PRINCIPES */
-#principes { padding: 10rem 3rem; }
-.pr-header { text-align: center; margin-bottom: 7rem; opacity: 0; }
-.pr-header h2 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 4rem); font-weight: 400; letter-spacing: -.02em; margin-bottom: .5rem; }
-.pr-header h2 em { font-style: italic; color: var(--ink2); }
-.pr-header p { font-weight: 300; font-size: 1rem; color: var(--ink3); }
-.pr-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+/* ──────────────────────────────────────────────────────────────
+   PRINCIPES
+   ────────────────────────────────────────────────────────────── */
+
+#principes {
+  padding: 7rem var(--gutter);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.pr-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+@media (min-width: 700px) { .pr-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1080px) { .pr-grid { grid-template-columns: repeat(4, 1fr); } }
+
 .pr {
-  padding: 2.5rem 2rem;
-  border-radius: var(--r-lg);
-  background: var(--glass);
-  backdrop-filter: blur(16px) saturate(1.3);
-  -webkit-backdrop-filter: blur(16px) saturate(1.3);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  opacity: 0; transform: translateY(20px);
+  background: var(--paper);
+  padding: 2.2rem 1.8rem;
+  display: grid;
+  align-content: start;
+  gap: .8rem;
+  position: relative;
+  transition: background .3s ease;
 }
-.pr-n { font-family: var(--serif); font-size: 2.5rem; font-weight: 400; color: var(--ink4); display: block; line-height: 1; margin-bottom: 1.2rem; }
-.pr h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: .6rem; }
-.pr p { font-weight: 300; font-size: .88rem; color: var(--ink2); line-height: 1.8; }
+.pr:hover { background: var(--bg); }
+.pr-n {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--blue);
+  letter-spacing: .14em;
+  display: flex; justify-content: space-between;
+  padding-bottom: 1rem;
+  margin-bottom: .4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.pr-n .roman { color: var(--ink-3); }
+.pr h4 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.pr p {
+  font-size: .9rem;
+  color: var(--ink-2);
+  line-height: 1.7;
+}
 
-/* FOOTER */
+/* ──────────────────────────────────────────────────────────────
+   CONTACT BAND
+   ────────────────────────────────────────────────────────────── */
+
+#contact {
+  padding: 5rem var(--gutter);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+  display: grid; place-items: center;
+  text-align: center;
+}
+.contact-inner { max-width: 700px; }
+.contact-eyebrow {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-3); letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 1.3rem;
+}
+.contact-q {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  line-height: 1.25;
+  letter-spacing: -.015em;
+  color: var(--ink);
+  margin-bottom: 1.6rem;
+}
+.contact-q em { font-style: italic; color: var(--blue); }
+.contact-actions { display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.btn {
+  font-family: var(--mono);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: .85rem 1.4rem;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  display: inline-flex; align-items: center; gap: .6rem;
+  transition: background .25s, color .25s;
+}
+.btn:hover { background: var(--ink); color: var(--paper); }
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn.primary:hover { background: var(--blue); border-color: var(--blue); }
+.btn .arrow { transition: transform .3s; }
+.btn:hover .arrow { transform: translate(2px,-2px); }
+
+/* ──────────────────────────────────────────────────────────────
+   FOOTER
+   ────────────────────────────────────────────────────────────── */
+
 footer {
-  margin: 0 1.5rem 1.5rem;
-  padding: 2rem 2.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 1.5rem;
-  background: var(--glass);
-  backdrop-filter: blur(20px) saturate(1.3);
-  -webkit-backdrop-filter: blur(20px) saturate(1.3);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--r-xl);
-  box-shadow: var(--glass-shadow);
+  padding: 3rem var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
 }
-.ft-brand { font-family: var(--serif); font-size: 1rem; color: var(--ink2); }
-.ft-links { display: flex; gap: 1.8rem; flex-wrap: wrap; list-style: none; }
-.ft-links a { font-weight: 300; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3); text-decoration: none; transition: color .3s; }
-.ft-links a:hover { color: var(--ink); }
-.ft-copy { font-weight: 300; font-size: .6rem; letter-spacing: .1em; color: var(--ink4); }
+@media (min-width: 800px) {
+  footer { grid-template-columns: 1.2fr 2fr 1fr; }
+}
+.ft-brand { display: grid; gap: .4rem; }
+.ft-brand .b1 {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.3rem; color: var(--ink);
+  letter-spacing: -.01em;
+}
+.ft-brand .b2 { font-size: 11px; letter-spacing: .04em; }
+.ft-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem 2rem;
+}
+.ft-cols a {
+  color: var(--ink-2);
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .15rem 0;
+  transition: color .25s;
+  letter-spacing: .04em;
+}
+.ft-cols a:hover { color: var(--ink); }
+.ft-cols a::before { content: '↗'; color: var(--ink-4); font-size: 10px; }
+.ft-end {
+  display: grid;
+  gap: .4rem;
+  align-content: start;
+  letter-spacing: .04em;
+}
+.ft-end strong { color: var(--ink); font-weight: 500; }
 
-/* MOBILE */
-@media (max-width: 900px) {
-  #nav { top: .8rem; width: calc(100% - 2rem); padding: .8rem 1.4rem; border-radius: var(--r-xl); }
-  #stage { padding: 0 1.5rem 8vh; }
-  .stage-dots, .stage-scroll { display: none; }
-  #projects { padding: 5rem 1.5rem; }
-  .pc { grid-template-columns: 44px 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
-  .pc-right { display: none; }
-  #interlude { padding: 4rem 1.5rem; min-height: auto; }
-  .int-inner { padding: 2.5rem 2rem; }
-  #principes { padding: 6rem 1.5rem; }
-  .pr-grid { grid-template-columns: 1fr 1fr; }
-  .pr { padding: 1.8rem 1.5rem; }
-  footer { margin: 0 1rem 1rem; padding: 1.8rem 1.5rem; flex-direction: column; align-items: flex-start; }
-  #cur, #cur-r { display: none; }
-  body { cursor: auto; }
+/* ──────────────────────────────────────────────────────────────
+   ANIMATIONS partagées
+   ────────────────────────────────────────────────────────────── */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Reveal au scroll via animation-timeline (progressive enhancement) */
+.reveal {
+  opacity: 0;
+  animation: fade-up .9s ease forwards;
+  animation-timeline: view();
+  animation-range: cover 0% cover 30%;
+}
+@supports not (animation-timeline: view()) {
+  .reveal { opacity: 1; }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   MOBILE
+   ────────────────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  :root { --gutter: 1.1rem; }
+  body { font-size: 15px; background-size: 40px 40px; }
+  #stage { padding-top: 7rem; padding-bottom: 4rem; }
+  .stage-coords { display: none; }
+  .crop { display: none; }
+  .pc-thumb { aspect-ratio: 16/9; }
+  .pc-side { padding: 1.1rem 1.3rem; }
+  .pc-body { padding: 1.4rem 1.3rem 1rem; }
+  .nav-r { gap: 1rem; }
+  .nav-link { font-size: 10px; }
+  #interlude { padding: 5rem var(--gutter); }
+  #principes { padding: 5rem var(--gutter); }
 }
 </style>
 </head>
 <body>
-<div id="cur"></div>
-<div id="cur-r"></div>
+<a href="#projects" class="skip">Aller aux projets</a>
 
 <header id="nav">
-  <a href="#" class="nav-logo">anthropotech /lab</a>
-  <div class="nav-r">
-    <a href="#projects" class="nav-link">Projets</a>
-    <a href="https://shamsetdean.github.io/humiAn/" target="_blank" class="nav-link">Magazine</a>
-    <a href="https://github.com/shamsetdean" target="_blank" class="nav-link">GitHub</a>
+  <a href="#" class="nav-logo">anthropotech/lab</a>
+  <div class="nav-meta">
+    <span>v2.0</span>
+    <span>10 PROJETS</span>
+    <span>PARIS · 48.85°N</span>
   </div>
+  <nav class="nav-r" aria-label="Navigation principale">
+    <a href="#projects" class="nav-link">Projets</a>
+    <a href="#principes" class="nav-link">Principes</a>
+    <a href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener" class="nav-link" data-ext>Magazine</a>
+    <a href="https://github.com/shamsetdean" target="_blank" rel="noopener" class="nav-link" data-ext>GitHub</a>
+  </nav>
 </header>
 
-<!-- STAGE -->
-<section id="stage">
-  <div class="stage-bg"></div>
-  <div class="stage-grid"></div>
-  <div class="stage-dots"></div>
-  <div class="stage-inner">
-    <p class="stage-eyebrow" id="se">Shams Guettaf · Paris · 2025–2026</p>
-    <h1 class="stage-title" id="st">
-      <span class="word"><span id="w1">Bâtir</span></span>
-      <span> </span>
-      <span class="word"><span id="w2">ce</span></span>
-      <span> </span>
-      <span class="word"><span id="w3">qui</span></span>
-      <span class="break"></span>
-      <span class="word"><span id="w4">n'<em>existe</em></span></span>
-      <span class="break"></span>
-      <span class="word"><span id="w5">pas</span></span>
-      <span> </span>
-      <span class="word"><span id="w6">encore.</span></span>
-    </h1>
-    <p class="stage-sub" id="ssub">Un laboratoire numérique.</p>
+<!-- ═══ STAGE ═══ -->
+<section id="stage" aria-labelledby="stage-title">
+  <span class="crop tl"></span>
+  <span class="crop tr"></span>
+  <span class="crop bl"></span>
+  <span class="crop br"></span>
+
+  <div class="stage-coords" aria-hidden="true">
+    <span>LAT 48.8566</span>
+    <span>LNG 2.3522</span>
+    <span>2025—2026</span>
   </div>
-  <div class="stage-scroll" id="sscroll">
-    <div class="stage-scroll-line"></div>
-    <span>Descendre</span>
+
+  <div class="stage-inner">
+    <div class="stage-main">
+      <p class="stage-id">DOSSIER N° 001 / SHAMS GUETTAF / PARIS</p>
+      <h1 class="stage-title" id="stage-title">
+        Bâtir <span class="br"></span>
+        ce qui n'<em>existe</em> <span class="br"></span>
+        pas encore.
+      </h1>
+      <div class="stage-foot">
+        <a href="#projects">↓ explorer les 10 expériences</a>
+        <a href="#contact">→ prendre contact</a>
+      </div>
+    </div>
+    <aside class="stage-side" aria-label="Spécifications">
+      <dl class="spec">
+        <dt>OBJET</dt><dd>Laboratoire numérique</dd>
+        <dt>AUTEUR</dt><dd>Shams Guettaf</dd>
+        <dt>PORTÉE</dt><dd>Éditorial, outils, infra</dd>
+        <dt>STACK</dt><dd>HTML · CSS · Python · Pi</dd>
+        <dt>DONNÉES</dt><dd><span class="em">Aucune collecte</span></dd>
+        <dt>HÉBERG.</dt><dd>GitHub Pages · Pi local</dd>
+      </dl>
+    </aside>
   </div>
 </section>
 
-<!-- TICKER -->
-<div id="ticker">
+<!-- ═══ TICKER ═══ -->
+<div id="ticker" aria-hidden="true">
   <div class="ticker-track">
-    <span class="ticker-item">Privacy by design</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">Zéro dépendance</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">Hébergement souverain</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">Cohérence fond / forme</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">Zéro tracker</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">Privacy by design</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">Zéro dépendance</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">Hébergement souverain</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">Cohérence fond / forme</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">Zéro tracker</span><span class="ticker-dot">·</span>
-    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Privacy by design</span>
+    <span class="ticker-item">Zéro dépendance</span>
+    <span class="ticker-item">Hébergement souverain</span>
+    <span class="ticker-item">Cohérence fond / forme</span>
+    <span class="ticker-item">Zéro tracker</span>
+    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span>
+    <span class="ticker-item">Privacy by design</span>
+    <span class="ticker-item">Zéro dépendance</span>
+    <span class="ticker-item">Hébergement souverain</span>
+    <span class="ticker-item">Cohérence fond / forme</span>
+    <span class="ticker-item">Zéro tracker</span>
+    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span>
   </div>
 </div>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="projects-header" id="ph">
-    <span class="ph-title">Les expériences</span>
-    <span class="ph-count">10 projets</span>
+<!-- ═══ PROJECTS ═══ -->
+<main id="projects">
+  <header class="section-head reveal">
+    <p class="lab">SECTION 02 / EXPÉRIMENTATION</p>
+    <h2 class="ttl">Les <em>expériences</em></h2>
+    <div class="meta">
+      <span><strong>10</strong> projets actifs</span>
+      <span><strong>4</strong> domaines</span>
+      <span>Maj. <strong>2026.04</strong></span>
+    </div>
+  </header>
+
+  <!-- GROUPE A : Éditorial & Culture -->
+  <div class="proj-group">
+    <span class="ix">A.</span>
+    <span>Éditorial & Culture</span>
+    <span class="lin"></span>
+    <span class="ct">03 entrées</span>
   </div>
 
-  <!-- ── ÉDITORIAL & CULTURE ── -->
-  <div class="projects-group-label">Éditorial & Culture</div>
-
   <!-- 01 HumiAn -->
-  <a class="pc" href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener">
-    <div class="pc-num">01</div>
+  <a class="pc" href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener" aria-labelledby="t01">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°01</span>
+      <span class="pc-thumb-coord br">x:128 y:080</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-01"></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">01</span><span class="dash">—</span><span>HUM-IAN</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Éditorial</span>
         <span class="pc-tag">IA</span>
         <span class="pc-tag">Société</span>
-        <span class="pc-status actif"><span class="pc-status-dot"></span>Actif</span>
+        <span class="pc-status actif">Actif</span>
       </div>
-      <div class="pc-title">Hum<em>{i}</em>An</div>
-      <p class="pc-q">"Que reste-t-il de la pensée critique dans un monde où l'IA produit de la pensée à la demande ?"</p>
+      <h3 class="pc-title" id="t01">Hum<em>{i}</em>An</h3>
+      <p class="pc-q">Que reste-t-il de la pensée critique dans un monde où l'IA produit de la pensée à la demande ?</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">43+</span><span class="pc-stat-l">Articles</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v">43+</span>
+        <span class="pc-stat-l">Articles publiés</span>
+      </div>
+      <div class="pc-cta">Lire <span class="arrow">↗</span></div>
     </div>
   </a>
 
   <!-- 02 Codex -->
-  <a class="pc" href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener">
-    <div class="pc-num">02</div>
+  <a class="pc" href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener" aria-labelledby="t02">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°02</span>
+      <span class="pc-thumb-coord br">PUB-DOMAIN</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-02" aria-hidden="true"><svg viewBox="0 0 96 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="pl" d="M48 22 L12 16 L12 72 L48 78 Z"/><path class="pr" d="M48 22 L84 16 L84 72 L48 78 Z"/><line x1="20" y1="30" x2="42" y2="33" opacity=".5"/><line x1="20" y1="38" x2="42" y2="41" opacity=".5"/><line x1="20" y1="46" x2="38" y2="49" opacity=".5"/><line x1="54" y1="33" x2="76" y2="30" opacity=".5"/><line x1="54" y1="41" x2="76" y2="38" opacity=".5"/><line x1="54" y1="49" x2="72" y2="46" opacity=".5"/><line x1="48" y1="22" x2="48" y2="78" opacity=".7"/></svg></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">02</span><span class="dash">—</span><span>CODEX</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Culture</span>
         <span class="pc-tag">Domaine public</span>
         <span class="pc-tag">Littérature</span>
-        <span class="pc-status stable"><span class="pc-status-dot"></span>Stable</span>
+        <span class="pc-status stable">Stable</span>
       </div>
-      <div class="pc-title">Codex</div>
-      <p class="pc-q">"Le patrimoine culturel commun devrait-il appartenir à celui qui construit la meilleure interface ?"</p>
+      <h3 class="pc-title" id="t02">Codex</h3>
+      <p class="pc-q">Le patrimoine culturel commun devrait-il appartenir à celui qui construit la meilleure interface ?</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">458</span><span class="pc-stat-l">Œuvres libres</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v">458</span>
+        <span class="pc-stat-l">Œuvres libres</span>
+      </div>
+      <div class="pc-cta">Ouvrir <span class="arrow">↗</span></div>
     </div>
   </a>
 
   <!-- 03 Fabulae -->
-  <a class="pc" href="https://fabulae.vercel.app/" target="_blank" rel="noopener">
-    <div class="pc-num">03</div>
+  <a class="pc" href="https://fabulae.vercel.app/" target="_blank" rel="noopener" aria-labelledby="t03">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°03</span>
+      <span class="pc-thumb-coord br">PWA · TMDB</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-03" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M16 22 Q43 8 70 22 Q74 50 60 70 Q43 80 26 70 Q12 50 16 22 Z"/><ellipse cx="32" cy="40" rx="5" ry="3" fill="currentColor" stroke="none"/><ellipse cx="54" cy="40" rx="5" ry="3" fill="currentColor" stroke="none"/><path class="smile" d="M28 56 Q43 66 58 56"/><path class="frown" d="M28 60 Q43 50 58 60"/><path d="M22 30 Q24 27 26 30" opacity=".6"/><path d="M60 30 Q62 27 64 30" opacity=".6"/></svg></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">03</span><span class="dash">—</span><span>FABULAE</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Séries</span>
         <span class="pc-tag">TMDB</span>
         <span class="pc-tag">PWA</span>
         <span class="pc-tag">Mobile-first</span>
-        <span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span>
+        <span class="pc-status beta">Beta</span>
       </div>
-      <div class="pc-title"><em>Fabulae</em></div>
-      <p class="pc-q">"Ton Top 3 des séries du moment — classé, partagé, sans compte, sans collecte."</p>
+      <h3 class="pc-title" id="t03"><em>Fabulae</em></h3>
+      <p class="pc-q">Ton Top 3 des séries du moment — classé, partagé, sans compte, sans collecte.</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">TMDB</span><span class="pc-stat-l">API officielle</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v small">TMDB</span>
+        <span class="pc-stat-l">API officielle</span>
+      </div>
+      <div class="pc-cta">Tester <span class="arrow">↗</span></div>
     </div>
   </a>
 
-  <!-- ── OUTILS & AUTONOMIE ── -->
-  <div class="projects-group-label">Outils & Autonomie</div>
+  <!-- GROUPE B : Outils & Autonomie -->
+  <div class="proj-group">
+    <span class="ix">B.</span>
+    <span>Outils & Autonomie</span>
+    <span class="lin"></span>
+    <span class="ct">02 entrées</span>
+  </div>
 
   <!-- 04 Scribe -->
-  <a class="pc" href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener">
-    <div class="pc-num">04</div>
+  <a class="pc" href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener" aria-labelledby="t04">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°04</span>
+      <span class="pc-thumb-coord br">100% LOCAL</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-04" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><g class="nib"><path d="M58 12 L72 26 L36 62 L22 64 L24 50 Z"/><path d="M36 62 L48 50" /><line x1="30" y1="56" x2="42" y2="68" opacity=".7"/><path d="M52 18 L66 32" opacity=".5"/></g><path d="M18 70 Q26 72 36 70" opacity=".4"/></svg></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">04</span><span class="dash">—</span><span>SCRIBE</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Emploi</span>
         <span class="pc-tag">CV</span>
         <span class="pc-tag">Autonomie</span>
-        <span class="pc-status stable"><span class="pc-status-dot"></span>Stable</span>
+        <span class="pc-status stable">Stable</span>
       </div>
-      <div class="pc-title">Scribe</div>
-      <p class="pc-q">"Peut-on concevoir un outil dont le modèle économique est simplement d'être utile ?"</p>
+      <h3 class="pc-title" id="t04">Scribe</h3>
+      <p class="pc-q">Peut-on concevoir un outil dont le modèle économique est simplement d'être utile ?</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">100%</span><span class="pc-stat-l">Local — zéro tracker</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v">100%</span>
+        <span class="pc-stat-l">Local · zéro tracker</span>
+      </div>
+      <div class="pc-cta">Utiliser <span class="arrow">↗</span></div>
     </div>
   </a>
 
   <!-- 05 Didici -->
-  <a class="pc" href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener">
-    <div class="pc-num">05</div>
+  <a class="pc" href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener" aria-labelledby="t05">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°05</span>
+      <span class="pc-thumb-coord br">QUOTIDIEN</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-05"></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">05</span><span class="dash">—</span><span>DIDICI</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Apprentissage</span>
         <span class="pc-tag">Éducation</span>
-        <span class="pc-status beta"><span class="pc-status-dot"></span>Non audité</span>
+        <span class="pc-status beta">Non audité</span>
       </div>
-      <div class="pc-title"><em>Didici</em></div>
-      <p class="pc-q">"Et si apprendre était une pratique quotidienne, sans friction et sans compte à créer ?"</p>
+      <h3 class="pc-title" id="t05"><em>Didici</em></h3>
+      <p class="pc-q">Et si apprendre était une pratique quotidienne, sans friction et sans compte à créer ?</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">—</span><span class="pc-stat-l">À vérifier</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v small">À vérifier</span>
+        <span class="pc-stat-l">En audit</span>
+      </div>
+      <div class="pc-cta">Voir <span class="arrow">↗</span></div>
     </div>
   </a>
 
-  <!-- ── DIAGNOSTIC & MOBILITÉ ── -->
-  <div class="projects-group-label">Diagnostic & Mobilité</div>
+  <!-- GROUPE C : Diagnostic & Mobilité -->
+  <div class="proj-group">
+    <span class="ix">C.</span>
+    <span>Diagnostic & Mobilité</span>
+    <span class="lin"></span>
+    <span class="ct">02 entrées</span>
+  </div>
 
   <!-- 06 SENTINEL -->
-  <a class="pc" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">
-    <div class="pc-num">06</div>
+  <a class="pc" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener" aria-labelledby="t06">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°06</span>
+      <span class="pc-thumb-coord br">v3.28 · 4 OS</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-06"><i></i></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">06</span><span class="dash">—</span><span>SENTINEL</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Diagnostic</span>
         <span class="pc-tag">Python</span>
         <span class="pc-tag">Vie privée</span>
         <span class="pc-tag">Multi-plateforme</span>
-        <span class="pc-status stable"><span class="pc-status-dot"></span>Stable v3.28</span>
+        <span class="pc-status stable">Stable v3.28</span>
       </div>
-      <div class="pc-title">SENTINEL</div>
-      <p class="pc-q">"Connaître son système sans en perdre le contrôle — est-ce encore possible ?"</p>
+      <h3 class="pc-title" id="t06">SENTINEL</h3>
+      <p class="pc-q">Connaître son système sans en perdre le contrôle — est-ce encore possible ?</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">240+</span><span class="pc-stat-l">Métriques · 4 OS</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v">240+</span>
+        <span class="pc-stat-l">Métriques · 4 OS</span>
+      </div>
+      <div class="pc-cta">Télécharger <span class="arrow">↗</span></div>
     </div>
   </a>
 
   <!-- 07 Talaria -->
-  <a class="pc" href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener">
-    <div class="pc-num">07</div>
+  <a class="pc" href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener" aria-labelledby="t07">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°07</span>
+      <span class="pc-thumb-coord br">IDFM · OSM</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-07"><i></i></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">07</span><span class="dash">—</span><span>TALARIA</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Transport</span>
         <span class="pc-tag">Île-de-France</span>
         <span class="pc-tag">PWA</span>
         <span class="pc-tag">Mobilité</span>
-        <span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span>
+        <span class="pc-status beta">Beta</span>
       </div>
-      <div class="pc-title"><em>Talaria</em></div>
-      <p class="pc-q">"Les transports en commun d'Île-de-France, sans compte, sans pub, sans collecte — depuis n'importe quel mobile."</p>
+      <h3 class="pc-title" id="t07"><em>Talaria</em></h3>
+      <p class="pc-q">Les transports en commun d'Île-de-France, sans compte, sans pub, sans collecte — depuis n'importe quel mobile.</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">IDFM</span><span class="pc-stat-l">PRIM · OSM · Météo</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v small">IDFM</span>
+        <span class="pc-stat-l">PRIM · OSM · Météo</span>
+      </div>
+      <div class="pc-cta">Lancer <span class="arrow">↗</span></div>
     </div>
   </a>
 
-  <!-- ── INFRASTRUCTURE & CONCEPT ── -->
-  <div class="projects-group-label">Infrastructure & Concept</div>
+  <!-- GROUPE D : Infrastructure & Concept -->
+  <div class="proj-group">
+    <span class="ix">D.</span>
+    <span>Infrastructure & Concept</span>
+    <span class="lin"></span>
+    <span class="ct">03 entrées</span>
+  </div>
 
   <!-- 08 Pi.stream -->
-  <a class="pc" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">
-    <div class="pc-num">08</div>
+  <a class="pc" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener" aria-labelledby="t08">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°08</span>
+      <span class="pc-thumb-coord br">NYC → PARIS</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-08"></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">08</span><span class="dash">—</span><span>PI-STREAM</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Hardware</span>
         <span class="pc-tag">Automatisation</span>
         <span class="pc-tag">Raspberry Pi</span>
-        <span class="pc-status stable"><span class="pc-status-dot"></span>Actif NYC</span>
+        <span class="pc-status actif">Actif NYC</span>
       </div>
-      <div class="pc-title">π<em>.stream</em></div>
-      <p class="pc-q">"Jusqu'où peut-on aller seul, avec du hardware bas de gamme et une architecture bien pensée ?"</p>
+      <h3 class="pc-title" id="t08">π<em>.stream</em></h3>
+      <p class="pc-q">Jusqu'où peut-on aller seul, avec du hardware bas de gamme et une architecture bien pensée ?</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">24/7</span><span class="pc-stat-l">NYC → Paris</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v">24/7</span>
+        <span class="pc-stat-l">NYC → Paris</span>
+      </div>
+      <div class="pc-cta">Voir <span class="arrow">↗</span></div>
     </div>
   </a>
 
   <!-- 09 LégaleInk -->
-  <a class="pc" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">
-    <div class="pc-num">09</div>
+  <a class="pc" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener" aria-labelledby="t09">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°09</span>
+      <span class="pc-thumb-coord br">CONCEPT</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-09" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z" fill="currentColor" stroke="none"/><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z"/><ellipse class="ripple" cx="43" cy="74" rx="20" ry="3"/><line x1="18" y1="74" x2="68" y2="74" opacity=".4"/></svg></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">09</span><span class="dash">—</span><span>LEGALE-INK</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Concept</span>
         <span class="pc-tag">e-ink</span>
         <span class="pc-tag">Droit</span>
-        <span class="pc-status concept"><span class="pc-status-dot"></span>Concept</span>
+        <span class="pc-status concept">Concept</span>
       </div>
-      <div class="pc-title">Légale<em>Ink</em></div>
-      <p class="pc-q">"Et si la conformité légale devenait aussi invisible qu'une mise à jour système ?"</p>
+      <h3 class="pc-title" id="t09">Légale<em>Ink</em></h3>
+      <p class="pc-q">Et si la conformité légale devenait aussi invisible qu'une mise à jour système ?</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">RGPD</span><span class="pc-stat-l">Pitch · Prototype</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v small">RGPD</span>
+        <span class="pc-stat-l">Pitch · Prototype</span>
+      </div>
+      <div class="pc-cta">Découvrir <span class="arrow">↗</span></div>
     </div>
   </a>
 
   <!-- 10 Vacuum -->
-  <a class="pc" href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener">
-    <div class="pc-num">10</div>
+  <a class="pc" href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener" aria-labelledby="t10">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°10</span>
+      <span class="pc-thumb-coord br">LIVE</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-10"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    </div>
     <div class="pc-body">
+      <div class="pc-id"><span class="num">10</span><span class="dash">—</span><span>VACUUM</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Carte</span>
         <span class="pc-tag">Signalement</span>
         <span class="pc-tag">Firebase</span>
         <span class="pc-tag">OSM</span>
-        <span class="pc-status beta"><span class="pc-status-dot"></span>Beta</span>
+        <span class="pc-status beta">Beta</span>
       </div>
-      <div class="pc-title">Vacuum</div>
-      <p class="pc-q">"Trouver une place de parking en temps réel — par la communauté, pour la communauté, sans compte."</p>
+      <h3 class="pc-title" id="t10">Vacuum</h3>
+      <p class="pc-q">Trouver une place de parking en temps réel — par la communauté, pour la communauté, sans compte.</p>
     </div>
-    <div class="pc-right">
-      <div class="pc-stat"><span class="pc-stat-v">Live</span><span class="pc-stat-l">Firebase · OSM</span></div>
-      <span class="pc-arrow">↗</span>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v small">Live</span>
+        <span class="pc-stat-l">Firebase · OSM</span>
+      </div>
+      <div class="pc-cta">Tester <span class="arrow">↗</span></div>
     </div>
   </a>
+</main>
 
-</section>
-
-<!-- INTERLUDE -->
-<div id="interlude">
-  <div class="int-bg-word" aria-hidden="true">Lab</div>
-  <div class="int-inner">
-    <p class="int-label" id="il">Ce qui les relie</p>
-    <blockquote class="int-q" id="iq">
-      "Ce n'est pas un portfolio.<br>
+<!-- ═══ INTERLUDE ═══ -->
+<aside id="interlude">
+  <span class="int-bg" aria-hidden="true">Lab.</span>
+  <div class="int-inner reveal">
+    <p class="int-label">SECTION 03 / Ce qui les relie</p>
+    <blockquote class="int-q">
+      Ce n'est pas un portfolio.<br>
       C'est une <em>conviction</em> :<br>
-      bâtir ce qu'on rêve de voir exister."
+      bâtir ce qu'on rêve de voir exister.
     </blockquote>
+    <div class="int-foot">
+      <span>10 projets</span>
+      <span>4 domaines</span>
+      <span>1 fil conducteur</span>
+      <span>0 collecte</span>
+    </div>
   </div>
-</div>
+</aside>
 
-<!-- PRINCIPES -->
-<section id="principes">
-  <div class="pr-header" id="prh">
-    <h2>Un seul <em>fil conducteur</em></h2>
-    <p>Dix projets distincts. Dix domaines différents. Une même architecture.</p>
-  </div>
+<!-- ═══ PRINCIPES ═══ -->
+<section id="principes" aria-labelledby="pr-title">
+  <header class="section-head reveal">
+    <p class="lab">SECTION 04 / Méthode</p>
+    <h2 class="ttl" id="pr-title">Un seul <em>fil conducteur</em></h2>
+    <div class="meta">
+      <span>Dix projets distincts</span>
+      <span>Une même architecture</span>
+    </div>
+  </header>
   <div class="pr-grid">
-    <div class="pr" id="pr0"><span class="pr-n">I</span><h4>Souveraineté</h4><p>Aucun projet ne collecte ni ne transmet de données. Ce n'est pas un paramètre — c'est une architecture de départ.</p></div>
-    <div class="pr" id="pr1"><span class="pr-n">II</span><h4>Zéro dépendance</h4><p>HTML, CSS, Python, Raspberry Pi. Chaque outil compris en totalité par son auteur. Aucune boîte noire acceptée.</p></div>
-    <div class="pr" id="pr2"><span class="pr-n">III</span><h4>Hébergement libre</h4><p>GitHub Pages ou Pi local. Zéro coût d'infrastructure, zéro plateforme imposée, déploiement en un push.</p></div>
-    <div class="pr" id="pr3"><span class="pr-n">IV</span><h4>Forme = message</h4><p>Un site sur la maîtrise numérique qui est lui-même maîtrisé. La forme ne vient pas après le fond.</p></div>
+    <article class="pr">
+      <div class="pr-n"><span>PRINCIPE</span><span class="roman">I</span></div>
+      <h4>Souveraineté</h4>
+      <p>Aucun projet ne collecte ni ne transmet de données. Ce n'est pas un paramètre — c'est une architecture de départ.</p>
+    </article>
+    <article class="pr">
+      <div class="pr-n"><span>PRINCIPE</span><span class="roman">II</span></div>
+      <h4>Zéro dépendance</h4>
+      <p>HTML, CSS, Python, Raspberry Pi. Chaque outil compris en totalité par son auteur. Aucune boîte noire acceptée.</p>
+    </article>
+    <article class="pr">
+      <div class="pr-n"><span>PRINCIPE</span><span class="roman">III</span></div>
+      <h4>Hébergement libre</h4>
+      <p>GitHub Pages ou Pi local. Zéro coût d'infrastructure, zéro plateforme imposée, déploiement en un push.</p>
+    </article>
+    <article class="pr">
+      <div class="pr-n"><span>PRINCIPE</span><span class="roman">IV</span></div>
+      <h4>Forme = message</h4>
+      <p>Un site sur la maîtrise numérique qui est lui-même maîtrisé. La forme ne vient pas après le fond.</p>
+    </article>
   </div>
 </section>
 
+<!-- ═══ CONTACT BAND ═══ -->
+<section id="contact" aria-labelledby="contact-q">
+  <div class="contact-inner reveal">
+    <p class="contact-eyebrow">SECTION 05 / Prendre contact</p>
+    <p class="contact-q" id="contact-q">Une <em>conviction</em> à mettre en commun ? Un projet à <em>bâtir</em> ?</p>
+    <div class="contact-actions">
+      <a class="btn primary" href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+      <a class="btn" href="https://github.com/shamsetdean" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
 <footer>
-  <span class="ft-brand">anthropotech /lab</span>
-  <ul class="ft-links">
-    <li><a href="https://shamsetdean.github.io/humiAn/" target="_blank">Hum{i}An</a></li>
-    <li><a href="https://shamsetdean.github.io/codex/" target="_blank">Codex</a></li>
-    <li><a href="https://fabulae.vercel.app/" target="_blank">Fabulae</a></li>
-    <li><a href="https://shamsetdean.github.io/scribe/" target="_blank">Scribe</a></li>
-    <li><a href="https://shamsetdean.github.io/didici/" target="_blank">Didici</a></li>
-    <li><a href="https://shamsetdean.github.io/sentinel/" target="_blank">Sentinel</a></li>
-    <li><a href="https://talaria-iota.vercel.app/" target="_blank">Talaria</a></li>
-    <li><a href="https://shamsetdean.github.io/pi-stream/" target="_blank">π.stream</a></li>
-    <li><a href="https://shamsetdean.github.io/legaleink/" target="_blank">LégaleInk</a></li>
-    <li><a href="https://shamsetdean.github.io/vacuum/" target="_blank">Vacuum</a></li>
-    <li><a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank">LinkedIn</a></li>
-    <li><a href="https://github.com/shamsetdean" target="_blank">GitHub</a></li>
-  </ul>
-  <span class="ft-copy">© 2026 Shams Guettaf</span>
+  <div class="ft-brand">
+    <span class="b1">anthropotech /lab</span>
+    <span class="b2">PARIS · 2025—2026 · v2.0</span>
+  </div>
+  <div class="ft-cols">
+    <a href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener">Hum{i}An</a>
+    <a href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener">Codex</a>
+    <a href="https://fabulae.vercel.app/" target="_blank" rel="noopener">Fabulae</a>
+    <a href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener">Scribe</a>
+    <a href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener">Didici</a>
+    <a href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">Sentinel</a>
+    <a href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener">Talaria</a>
+    <a href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">π.stream</a>
+    <a href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">LégaleInk</a>
+    <a href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener">Vacuum</a>
+  </div>
+  <div class="ft-end">
+    <strong>Shams Guettaf</strong>
+    <span>shamsetdean.github.io</span>
+    <span>© 2026 — All rights free</span>
+  </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
-gsap.registerPlugin(ScrollTrigger);
-
-const ls = document.createElement('script');
-ls.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js';
-ls.onload = () => {
-  const lenis = new Lenis({ lerp: .09 });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(t => lenis.raf(t * 1000));
-  gsap.ticker.lagSmoothing(0);
-};
-document.head.appendChild(ls);
-
-// CURSOR
-const cur = document.getElementById('cur'), curR = document.getElementById('cur-r');
-let mx=0, my=0, rx=0, ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
-(function loop(){
-  cur.style.transform = `translate(${mx-3}px,${my-3}px)`;
-  rx += (mx-rx)*.09; ry += (my-ry)*.09;
-  curR.style.transform = `translate(${rx-17}px,${ry-17}px)`;
-  requestAnimationFrame(loop);
-})();
-document.querySelectorAll('a').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('ch'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('ch'));
-});
-
-// HERO
-const intro = gsap.timeline({ delay: .1 });
-const words = ['w1','w2','w3','w4','w5','w6'];
-intro.to(words.map(id => `#${id}`), { y: '0%', duration: 1.4, ease: 'expo.out', stagger: .09 }, .5);
-intro.to('#se', { opacity:1, y:0, duration:.9, ease:'expo.out' }, .4);
-intro.to('#ssub', { opacity:1, duration:1.1, ease:'power2.out' }, 1.5);
-intro.to('#sscroll', { opacity:1, duration:.8, ease:'power2.out' }, 2);
-intro.to('#nav', { opacity:1, duration:.9, ease:'power2.out' }, 2.2);
-intro.to('#ticker', { opacity:1, duration:.8, ease:'power2.out' }, 2.4);
-gsap.set('#se', { y: 12 });
-
-document.addEventListener('mousemove', e => {
-  const x = (e.clientX / window.innerWidth - .5);
-  const y = (e.clientY / window.innerHeight - .5);
-  gsap.to('#st', { x: x*18, y: y*9, duration:1.5, ease:'power2.out' });
-  gsap.to('.stage-bg', { x: x*-30, y: y*-18, duration:2, ease:'power2.out' });
-  gsap.to('.stage-dots', { x: x*20, y: y*14, duration:1.8, ease:'power2.out' });
-});
-
-// PROJECTS HEADER
-gsap.to('#ph', {
-  scrollTrigger: { trigger: '#ph', start: 'top 80%' },
-  opacity: 1, y: 0, duration: 1, ease: 'expo.out'
-});
-
-// PROJECT CARDS + EFFET SABLE
-document.querySelectorAll('.pc').forEach((el, i) => {
-  gsap.to(el, {
-    scrollTrigger: { trigger: el, start: 'top 82%', toggleActions: 'play none none none' },
-    opacity: 1, y: 0, duration: 1.1, ease: 'expo.out', delay: i * .04
-  });
-  const title = el.querySelector('.pc-title');
-  const rawHTML = title.innerHTML;
-  let result = '';
-  let inTag = false;
-  for (let i = 0; i < rawHTML.length; i++) {
-    const ch = rawHTML[i];
-    if (ch === '<') { inTag = true; result += ch; continue; }
-    if (ch === '>') { inTag = false; result += ch; continue; }
-    if (inTag) { result += ch; continue; }
-    if (ch === ' ') { result += '<span class="sc" style="display:inline-block"> </span>'; continue; }
-    result += `<span class="sc" style="display:inline-block">${ch}</span>`;
-  }
-  title.innerHTML = result;
-  const chars = title.querySelectorAll('.sc');
-  el.addEventListener('mouseenter', () => {
-    chars.forEach(ch => {
-      const angle = (Math.random() - .5) * 80;
-      const dist  = 4 + Math.random() * 16;
-      const dx    = Math.cos(angle) * dist;
-      const dy    = Math.sin(angle) * dist - Math.random() * 8;
-      gsap.to(ch, { x: dx, y: dy, rotation: (Math.random()-.5)*18, opacity: .35+Math.random()*.45, duration: .9+Math.random()*.4, ease: 'power1.out', delay: Math.random()*.35 });
-    });
-  });
-  el.addEventListener('mouseleave', () => {
-    chars.forEach(ch => {
-      gsap.to(ch, { x:0, y:0, rotation:0, opacity:1, duration: 1.1+Math.random()*.4, ease: 'elastic.out(1,.45)', delay: Math.random()*.3 });
-    });
-  });
-});
-
-// INTERLUDE
-gsap.set('#il', { y: 10 });
-gsap.to('#il', {
-  scrollTrigger: { trigger: '#interlude', start: 'top 72%' },
-  opacity: 1, y: 0, duration: .9, ease: 'expo.out'
-});
-gsap.to('#iq', {
-  scrollTrigger: { trigger: '#interlude', start: 'top 68%' },
-  opacity: 1, filter: 'blur(0px)', duration: 1.8, ease: 'expo.out', delay: .2
-});
-gsap.to('.int-bg-word', {
-  scrollTrigger: { trigger: '#interlude', start: 'top bottom', end: 'bottom top', scrub: 1.5 },
-  x: -60, ease: 'none'
-});
-
-// PRINCIPES
-gsap.set('#prh', { y: 16 });
-gsap.to('#prh', {
-  scrollTrigger: { trigger: '#prh', start: 'top 78%' },
-  opacity: 1, y: 0, duration: 1, ease: 'expo.out'
-});
-['pr0','pr1','pr2','pr3'].forEach((id, i) => {
-  gsap.to(`#${id}`, {
-    scrollTrigger: { trigger: '#principes', start: 'top 65%' },
-    opacity: 1, y: 0, duration: 1, ease: 'expo.out', delay: .15 + i * .1
-  });
-});
-</script>
 </body>
 </html>

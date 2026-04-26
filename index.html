@@ -961,6 +961,36 @@ a { color: inherit; text-decoration: none; }
 .btn .arrow { transition: transform .3s; }
 .btn:hover .arrow { transform: translate(2px,-2px); }
 
+/* social icon row */
+.contact-socials {
+  margin-top: 2.2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  justify-content: center;
+}
+.social-icon {
+  width: 42px; height: 42px;
+  display: inline-grid; place-items: center;
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  background: var(--paper);
+  transition: color .2s, border-color .2s, background .2s, transform .2s;
+}
+.social-icon:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+.social-icon svg { width: 18px; height: 18px; stroke-width: 1.5; }
+.contact-eyebrow.tiny {
+  font-size: 10px;
+  margin: 1.4rem 0 .6rem;
+  color: var(--ink-3);
+}
+
 /* ──────────────────────────────────────────────────────────────
    STACK & MÉTHODE
    ────────────────────────────────────────────────────────────── */
@@ -1109,6 +1139,25 @@ footer {
   letter-spacing: .04em;
 }
 .ft-end strong { color: var(--ink); font-weight: 500; }
+.ft-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: .6rem 0 .2rem;
+}
+.ft-socials a {
+  width: 30px; height: 30px;
+  display: inline-grid; place-items: center;
+  border: 1px solid var(--rule);
+  color: var(--ink-3);
+  transition: color .2s, border-color .2s, transform .2s;
+}
+.ft-socials a:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+  transform: translateY(-1px);
+}
+.ft-socials svg { width: 14px; height: 14px; stroke-width: 1.5; }
 
 /* ──────────────────────────────────────────────────────────────
    ANIMATIONS partagées
@@ -1616,8 +1665,36 @@ footer {
     <p class="contact-eyebrow">SECTION 05 / Prendre contact</p>
     <p class="contact-q" id="contact-q">Une <em>conviction</em> à mettre en commun ? Un projet à <em>bâtir</em> ?</p>
     <div class="contact-actions">
-      <a class="btn primary" href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
-      <a class="btn" href="https://github.com/shamsetdean" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+      <a class="btn primary" href="/cdn-cgi/l/email-protection#0f7c676e627c6a7b6b6a6e614f68626e6663216c6062">Email <span class="arrow">↗</span></a>
+      <a class="btn" href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+    </div>
+
+    <p class="contact-eyebrow tiny">/ retrouvez-moi ailleurs</p>
+    <div class="contact-socials" role="list">
+      <a class="social-icon" role="listitem" href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a class="social-icon" role="listitem" href="https://github.com/shamsetdean" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+      <a class="social-icon" role="listitem" href="https://x.com/shamsetdean" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a class="social-icon" role="listitem" href="https://www.instagram.com/shamsetdean" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a class="social-icon" role="listitem" href="https://www.facebook.com/shamsetdean" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a class="social-icon" role="listitem" href="https://abstracted-crush-f4e.notion.site/SHAMS-DEAN-286d3f1e5597815f9fdfc90d48445621" target="_blank" rel="noopener" aria-label="Notion — Page personnelle" title="Notion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </a>
+      <a class="social-icon" role="listitem" href="https://t.co/B2sslp0dGV" target="_blank" rel="noopener" aria-label="Apple Books" title="Apple Books">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </a>
+      <a class="social-icon" role="listitem" href="/cdn-cgi/l/email-protection#ccbfa4ada1bfa9b8a8a9ada28caba1ada5a0e2afa3a1" aria-label="Email" title="shamsetdean@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1717,7 +1794,7 @@ footer {
     <div class="legal-block">
       <h4>Éditeur</h4>
       <p><strong>Shams Guettaf</strong> — particulier, éditeur à titre personnel et non commercial.</p>
-      <p>Contact : via <a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn</a> ou <a href="https://github.com/shamsetdean" target="_blank" rel="noopener">GitHub</a>.</p>
+      <p>Contact : <a href="/cdn-cgi/l/email-protection#44372c25293721302021252a042329252d286a272b29"><span class="__cf_email__" data-cfemail="becdd6dfd3cddbcadadbdfd0fed9d3dfd7d290ddd1d3">[email&#160;protected]</span></a> · <a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/shamsetdean" target="_blank" rel="noopener">GitHub</a>.</p>
       <p>Directeur de la publication : Shams Guettaf.</p>
     </div>
 
@@ -1779,11 +1856,34 @@ footer {
   </div>
   <div class="ft-end">
     <strong>Shams Guettaf</strong>
-    <span>shamsetdean.github.io</span>
+    <span><a href="/cdn-cgi/l/email-protection#a3d0cbc2ced0c6d7c7c6c2cde3c4cec2cacf8dc0ccce" style="color:inherit;"><span class="__cf_email__" data-cfemail="7e0d161f130d1b0a1a1b1f103e19131f1712501d1113">[email&#160;protected]</span></a></span>
+    <div class="ft-socials" aria-label="Réseaux sociaux">
+      <a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://github.com/shamsetdean" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+      <a href="https://x.com/shamsetdean" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/shamsetdean" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.facebook.com/shamsetdean" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://abstracted-crush-f4e.notion.site/SHAMS-DEAN-286d3f1e5597815f9fdfc90d48445621" target="_blank" rel="noopener" aria-label="Notion" title="Notion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </a>
+      <a href="https://t.co/B2sslp0dGV" target="_blank" rel="noopener" aria-label="Apple Books" title="Apple Books">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </a>
+    </div>
     <span><a href="#legal" style="color:inherit;border-bottom:1px solid var(--ink-4);">Mentions légales</a></span>
     <span>© 2025–2026 — Tous droits réservés</span>
   </div>
 </footer>
 
-</body>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
 </html>

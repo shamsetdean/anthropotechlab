@@ -953,6 +953,110 @@ a { color: inherit; text-decoration: none; }
 .btn:hover .arrow { transform: translate(2px,-2px); }
 
 /* ──────────────────────────────────────────────────────────────
+   STACK & MÉTHODE
+   ────────────────────────────────────────────────────────────── */
+
+#stack {
+  padding: 7rem var(--gutter);
+  background: var(--bg-warm);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.stack-inner { max-width: var(--max); margin: 0 auto; }
+.stack-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 3rem;
+}
+@media (min-width: 800px) { .stack-grid { grid-template-columns: 1fr 1fr; } }
+.stack-item {
+  background: var(--paper);
+  padding: 2rem 1.8rem;
+  display: grid;
+  gap: .9rem;
+  align-content: start;
+}
+.stack-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.stack-name {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  letter-spacing: -.01em;
+}
+.stack-name em { font-style: italic; color: var(--blue); }
+.stack-tag {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--ink-3);
+  letter-spacing: .12em; text-transform: uppercase;
+}
+.stack-item p {
+  font-size: .92rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.stack-item p em { font-style: italic; color: var(--blue); }
+.stack-list {
+  margin-top: .4rem;
+  display: grid; gap: .5rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-2);
+}
+.stack-list li {
+  list-style: none;
+  display: flex; gap: .8rem;
+  padding: .35rem 0;
+  border-top: 1px solid var(--rule-2);
+}
+.stack-list li::before { content: '/'; color: var(--ink-4); }
+
+/* ──────────────────────────────────────────────────────────────
+   MENTIONS LÉGALES
+   ────────────────────────────────────────────────────────────── */
+
+#legal {
+  padding: 6rem var(--gutter);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.legal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 800px) { .legal-grid { grid-template-columns: 1fr 1fr; } }
+.legal-block {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 1.6rem 1.6rem 1.4rem;
+  display: grid; gap: .6rem;
+  align-content: start;
+}
+.legal-block h4 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-3);
+  padding-bottom: .8rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: .3rem;
+}
+.legal-block p, .legal-block li {
+  font-size: .88rem; line-height: 1.7; color: var(--ink-2);
+}
+.legal-block ul { padding-left: 1rem; display: grid; gap: .3rem; }
+.legal-block strong { color: var(--ink); font-weight: 500; }
+.legal-block a { color: var(--blue); border-bottom: 1px solid var(--ink-4); transition: border-color .25s; }
+.legal-block a:hover { border-bottom-color: var(--blue); }
+
+/* ──────────────────────────────────────────────────────────────
    FOOTER
    ────────────────────────────────────────────────────────────── */
 
@@ -1052,6 +1156,7 @@ footer {
   </div>
   <nav class="nav-r" aria-label="Navigation principale">
     <a href="#projects" class="nav-link">Projets</a>
+    <a href="#stack" class="nav-link">Stack</a>
     <a href="#principes" class="nav-link">Principes</a>
     <a href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener" class="nav-link" data-ext>Magazine</a>
     <a href="https://github.com/shamsetdean" target="_blank" rel="noopener" class="nav-link" data-ext>GitHub</a>
@@ -1508,6 +1613,143 @@ footer {
   </div>
 </section>
 
+<!-- ═══ STACK & MÉTHODE ═══ -->
+<section id="stack" aria-labelledby="stack-title">
+  <div class="stack-inner">
+    <header class="section-head reveal">
+      <p class="lab">SECTION 06 / Stack & méthode</p>
+      <h2 class="ttl" id="stack-title">Comment <em>c'est fait</em></h2>
+      <div class="meta">
+        <span>Outils choisis</span>
+        <span>Raisons assumées</span>
+      </div>
+    </header>
+
+    <div class="stack-grid">
+
+      <article class="stack-item">
+        <div class="stack-head">
+          <span class="stack-name">APIs <em>publiques</em></span>
+          <span class="stack-tag">DONNÉES</span>
+        </div>
+        <p>Plutôt que de scraper ou de bâtir mes propres bases, je m'appuie sur des APIs <em>officielles, ouvertes et documentées</em>. C'est plus rapide, plus fiable, et ça respecte le travail des organismes qui les maintiennent.</p>
+        <ul class="stack-list">
+          <li><strong>TMDB</strong> — base de données séries (Fabulae)</li>
+          <li><strong>IDFM / PRIM</strong> — transports Île-de-France (Talaria)</li>
+          <li><strong>OpenStreetMap</strong> — cartographie libre (Talaria, Vacuum)</li>
+          <li><strong>Open-Meteo</strong> — météo sans clé (Talaria)</li>
+        </ul>
+      </article>
+
+      <article class="stack-item">
+        <div class="stack-head">
+          <span class="stack-name"><em>Vercel</em></span>
+          <span class="stack-tag">HÉBERGEMENT DYNAMIQUE</span>
+        </div>
+        <p>Pour les projets qui ont besoin de fonctions serverless ou d'un build (PWA, fetch d'API), Vercel offre un déploiement <em>en un push Git</em>, gratuit pour les usages personnels, sans carte bancaire requise. Le tier gratuit suffit largement à mes volumes.</p>
+        <ul class="stack-list">
+          <li>Build automatique depuis GitHub</li>
+          <li>HTTPS par défaut, CDN mondial</li>
+          <li>Aucun lock-in : mes sources restent sur Git</li>
+        </ul>
+      </article>
+
+      <article class="stack-item">
+        <div class="stack-head">
+          <span class="stack-name"><em>Supabase</em></span>
+          <span class="stack-tag">BASE DE DONNÉES</span>
+        </div>
+        <p>Quand un projet a besoin d'écrire des données (signalements Vacuum, stockage minimal), Supabase fournit une base <em>PostgreSQL open-source</em> avec auth et API REST clés en main. Le tier gratuit couvre largement les usages communautaires.</p>
+        <ul class="stack-list">
+          <li>PostgreSQL standard, exportable</li>
+          <li>Open-source, auto-hébergeable si besoin</li>
+          <li>Row Level Security pour limiter l'accès</li>
+        </ul>
+      </article>
+
+      <article class="stack-item">
+        <div class="stack-head">
+          <span class="stack-name"><em>GitHub Pages</em> + Pi</span>
+          <span class="stack-tag">HÉBERGEMENT STATIQUE</span>
+        </div>
+        <p>Pour tout ce qui est statique (la majorité), GitHub Pages suffit : zéro coût, zéro config, version en clair. Pour le reste — captures, cron jobs, automatisations — un <em>Raspberry Pi</em> à la maison fait le travail 24/7 pour quelques euros d'électricité.</p>
+        <ul class="stack-list">
+          <li>GitHub Pages : sites statiques, déploiement Git</li>
+          <li>Raspberry Pi : automation, π.stream, scripts Python</li>
+          <li>Aucune dépendance à un cloud propriétaire</li>
+        </ul>
+      </article>
+
+      <article class="stack-item" style="grid-column: 1 / -1;">
+        <div class="stack-head">
+          <span class="stack-name"><em>Pourquoi le gratuit ?</em></span>
+          <span class="stack-tag">PRINCIPE</span>
+        </div>
+        <p>Le gratuit n'est pas un compromis — c'est un <em>choix politique</em>. Tant qu'un outil reste gratuit, il reste accessible à <em>quiconque veut bâtir</em>, sans barrière financière. Je m'astreins donc à concevoir des projets qui tiennent sur des tiers gratuits : ça force la frugalité, l'efficacité, et garantit que mes outils restent reproductibles par n'importe qui — étudiant, autodidacte, association — sans demander un budget. Quand un service devient payant, je migre. Le code, lui, reste libre.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MENTIONS LÉGALES ═══ -->
+<section id="legal" aria-labelledby="legal-title">
+  <header class="section-head reveal">
+    <p class="lab">SECTION 07 / Mentions légales</p>
+    <h2 class="ttl" id="legal-title">Mentions <em>légales</em></h2>
+    <div class="meta">
+      <span>Conformité RGPD</span>
+      <span>Maj. 2026.04</span>
+    </div>
+  </header>
+
+  <div class="legal-grid">
+
+    <div class="legal-block">
+      <h4>Éditeur</h4>
+      <p><strong>Shams Guettaf</strong> — particulier, éditeur à titre personnel et non commercial.</p>
+      <p>Contact : via <a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn</a> ou <a href="https://github.com/shamsetdean" target="_blank" rel="noopener">GitHub</a>.</p>
+      <p>Directeur de la publication : Shams Guettaf.</p>
+    </div>
+
+    <div class="legal-block">
+      <h4>Hébergement</h4>
+      <p>Sites statiques hébergés par <strong>GitHub, Inc.</strong> — 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.</p>
+      <p>Projets dynamiques (Fabulae, Talaria) hébergés par <strong>Vercel Inc.</strong> — 340 S Lemon Ave #4133, Walnut, CA 91789, USA.</p>
+      <p>Certains services (Vacuum) reposent sur <strong>Supabase Inc.</strong> — 970 Toa Payoh North #07-04, Singapore.</p>
+    </div>
+
+    <div class="legal-block">
+      <h4>Propriété intellectuelle — Tous droits réservés</h4>
+      <p><strong>© 2025–2026 Shams Guettaf. Tous droits réservés. All rights reserved worldwide.</strong></p>
+      <p>L'ensemble du contenu de ce laboratoire — <strong>code source, architecture logicielle, interfaces, designs, identités visuelles, textes éditoriaux, citations, concepts, noms de projets, marques et logos</strong> — constitue une œuvre originale protégée par le droit d'auteur français (<em>Code de la propriété intellectuelle, art. L.111-1 et suivants</em>) ainsi que par les conventions internationales (<em>Convention de Berne, accord ADPIC, traité OMPI sur le droit d'auteur</em>).</p>
+      <p>Cette protection s'applique dès la création, sans formalité, dans l'ensemble des pays signataires — soit la quasi-totalité du monde.</p>
+      <p><strong>Toute reproduction, représentation, modification, publication, adaptation, traduction, diffusion ou exploitation</strong>, totale ou partielle, par quelque procédé que ce soit (incluant l'entraînement de modèles d'intelligence artificielle), <strong>est strictement interdite sans autorisation écrite préalable de l'auteur</strong>.</p>
+      <p>La consultation publique d'un projet sur Internet ou la visibilité du code dans un dépôt Git <strong>n'emporte aucune renonciation</strong> aux droits patrimoniaux ou moraux de l'auteur. Aucune licence libre n'est concédée par défaut.</p>
+      <p>Toute infraction expose son auteur aux sanctions prévues par les articles <em>L.335-2 et suivants du CPI</em> (jusqu'à 3 ans d'emprisonnement et 300 000 € d'amende en France) ainsi qu'aux dispositions équivalentes dans les juridictions étrangères.</p>
+      <p>Les marques et logos tiers cités appartiennent à leurs propriétaires respectifs.</p>
+    </div>
+
+    <div class="legal-block">
+      <h4>Données personnelles</h4>
+      <p><strong>Aucune collecte.</strong> Ce site et l'ensemble des projets associés ne déposent aucun cookie de suivi, n'utilisent aucun outil d'analyse, et ne transmettent aucune donnée à des tiers.</p>
+      <p>Les seuls échanges réseau concernent les APIs publiques nécessaires au fonctionnement (TMDB, IDFM, OSM…) — sans authentification utilisateur.</p>
+    </div>
+
+    <div class="legal-block">
+      <h4>Cookies</h4>
+      <p>Aucun cookie de mesure ni de publicité. Certains projets utilisent uniquement le <strong>localStorage</strong> du navigateur pour mémoriser des préférences (Top 3 Fabulae, position Vacuum…). Ces données restent sur l'appareil de l'utilisateur et ne sont jamais transmises.</p>
+    </div>
+
+    <div class="legal-block">
+      <h4>Responsabilité</h4>
+      <p>Les projets de ce laboratoire sont des expérimentations personnelles, fournies <strong>« en l'état »</strong>, sans garantie. L'auteur ne saurait être tenu responsable de l'utilisation qui en est faite ni des éventuelles erreurs ou indisponibilités.</p>
+      <p>Tout signalement bienvenu via les canaux de contact.</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="ft-brand">
@@ -1529,7 +1771,8 @@ footer {
   <div class="ft-end">
     <strong>Shams Guettaf</strong>
     <span>shamsetdean.github.io</span>
-    <span>© 2026 — All rights free</span>
+    <span><a href="#legal" style="color:inherit;border-bottom:1px solid var(--ink-4);">Mentions légales</a></span>
+    <span>© 2025–2026 — Tous droits réservés</span>
   </div>
 </footer>
 

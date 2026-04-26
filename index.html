@@ -147,17 +147,37 @@ a { color: inherit; text-decoration: none; }
    ────────────────────────────────────────────────────────────── */
 
 #nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  position: fixed; top: 14px; left: 14px; right: 14px; z-index: 500;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 2rem;
   align-items: center;
-  padding: 1rem var(--gutter);
-  background: rgba(244,242,236,.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: var(--rule-w) solid var(--rule);
+  padding: .7rem 1.2rem;
+  border-radius: 999px;
+  background: rgba(244,242,236,.78);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255,255,255,.6);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.7) inset,
+    0 -1px 0 rgba(0,0,0,.04) inset,
+    0 8px 24px -10px rgba(20,19,15,.22),
+    0 2px 6px -2px rgba(20,19,15,.1);
   animation: fade-down .8s ease both;
+}
+/* Highlight glassy en haut */
+#nav::before {
+  content: '';
+  position: absolute;
+  inset: 1px 1px auto 1px;
+  height: 50%;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.45) 0%,
+    rgba(255,255,255,0) 100%
+  );
+  pointer-events: none;
 }
 
 .nav-logo {
@@ -210,6 +230,101 @@ a { color: inherit; text-decoration: none; }
 .nav-link[data-ext]:hover::after { transform: translate(2px,-2px); }
 
 @media (min-width: 900px) { .nav-meta { display: inline-flex; } }
+
+/* ── Mobile burger ── */
+.nav-burger {
+  display: none;
+  width: 38px; height: 38px;
+  border: 1px solid rgba(20,19,15,.12);
+  background: rgba(255,255,255,.35);
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  transition: border-color .2s, background .2s, transform .2s;
+}
+.nav-burger:hover { border-color: var(--ink); background: rgba(255,255,255,.6); }
+.nav-burger:active { transform: scale(.94); }
+.nav-burger:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.nav-burger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+  position: relative;
+  transition: transform .3s, opacity .2s;
+}
+.nav-burger span::before,
+.nav-burger span::after {
+  content: '';
+  position: absolute; left: 0;
+  width: 18px; height: 1.5px;
+  background: currentColor;
+  transition: transform .3s;
+}
+.nav-burger span::before { top: -6px; }
+.nav-burger span::after  { top:  6px; }
+body.nav-open .nav-burger span { transform: scaleX(0); opacity: 0; }
+body.nav-open .nav-burger span::before { transform: translateY(6px) rotate(45deg); }
+body.nav-open .nav-burger span::after  { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 760px) {
+  #nav {
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    padding: .55rem .8rem .55rem 1.1rem;
+    top: 10px; left: 10px; right: 10px;
+    border-radius: 28px;
+  }
+  .nav-meta { display: none !important; }
+  .nav-burger { display: inline-flex; }
+  .nav-r {
+    position: fixed;
+    top: 70px; left: 10px; right: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(244,242,236,.94);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    padding: .6rem 1rem;
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 24px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.7) inset,
+      0 0 0 1px rgba(20,19,15,.04),
+      0 16px 40px -10px rgba(20,19,15,.28),
+      0 4px 12px -2px rgba(20,19,15,.12);
+    transform: translateY(-12px) scale(.97);
+    transform-origin: top center;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .3s cubic-bezier(.2,.9,.3,1.2), opacity .25s ease;
+    overflow-y: auto;
+    max-height: calc(100vh - 90px);
+  }
+  body.nav-open { overflow: hidden; }
+  body.nav-open .nav-r {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-r .nav-link {
+    font-size: 13px;
+    padding: .95rem .4rem;
+    border-bottom: 1px solid rgba(20,19,15,.07);
+    border-top: none;
+    letter-spacing: .14em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .nav-r .nav-link:last-child { border-bottom: none; }
+  .nav-r .nav-link[data-ext]::after { margin-left: auto; font-size: 12px; }
+}
 
 /* ──────────────────────────────────────────────────────────────
    HERO / STAGE
@@ -1195,8 +1310,6 @@ footer {
   .pc-thumb { aspect-ratio: 16/9; }
   .pc-side { padding: 1.1rem 1.3rem; }
   .pc-body { padding: 1.4rem 1.3rem 1rem; }
-  .nav-r { gap: 1rem; }
-  .nav-link { font-size: 10px; }
   #interlude { padding: 5rem var(--gutter); }
   #principes { padding: 5rem var(--gutter); }
 }
@@ -1212,10 +1325,14 @@ footer {
     <span>10 PROJETS</span>
     <span>PARIS · 48.85°N</span>
   </div>
-  <nav class="nav-r" aria-label="Navigation principale">
+  <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-r">
+    <span></span>
+  </button>
+  <nav class="nav-r" id="nav-r" aria-label="Navigation principale">
     <a href="#projects" class="nav-link">Projets</a>
     <a href="#stack" class="nav-link">Stack</a>
     <a href="#principes" class="nav-link">Principes</a>
+    <a href="#contact" class="nav-link">Contact</a>
     <a href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener" class="nav-link" data-ext>Magazine</a>
     <a href="https://github.com/shamsetdean" target="_blank" rel="noopener" class="nav-link" data-ext>GitHub</a>
   </nav>
@@ -1665,7 +1782,7 @@ footer {
     <p class="contact-eyebrow">SECTION 05 / Prendre contact</p>
     <p class="contact-q" id="contact-q">Une <em>conviction</em> à mettre en commun ? Un projet à <em>bâtir</em> ?</p>
     <div class="contact-actions">
-      <a class="btn primary" href="/cdn-cgi/l/email-protection#0f7c676e627c6a7b6b6a6e614f68626e6663216c6062">Email <span class="arrow">↗</span></a>
+      <a class="btn primary" href="/cdn-cgi/l/email-protection#bac9d2dbd7c9dfcededfdbd4faddd7dbd3d694d9d5d7">Email <span class="arrow">↗</span></a>
       <a class="btn" href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
     </div>
 
@@ -1692,7 +1809,7 @@ footer {
       <a class="social-icon" role="listitem" href="https://t.co/B2sslp0dGV" target="_blank" rel="noopener" aria-label="Apple Books" title="Apple Books">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
       </a>
-      <a class="social-icon" role="listitem" href="/cdn-cgi/l/email-protection#ccbfa4ada1bfa9b8a8a9ada28caba1ada5a0e2afa3a1" aria-label="Email" title="shamsetdean@gmail.com">
+      <a class="social-icon" role="listitem" href="/cdn-cgi/l/email-protection#6b18030a06180e1f0f0e0a052b0c060a020745080406" aria-label="Email" title="shamsetdean@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </a>
     </div>
@@ -1794,7 +1911,7 @@ footer {
     <div class="legal-block">
       <h4>Éditeur</h4>
       <p><strong>Shams Guettaf</strong> — particulier, éditeur à titre personnel et non commercial.</p>
-      <p>Contact : <a href="/cdn-cgi/l/email-protection#44372c25293721302021252a042329252d286a272b29"><span class="__cf_email__" data-cfemail="becdd6dfd3cddbcadadbdfd0fed9d3dfd7d290ddd1d3">[email&#160;protected]</span></a> · <a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/shamsetdean" target="_blank" rel="noopener">GitHub</a>.</p>
+      <p>Contact : <a href="/cdn-cgi/l/email-protection#82f1eae3eff1e7f6e6e7e3ecc2e5efe3ebeeace1edef"><span class="__cf_email__" data-cfemail="087b6069657b6d7c6c6d6966486f65696164266b6765">[email&#160;protected]</span></a> · <a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/shamsetdean" target="_blank" rel="noopener">GitHub</a>.</p>
       <p>Directeur de la publication : Shams Guettaf.</p>
     </div>
 
@@ -1856,7 +1973,7 @@ footer {
   </div>
   <div class="ft-end">
     <strong>Shams Guettaf</strong>
-    <span><a href="/cdn-cgi/l/email-protection#a3d0cbc2ced0c6d7c7c6c2cde3c4cec2cacf8dc0ccce" style="color:inherit;"><span class="__cf_email__" data-cfemail="7e0d161f130d1b0a1a1b1f103e19131f1712501d1113">[email&#160;protected]</span></a></span>
+    <span><a href="/cdn-cgi/l/email-protection#8dfee5ece0fee8f9e9e8ece3cdeae0ece4e1a3eee2e0" style="color:inherit;"><span class="__cf_email__" data-cfemail="ec9f848d819f899888898d82ac8b818d8580c28f8381">[email&#160;protected]</span></a></span>
     <div class="ft-socials" aria-label="Réseaux sociaux">
       <a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -1885,5 +2002,40 @@ footer {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  var burger = document.querySelector('.nav-burger');
+  var nav = document.querySelector('.nav-r');
+  var body = document.body;
+  if(!burger || !nav) return;
+
+  function close(){
+    body.classList.remove('nav-open');
+    burger.setAttribute('aria-expanded','false');
+  }
+  function toggle(){
+    var open = body.classList.toggle('nav-open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  burger.addEventListener('click', toggle);
+
+  // Fermer après clic sur un lien
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', close);
+  });
+
+  // Fermer avec Échap
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+  });
+
+  // Fermer si on repasse en desktop
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 760) close();
+  });
+})();
+</script>
+
+</body>
 </html>

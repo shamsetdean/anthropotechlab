@@ -691,6 +691,13 @@ body.nav-open .nav-burger span::after  { transform: translateY(-6px) rotate(-45d
   70% { transform: scale(2); opacity: 0; }
   100% { opacity: 0; }
 }
+/* glyph iter — itinéraire tracé + point de position live */
+.glyph-iter { width: 86px; height: 86px; }
+.glyph-iter svg { width: 100%; height: 100%; overflow: visible; }
+.glyph-iter .track { stroke-dasharray: 4 5; animation: iter-dash 2.6s linear infinite; }
+@keyframes iter-dash { to { stroke-dashoffset: -18; } }
+.glyph-iter .live-ring { transform-origin: 66px 26px; animation: simul-ping 2.6s ease-out infinite; }
+.glyph-iter .live-dot { transform-origin: 66px 26px; }
 .pc-body {
   padding: 1.8rem 1.6rem 1.4rem;
   display: grid;
@@ -1169,7 +1176,7 @@ footer {
   <a href="#" class="nav-logo">anthropotech/lab</a>
   <div class="nav-meta">
     <span>v2.0</span>
-    <span>11 PROJETS</span>
+    <span>12 PROJETS</span>
     <span>PARIS · 48.85°N</span>
   </div>
   <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-r">
@@ -1204,7 +1211,7 @@ footer {
         pas encore.
       </h1>
       <div class="stage-foot">
-        <a href="#projects">↓ explorer les 11 expériences</a>
+        <a href="#projects">↓ explorer les 12 expériences</a>
         <a href="#contact">→ prendre contact</a>
       </div>
     </div>
@@ -1243,9 +1250,9 @@ footer {
     <p class="lab">SECTION 02 / EXPÉRIMENTATION</p>
     <h2 class="ttl">Les <em>expériences</em></h2>
     <div class="meta">
-      <span><strong>11</strong> projets actifs</span>
+      <span><strong>12</strong> projets actifs</span>
       <span><strong>4</strong> domaines</span>
-      <span>Maj. <strong>2026.04</strong></span>
+      <span>Maj. <strong>2026.07</strong></span>
     </div>
   </header>
 
@@ -1429,7 +1436,7 @@ footer {
     <span class="ix">C.</span>
     <span>Diagnostic & Mobilité</span>
     <span class="lin"></span>
-    <span class="ct">02 entrées</span>
+    <span class="ct">03 entrées</span>
   </div>
 
   <a class="pc" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener" aria-labelledby="t07">
@@ -1488,6 +1495,33 @@ footer {
     </div>
   </a>
 
+  <a class="pc" href="https://shamsetdean.github.io/iter/" target="_blank" rel="noopener" aria-labelledby="t09">
+    <div class="pc-thumb">
+      <div class="pc-thumb-grid"></div>
+      <span class="pc-thumb-coord tl">N°09</span>
+      <span class="pc-thumb-coord br">GPS · LOCAL</span>
+      <div class="pc-thumb-art"><div class="glyph glyph-iter" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="track" d="M14 68 C24 68 22 40 34 34 C48 27 46 14 66 26" opacity=".85"/><circle cx="14" cy="68" r="3" fill="currentColor" stroke="none"/><circle class="live-ring" cx="66" cy="26" r="7" opacity=".5"/><circle class="live-dot" cx="66" cy="26" r="2.6" fill="currentColor" stroke="none"/></svg></div></div>
+    </div>
+    <div class="pc-body">
+      <div class="pc-id"><span class="num">09</span><span class="dash">—</span><span>ITER</span></div>
+      <div class="pc-tags">
+        <span class="pc-tag">GPS</span>
+        <span class="pc-tag">Itinéraires</span>
+        <span class="pc-tag">Mobilité</span>
+        <span class="pc-status actif">Actif</span>
+      </div>
+      <h3 class="pc-title" id="t09"><em>iter</em></h3>
+      <p class="pc-q">Peut-on comprendre ses propres trajets sans jamais les confier à quelqu'un d'autre ?</p>
+    </div>
+    <div class="pc-side">
+      <div class="pc-stat">
+        <span class="pc-stat-v">100%</span>
+        <span class="pc-stat-l">Local · zéro tracker</span>
+      </div>
+      <div class="pc-cta">Tester <span class="arrow">↗</span></div>
+    </div>
+  </a>
+
   <div class="proj-group">
     <span class="ix">D.</span>
     <span>Infrastructure & Concept</span>
@@ -1495,22 +1529,22 @@ footer {
     <span class="ct">03 entrées</span>
   </div>
 
-  <a class="pc" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener" aria-labelledby="t09">
+  <a class="pc" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener" aria-labelledby="t10">
     <div class="pc-thumb">
       <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°09</span>
+      <span class="pc-thumb-coord tl">N°10</span>
       <span class="pc-thumb-coord br">NYC → PARIS</span>
       <div class="pc-thumb-art"><div class="glyph glyph-08"></div></div>
     </div>
     <div class="pc-body">
-      <div class="pc-id"><span class="num">09</span><span class="dash">—</span><span>PI-STREAM</span></div>
+      <div class="pc-id"><span class="num">10</span><span class="dash">—</span><span>PI-STREAM</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Hardware</span>
         <span class="pc-tag">Automatisation</span>
         <span class="pc-tag">Raspberry Pi</span>
         <span class="pc-status actif">Actif NYC</span>
       </div>
-      <h3 class="pc-title" id="t09">π<em>.stream</em></h3>
+      <h3 class="pc-title" id="t10">π<em>.stream</em></h3>
       <p class="pc-q">Jusqu'où peut-on aller seul, avec du hardware bas de gamme et une architecture bien pensée ?</p>
     </div>
     <div class="pc-side">
@@ -1522,22 +1556,22 @@ footer {
     </div>
   </a>
 
-  <a class="pc" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener" aria-labelledby="t10">
+  <a class="pc" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener" aria-labelledby="t11">
     <div class="pc-thumb">
       <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°10</span>
+      <span class="pc-thumb-coord tl">N°11</span>
       <span class="pc-thumb-coord br">CONCEPT</span>
       <div class="pc-thumb-art"><div class="glyph glyph-09" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z" fill="currentColor" stroke="none"/><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z"/><ellipse class="ripple" cx="43" cy="74" rx="20" ry="3"/><line x1="18" y1="74" x2="68" y2="74" opacity=".4"/></svg></div></div>
     </div>
     <div class="pc-body">
-      <div class="pc-id"><span class="num">10</span><span class="dash">—</span><span>LEGALE-INK</span></div>
+      <div class="pc-id"><span class="num">11</span><span class="dash">—</span><span>LEGALE-INK</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Concept</span>
         <span class="pc-tag">e-ink</span>
         <span class="pc-tag">Droit</span>
         <span class="pc-status concept">Concept</span>
       </div>
-      <h3 class="pc-title" id="t10">Légale<em>Ink</em></h3>
+      <h3 class="pc-title" id="t11">Légale<em>Ink</em></h3>
       <p class="pc-q">Et si la conformité légale devenait aussi invisible qu'une mise à jour système ?</p>
     </div>
     <div class="pc-side">
@@ -1549,15 +1583,15 @@ footer {
     </div>
   </a>
 
-  <a class="pc" href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener" aria-labelledby="t11">
+  <a class="pc" href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener" aria-labelledby="t12">
     <div class="pc-thumb">
       <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°11</span>
+      <span class="pc-thumb-coord tl">N°12</span>
       <span class="pc-thumb-coord br">LIVE</span>
       <div class="pc-thumb-art"><div class="glyph glyph-10"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
     </div>
     <div class="pc-body">
-      <div class="pc-id"><span class="num">11</span><span class="dash">—</span><span>VACUUM</span></div>
+      <div class="pc-id"><span class="num">12</span><span class="dash">—</span><span>VACUUM</span></div>
       <div class="pc-tags">
         <span class="pc-tag">Carte</span>
         <span class="pc-tag">Signalement</span>
@@ -1565,7 +1599,7 @@ footer {
         <span class="pc-tag">OSM</span>
         <span class="pc-status beta">Beta</span>
       </div>
-      <h3 class="pc-title" id="t11">Vacuum</h3>
+      <h3 class="pc-title" id="t12">Vacuum</h3>
       <p class="pc-q">Trouver une place de parking en temps réel — par la communauté, pour la communauté, sans compte.</p>
     </div>
     <div class="pc-side">
@@ -1588,7 +1622,7 @@ footer {
       bâtir ce qu'on rêve de voir exister.
     </blockquote>
     <div class="int-foot">
-      <span>11 projets</span>
+      <span>12 projets</span>
       <span>4 domaines</span>
       <span>1 fil conducteur</span>
       <span>0 collecte</span>
@@ -1601,7 +1635,7 @@ footer {
     <p class="lab">SECTION 04 / Méthode</p>
     <h2 class="ttl" id="pr-title">Un seul <em>fil conducteur</em></h2>
     <div class="meta">
-      <span>Dix projets distincts</span>
+      <span>Douze projets distincts</span>
       <span>Une même architecture</span>
     </div>
   </header>
@@ -1688,7 +1722,7 @@ footer {
           <li><strong>TMDB</strong> — base de données séries (Fabulae)</li>
           <li><strong>IDFM / PRIM</strong> — transports Île-de-France (Talaria)</li>
           <li><strong>OpenStreetMap</strong> — cartographie libre (Talaria, Vacuum)</li>
-          <li><strong>Open-Meteo</strong> — météo sans clé (Talaria)</li>
+          <li><strong>Open-Meteo</strong> — météo sans clé (Talaria, iter)</li>
         </ul>
       </article>
       <article class="stack-item">
@@ -1744,7 +1778,7 @@ footer {
     <h2 class="ttl" id="legal-title">Mentions <em>légales</em></h2>
     <div class="meta">
       <span>Conformité RGPD</span>
-      <span>Maj. 2026.04</span>
+      <span>Maj. 2026.07</span>
     </div>
   </header>
   <div class="legal-grid">
@@ -1801,6 +1835,7 @@ footer {
     <a href="https://shamsetdean.github.io/simul/" target="_blank" rel="noopener">simul</a>
     <a href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">Sentinel</a>
     <a href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener">Talaria</a>
+    <a href="https://shamsetdean.github.io/iter/" target="_blank" rel="noopener">iter</a>
     <a href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">π.stream</a>
     <a href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">LégaleInk</a>
     <a href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener">Vacuum</a>

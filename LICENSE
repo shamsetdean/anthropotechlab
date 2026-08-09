@@ -1,65 +1,19 @@
-Copyright (c) 2025-2026 Shams Guettaf
-All rights reserved. Tous droits réservés.
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 
-================================================================
-PROPRIETARY SOFTWARE — NOT OPEN SOURCE
-================================================================
+Copyright (c) 2026 Shams&Dean — Anthropotech Lab
+https://shamsetdean.github.io/anthropotechlab/
 
-This source code, including but not limited to its architecture,
-interfaces, designs, identities, editorial content, project names,
-concepts, trademarks and logos, is the exclusive property of
-Shams Guettaf.
+You are free to:
+  Share — copy and redistribute the material in any medium or format.
 
-It is protected under:
-  - French Intellectual Property Code (Code de la propriété
-    intellectuelle, art. L.111-1 et suivants)
-  - Berne Convention for the Protection of Literary and Artistic
-    Works
-  - WIPO Copyright Treaty
-  - TRIPS Agreement (WTO)
-  - and any other applicable international treaty.
+Under the following terms:
+  Attribution    — You must give appropriate credit and provide a link to this license.
+  NonCommercial  — You may not use the material for commercial purposes.
+  NoDerivatives  — You may not remix, transform, or build upon the material and distribute it.
 
-================================================================
-RESTRICTIONS
-================================================================
+No additional restrictions — You may not apply legal terms that legally restrict others
+from doing anything the license permits.
 
-No license, express or implied, is granted to any party.
+Full legal text: https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
 
-The following actions are STRICTLY PROHIBITED without prior
-written authorization from the author:
-
-  - reproduction, in whole or in part, by any means;
-  - public or private representation;
-  - modification, adaptation, translation, derivative work;
-  - distribution, publication, communication to the public;
-  - commercial or non-commercial exploitation;
-  - use as training data for any artificial intelligence,
-    machine learning model, large language model, or any
-    automated system;
-  - extraction, scraping, mining of code, text, design,
-    or any other material;
-  - re-publication on any third-party platform.
-
-The fact that this repository or website is publicly accessible
-on the Internet does NOT constitute a waiver of any patrimonial
-or moral right of the author. No implicit license is granted by
-public visibility.
-
-================================================================
-SANCTIONS
-================================================================
-
-Any infringement exposes the offender to civil and criminal
-sanctions under French law (CPI, art. L.335-2 and following:
-up to 3 years of imprisonment and 300,000 EUR fine) as well as
-equivalent provisions in foreign jurisdictions.
-
-================================================================
-CONTACT
-================================================================
-
-For licensing requests, partnerships or any other inquiry:
-  - LinkedIn: https://www.linkedin.com/in/shamsguettaf/
-  - GitHub:   https://github.com/shamsetdean
-
-================================================================
+Third-party libraries included in this project retain their own respective licenses.

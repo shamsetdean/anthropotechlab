@@ -1,11 +1,17 @@
 <!DOCTYPE html>
+<!--
+  Anthropotech Lab, laboratoire numérique
+  © 2025-2026 Shams Guettaf, Anthropotech Lab. Tous droits réservés.
+  Voir LICENSE : reproduction et réutilisation interdites sans autorisation écrite.
+  Polices tierces sous licence SIL OFL 1.1 (voir fonts/OFL.txt).
+-->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Anthropotech · Lab</title>
-<meta name="description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
-<meta name="theme-color" content="#f4f2ec">
+<meta name="description" content="Un laboratoire numérique. Seize expériences pour bâtir ce qui n'existe pas encore : outils, éditorial, mobilité, infrastructure.">
+<meta name="theme-color" content="#f6f7f9">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -15,544 +21,91 @@
 <meta property="og:image" content="https://shamsetdean.github.io/anthropotechlab/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Anthropotech /lab — Bâtir ce qui n'existe pas encore.">
+<meta property="og:image:alt" content="Anthropotech /lab : bâtir ce qui n'existe pas encore.">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Anthropotech · Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Anthropotech · Lab">
 <meta name="twitter:description" content="Un laboratoire numérique. Bâtir ce qui n'existe pas encore.">
 <meta name="twitter:image" content="https://shamsetdean.github.io/anthropotechlab/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="fonts/source-serif-4-italic.woff2" crossorigin>
+<script>
+document.documentElement.classList.add('js');
+/* Aucun stockage dans le navigateur : l'écran d'accueil est simplement sauté
+   lors d'un retour arrière, d'un lien vers une section, ou en venant d'une autre page du site. */
+(function(){
+  var skip = !!location.hash;
+  try{
+    var nav = performance.getEntriesByType('navigation')[0];
+    if(nav && nav.type === 'back_forward') skip = true;
+    if(document.referrer){ var r = new URL(document.referrer); if(r.origin === location.origin && r.pathname.indexOf('/anthropotechlab/') === 0) skip = true; }
+  }catch(e){}
+  document.documentElement.classList.add(skip ? 'no-splash' : 'splash-on');
+})();
+</script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg:        #f4f2ec;
-  --bg-warm:   #ede9df;
-  --bg-deep:   #e4dfd1;
-  --paper:     #faf8f3;
-  --ink:       #14130f;
-  --ink-2:     #4a4740;
-  --ink-3:     #8a8478;
-  --ink-4:     #b8b2a4;
-  --ink-5:     #d8d2c2;
-  --blue:      #2a4d77;
-  --blue-2:    #3d5a80;
-  --blue-soft: rgba(42,77,119,.08);
-  --red:       #a8392b;
-  --gold:      #b8893f;
-  --green:     #4a6b3f;
-  --rule:      rgba(20,19,15,.10);
-  --rule-2:    rgba(20,19,15,.05);
-  --serif: 'Playfair Display', 'Iowan Old Style', Georgia, serif;
-  --sans:  'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --mono:  'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-  --gutter: 1.75rem;
-  --max:    1280px;
-  --rule-w: 1px;
+/* Polices hébergées avec le site (licence SIL OFL 1.1, voir fonts/OFL.txt) : aucune requête externe */
+@font-face{font-family:'Source Serif 4';src:url(fonts/source-serif-4.woff2) format('woff2');font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Source Serif 4';src:url(fonts/source-serif-4-italic.woff2) format('woff2');font-weight:200 900;font-style:italic;font-display:swap}
+@font-face{font-family:'Public Sans';src:url(fonts/public-sans.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Red Hat Mono';src:url(fonts/red-hat-mono.woff2) format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+
+:root{
+  /* Palette de confiance : blanc froid, bleu marine, bleu franc ; une couleur sobre par domaine */
+  --bg:#f6f7f9;--bg-warm:#eef1f5;--bg-deep:#e3e8ef;--paper:#ffffff;
+  --ink:#0f1c2e;--ink-2:#43506a;--ink-3:#7c8799;--ink-4:#b3bcc9;--ink-5:#dde2e9;
+  --blue:#2c5cc5;--red:#0e7c86;--gold:#b7791f;--green:#3f7d4e;
+  --navy:#0f1c2e;--on-navy:#e9eef6;--on-navy-2:rgba(233,238,246,.68);--on-navy-3:rgba(233,238,246,.4);--sky:#9db8f0;--warm:#e8c37a;
+  --rule:rgba(15,28,46,.09);
+  --serif:'Source Serif 4','Iowan Old Style',Georgia,serif;
+  --sans:'Public Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --mono:'Red Hat Mono','SF Mono',Menlo,monospace;
 }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  html { scroll-behavior: auto; }
-}
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--sans);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-image:
-    linear-gradient(to right, rgba(20,19,15,.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(20,19,15,.025) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: .04; mix-blend-mode: multiply;
-  pointer-events: none; z-index: 9000;
-}
-::selection { background: var(--blue); color: var(--paper); }
-:focus { outline: none; }
-:focus-visible {
-  outline: 2px solid var(--blue);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-a { color: inherit; text-decoration: none; }
-.mono { font-family: var(--mono); font-feature-settings: 'ss01', 'cv01'; }
-.serif { font-family: var(--serif); }
-.eyebrow {
-  font-family: var(--mono);
-  font-size: 11px; font-weight: 400;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--ink-3);
-}
-.coord {
-  font-family: var(--mono);
-  font-size: 10.5px; font-weight: 400;
-  color: var(--ink-4);
-  letter-spacing: .04em;
-}
-.skip {
-  position: absolute; left: 1rem; top: -40px;
-  background: var(--ink); color: var(--paper);
-  padding: .6rem 1rem; font: 500 12px var(--mono);
-  z-index: 9999; transition: top .2s;
-}
-.skip:focus { top: 1rem; }
-#nav {
-  position: fixed; top: 14px; left: 14px; right: 14px; z-index: 500;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 2rem;
-  align-items: center;
-  padding: .7rem 1.2rem;
-  border-radius: 999px;
-  background: rgba(244,242,236,.78);
-  backdrop-filter: blur(22px) saturate(180%);
-  -webkit-backdrop-filter: blur(22px) saturate(180%);
-  border: 1px solid rgba(255,255,255,.6);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.7) inset,
-    0 -1px 0 rgba(0,0,0,.04) inset,
-    0 8px 24px -10px rgba(20,19,15,.22),
-    0 2px 6px -2px rgba(20,19,15,.1);
-  animation: fade-down .8s ease both;
-}
-#nav::before {
-  content: '';
-  position: absolute;
-  inset: 1px 1px auto 1px;
-  height: 50%;
-  border-radius: 999px 999px 0 0;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,.45) 0%,
-    rgba(255,255,255,0) 100%
-  );
-  pointer-events: none;
-}
-.nav-logo {
-  font-family: var(--mono);
-  font-size: 12px; font-weight: 500;
-  letter-spacing: .04em;
-  color: var(--ink);
-  display: flex; align-items: center; gap: .55rem;
-}
-.nav-logo::before {
-  content: ''; width: 8px; height: 8px;
-  background: var(--blue);
-  display: inline-block;
-  animation: pulse 2.4s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: .35; transform: scale(.7); }
-}
-.nav-meta {
-  justify-self: center;
-  display: none;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--ink-3);
-  letter-spacing: .08em;
-  gap: 1.4rem;
-}
-.nav-meta span { display: inline-flex; align-items: center; gap: .4rem; }
-.nav-meta span::before { content: ''; width: 4px; height: 4px; background: var(--ink-4); border-radius: 50%; }
-.nav-r { display: flex; gap: 1.6rem; align-items: center; }
-.nav-link {
-  font-family: var(--mono);
-  font-size: 11px; font-weight: 400;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--ink-2);
-  padding: .35rem .15rem;
-  border-bottom: 1px solid transparent;
-  transition: color .25s ease, border-color .25s ease;
-}
-.nav-link:hover { color: var(--ink); border-bottom-color: var(--blue); }
-.nav-link[data-ext]::after {
-  content: '↗';
-  margin-left: .3rem; font-size: 10px;
-  display: inline-block;
-  transition: transform .3s ease;
-}
-.nav-link[data-ext]:hover::after { transform: translate(2px,-2px); }
-@media (min-width: 900px) { .nav-meta { display: inline-flex; } }
-.nav-burger {
-  display: none;
-  width: 38px; height: 38px;
-  border: 1px solid rgba(20,19,15,.12);
-  background: rgba(255,255,255,.35);
-  border-radius: 50%;
-  cursor: pointer;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink);
-  transition: border-color .2s, background .2s, transform .2s;
-}
-.nav-burger:hover { border-color: var(--ink); background: rgba(255,255,255,.6); }
-.nav-burger:active { transform: scale(.94); }
-.nav-burger:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-.nav-burger span {
-  display: block;
-  width: 18px;
-  height: 1.5px;
-  background: currentColor;
-  position: relative;
-  transition: transform .3s, opacity .2s;
-}
-.nav-burger span::before, .nav-burger span::after {
-  content: '';
-  position: absolute; left: 0;
-  width: 18px; height: 1.5px;
-  background: currentColor;
-  transition: transform .3s;
-}
-.nav-burger span::before { top: -6px; }
-.nav-burger span::after  { top:  6px; }
-body.nav-open .nav-burger span { transform: scaleX(0); opacity: 0; }
-body.nav-open .nav-burger span::before { transform: translateY(6px) rotate(45deg); }
-body.nav-open .nav-burger span::after  { transform: translateY(-6px) rotate(-45deg); }
-@media (max-width: 760px) {
-  #nav {
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
-    padding: .55rem .8rem .55rem 1.1rem;
-    top: 10px; left: 10px; right: 10px;
-    border-radius: 28px;
-  }
-  .nav-meta { display: none !important; }
-  .nav-burger { display: inline-flex; }
-  .nav-r {
-    position: fixed;
-    top: 70px; left: 10px; right: 10px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    background: rgba(244,242,236,.94);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    padding: .6rem 1rem;
-    border: 1px solid rgba(255,255,255,.7);
-    border-radius: 24px;
-    box-shadow:
-      0 1px 0 rgba(255,255,255,.7) inset,
-      0 0 0 1px rgba(20,19,15,.04),
-      0 16px 40px -10px rgba(20,19,15,.28),
-      0 4px 12px -2px rgba(20,19,15,.12);
-    transform: translateY(-12px) scale(.97);
-    transform-origin: top center;
-    opacity: 0;
-    pointer-events: none;
-    transition: transform .3s cubic-bezier(.2,.9,.3,1.2), opacity .25s ease;
-    overflow-y: auto;
-    max-height: calc(100vh - 90px);
-  }
-  body.nav-open { overflow: hidden; }
-  body.nav-open .nav-r {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .nav-r .nav-link {
-    font-size: 13px;
-    padding: .95rem .4rem;
-    border-bottom: 1px solid rgba(20,19,15,.07);
-    border-top: none;
-    letter-spacing: .14em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-  .nav-r .nav-link:last-child { border-bottom: none; }
-  .nav-r .nav-link[data-ext]::after { margin-left: auto; font-size: 12px; }
-}
-#stage {
-  position: relative;
-  min-height: 100vh;
-  padding: 9rem var(--gutter) 6rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-content: end;
-  gap: 3rem;
-  border-bottom: var(--rule-w) solid var(--rule);
-  overflow: hidden;
-}
-#stage::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: var(--gutter);
-  background-image:
-    linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
-  background-size: 100% 24px;
-  background-position: 0 6rem;
-  opacity: .55;
-  pointer-events: none;
-}
-.crop {
-  position: absolute;
-  width: 18px; height: 18px;
-  border-color: var(--ink-3);
-  pointer-events: none;
-  z-index: 1;
-}
-.crop.tl { top: 6rem; left: var(--gutter); border-top: 1px solid; border-left: 1px solid; }
-.crop.tr { top: 6rem; right: var(--gutter); border-top: 1px solid; border-right: 1px solid; }
-.crop.bl { bottom: 4rem; left: var(--gutter); border-bottom: 1px solid; border-left: 1px solid; }
-.crop.br { bottom: 4rem; right: var(--gutter); border-bottom: 1px solid; border-right: 1px solid; }
-.stage-coords {
-  position: absolute; top: 5.4rem; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 1.2rem;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--ink-3);
-  letter-spacing: .06em;
-  z-index: 2;
-}
-.stage-coords span::before { content: ''; display: inline-block; width: 6px; height: 1px; background: var(--ink-4); margin-right: .35rem; vertical-align: middle; }
-.stage-inner {
-  max-width: var(--max);
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-}
-@media (min-width: 1000px) {
-  .stage-inner {
-    grid-template-columns: 1fr 320px;
-    gap: 4rem;
-    align-items: end;
-  }
-}
-.stage-id {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-3);
-  letter-spacing: .1em;
-  display: flex; align-items: center; gap: .8rem;
-  margin-bottom: 1.5rem;
-  animation: fade-up .8s .2s ease both;
-}
-.stage-id::before {
-  content: ''; width: 32px; height: 1px; background: var(--blue);
-  flex-shrink: 0;
-}
-.stage-title {
-  font-family: var(--serif);
-  font-size: clamp(2.6rem, 8vw, 7.5rem);
-  font-weight: 400;
-  line-height: .98;
-  letter-spacing: -.025em;
-  color: var(--ink);
-  animation: fade-up 1.1s .35s ease both;
-}
-.stage-title em { font-style: italic; color: var(--blue); }
-.stage-title .br { display: block; }
-.stage-side {
-  display: grid;
-  gap: 1.6rem;
-  align-self: end;
-  padding-bottom: .4rem;
-  animation: fade-up .9s .55s ease both;
-}
-.spec {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: .9rem 1.2rem;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  line-height: 1.6;
-  border-top: 1px solid var(--rule);
-  padding-top: 1.4rem;
-}
-.spec dt { color: var(--ink-3); letter-spacing: .06em; }
-.spec dd { color: var(--ink); }
-.spec dd .em { color: var(--blue); }
-.stage-foot {
-  margin-top: 2rem;
-  padding-top: 1.3rem;
-  border-top: 1px solid var(--rule);
-  display: flex; flex-wrap: wrap; gap: 1.5rem;
-  font-family: var(--mono);
-  font-size: 11px; color: var(--ink-3);
-  animation: fade-up .9s .8s ease both;
-}
-.stage-foot a {
-  color: var(--ink-2);
-  border-bottom: 1px solid var(--ink-4);
-  padding-bottom: 1px;
-  transition: color .25s, border-color .25s;
-}
-.stage-foot a:hover { color: var(--blue); border-bottom-color: var(--blue); }
-#ticker {
-  background: var(--bg-warm);
-  border-bottom: var(--rule-w) solid var(--rule);
-  padding: .85rem 0;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-}
-#ticker::before, #ticker::after {
-  content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2;
-  pointer-events: none;
-}
-#ticker::before { left: 0; background: linear-gradient(to right, var(--bg-warm), transparent); }
-#ticker::after  { right: 0; background: linear-gradient(to left, var(--bg-warm), transparent); }
-.ticker-track {
-  display: inline-flex; gap: 3rem;
-  animation: tick 60s linear infinite;
-  padding-left: 3rem;
-}
-@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.ticker-item {
-  font-family: var(--mono);
-  font-size: 12px; font-weight: 400;
-  color: var(--ink-2);
-  letter-spacing: .04em;
-  flex-shrink: 0;
-  display: inline-flex; align-items: center; gap: .9rem;
-}
-.ticker-item::after {
-  content: '◆';
-  color: var(--blue);
-  font-size: 8px;
-  margin-left: 3rem;
-}
-#projects {
-  padding: 5rem var(--gutter) 6rem;
-  max-width: var(--max);
-  margin: 0 auto;
-  position: relative;
-}
-.section-head {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-bottom: 4rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--rule);
-}
-@media (min-width: 800px) {
-  .section-head { grid-template-columns: 1fr 1fr 1fr; align-items: end; gap: 2rem; }
-}
-.section-head .lab {
-  font-family: var(--mono); font-size: 11px;
-  color: var(--ink-3);
-  letter-spacing: .14em; text-transform: uppercase;
-  display: flex; align-items: center; gap: .8rem;
-}
-.section-head .lab::before {
-  content: ''; width: 14px; height: 1px; background: var(--blue);
-}
-.section-head .ttl {
-  font-family: var(--serif);
-  font-size: clamp(1.6rem, 3.6vw, 2.4rem);
-  font-weight: 400;
-  letter-spacing: -.02em;
-  line-height: 1.15;
-}
-.section-head .ttl em { font-style: italic; color: var(--ink-2); }
-.section-head .meta {
-  font-family: var(--mono); font-size: 11px;
-  color: var(--ink-3);
-  display: grid;
-  gap: .35rem;
-}
-.section-head .meta strong { color: var(--ink); font-weight: 500; }
-.proj-group {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 1.2rem;
-  align-items: center;
-  margin: 3.5rem 0 1.5rem;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--ink-3);
-}
-.proj-group:first-of-type { margin-top: 0; }
-.proj-group .ix { color: var(--ink-4); }
-.proj-group .lin { height: 1px; background: var(--rule); }
-.proj-group .ct { color: var(--ink-2); }
-.pc {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  padding: 0;
-  margin-bottom: -1px;
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  position: relative;
-  overflow: hidden;
-  transition: border-color .3s ease, transform .35s cubic-bezier(.2,.7,.2,1);
-  opacity: 0;
-  animation: card-in .9s ease forwards;
-  animation-timeline: view();
-  animation-range: cover 0% cover 30%;
-}
-@supports not (animation-timeline: view()) {
-  .pc { opacity: 1; }
-}
-@keyframes card-in {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.pc:hover {
-  border-color: var(--ink-2);
-  z-index: 5;
-}
-@media (min-width: 800px) {
-  .pc {
-    grid-template-columns: 220px 1fr 200px;
-    align-items: stretch;
-  }
-}
-.pc-thumb {
-  position: relative;
-  aspect-ratio: 16/10;
-  background: var(--bg-warm);
-  border-bottom: 1px solid var(--rule);
-  overflow: hidden;
-}
-@media (min-width: 800px) {
-  .pc-thumb { aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--rule); }
-}
-.pc-thumb-art {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform .8s cubic-bezier(.2,.7,.2,1);
-}
-.pc:hover .pc-thumb-art { transform: scale(1.04); }
-.pc-thumb-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(20,19,15,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20,19,15,.06) 1px, transparent 1px);
-  background-size: 14px 14px;
-  pointer-events: none;
-}
-.pc-thumb-coord {
-  position: absolute;
-  font-family: var(--mono);
-  font-size: 9px; color: var(--ink-3);
-  letter-spacing: .06em;
-}
-.pc-thumb-coord.tl { top: 8px; left: 10px; }
-.pc-thumb-coord.br { bottom: 8px; right: 10px; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+em.i{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--blue)}
+.k{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.t{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;line-height:1.02}
+.arrow{display:inline-block;transition:transform .3s}
+.skip{position:absolute;left:1rem;top:-40px;background:var(--ink);color:var(--paper);padding:.6rem 1rem;font:500 12px var(--mono);z-index:9999}
+.skip:focus{top:1rem}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+/* Écran d'accueil : quatre repères de coupe tracent le cadre, puis la devise */
+html.splash-on,html.splash-on body{overflow:hidden}
+.no-splash #splash{display:none}
+#splash{position:fixed;inset:0;z-index:300;display:grid;place-items:center;text-align:center;padding:24px;cursor:pointer;background:radial-gradient(60% 50% at 50% 45%,var(--paper),var(--bg) 70%);transition:opacity .7s,visibility .7s}
+#splash.out{opacity:0;visibility:hidden}
+#splash .fr{position:relative;padding:2.6rem 3rem}
+#splash .c{position:absolute;width:24px;height:24px;border-color:var(--ink-2);opacity:0;animation:cin .7s cubic-bezier(.2,.8,.2,1) forwards}
+#splash .c.tl{top:0;left:0;border-top:1px solid;border-left:1px solid;--fx:-50px;--fy:-50px}
+#splash .c.tr{top:0;right:0;border-top:1px solid;border-right:1px solid;--fx:50px;--fy:-50px}
+#splash .c.bl{bottom:0;left:0;border-bottom:1px solid;border-left:1px solid;--fx:-50px;--fy:50px}
+#splash .c.br{bottom:0;right:0;border-bottom:1px solid;border-right:1px solid;--fx:50px;--fy:50px}
+@keyframes cin{from{opacity:0;transform:translate(var(--fx),var(--fy))}to{opacity:1;transform:none}}
+#splash h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(2.6rem,9vw,4.2rem);line-height:1;opacity:0;animation:up .7s .55s ease forwards}
+#splash h2 span{color:var(--blue)}
+#splash p{margin-top:12px;color:var(--ink-3);font-size:.95rem;opacity:0;animation:up .7s .9s ease forwards}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Navigation */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;height:56px;background:rgba(246,247,249,.78);backdrop-filter:saturate(150%) blur(16px);-webkit-backdrop-filter:saturate(150%) blur(16px);border-bottom:1px solid var(--rule)}
+.nav .in{max-width:1200px;margin:0 auto;height:100%;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em}
+.brand::before{content:'';width:8px;height:8px;background:var(--blue);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.nav ul{display:flex;gap:24px;list-style:none}
+.nav ul a{font-size:.85rem;opacity:.7}
+.nav ul a:hover{opacity:1}
+.pill{display:inline-block;border:1px solid var(--blue);color:var(--blue);font-size:.8rem;font-weight:600;padding:7px 15px;border-radius:999px;transition:background .2s,color .2s}
+.pill:hover{background:var(--blue);color:var(--paper)}
+@media (max-width:860px){.nav ul{display:none}}
+
+/* Briques communes */
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .glyph {
   width: 86px; height: 86px;
   position: relative;
@@ -679,7 +232,7 @@ body.nav-open .nav-burger span::after  { transform: translateY(-6px) rotate(-45d
   0%, 80%, 100% { opacity: .85; }
   85%, 95% { opacity: .15; }
 }
-/* glyph 11 — simul : cadre + PiP + point GPS */
+/* glyph 11 : simul : cadre + PiP + point GPS */
 .glyph-simul { width: 86px; height: 86px; }
 .glyph-simul svg { width: 100%; height: 100%; overflow: visible; }
 .glyph-simul .pip { transition: transform .8s cubic-bezier(.2,.7,.2,1); transform-origin: 100% 0%; }
@@ -691,24 +244,24 @@ body.nav-open .nav-burger span::after  { transform: translateY(-6px) rotate(-45d
   70% { transform: scale(2); opacity: 0; }
   100% { opacity: 0; }
 }
-/* glyph iter — itinéraire tracé + point de position live */
+/* glyph iter : itinéraire tracé + point de position live */
 .glyph-iter { width: 86px; height: 86px; }
 .glyph-iter svg { width: 100%; height: 100%; overflow: visible; }
 .glyph-iter .track { stroke-dasharray: 4 5; animation: iter-dash 2.6s linear infinite; }
 @keyframes iter-dash { to { stroke-dashoffset: -18; } }
 .glyph-iter .live-ring { transform-origin: 66px 26px; animation: simul-ping 2.6s ease-out infinite; }
 .glyph-iter .live-dot { transform-origin: 66px 26px; }
-/* glyph synapse — nœuds connectés, cœur pulsant */
+/* glyph synapse : nœuds connectés, cœur pulsant */
 .glyph-synapse { width: 86px; height: 86px; }
 .glyph-synapse svg { width: 100%; height: 100%; overflow: visible; }
 .glyph-synapse .syn-ring { transform-origin: 43px 24px; animation: simul-ping 2.6s ease-out infinite; }
 .glyph-synapse .syn-core { transform-origin: 43px 24px; animation: pulse 2.4s ease-in-out infinite; }
-/* glyph clavium — clé, panne mobile au survol */
+/* glyph clavium : clé, panne mobile au survol */
 .glyph-clavium { width: 86px; height: 86px; animation: mask-tilt 4.5s ease-in-out infinite; transform-origin: 50% 50%; }
 .glyph-clavium svg { width: 100%; height: 100%; overflow: visible; }
 .glyph-clavium .key-shaft { transition: transform .9s cubic-bezier(.2,.7,.2,1); transform-origin: 38px 40px; }
 .pc:hover .glyph-clavium .key-shaft { transform: translate(2px, -2px); }
-/* glyph exceptor — égaliseur / transcription */
+/* glyph exceptor : égaliseur / transcription */
 .glyph-exceptor { width: 86px; height: 86px; display: flex; align-items: center; justify-content: center; }
 .glyph-exceptor svg { width: 80px; height: 66px; overflow: visible; }
 .glyph-exceptor .bar { transform-origin: 50% 100%; animation: eq-bounce 2.2s ease-in-out infinite; }
@@ -717,1289 +270,688 @@ body.nav-open .nav-burger span::after  { transform: translateY(-6px) rotate(-45d
 .glyph-exceptor .b4 { animation-delay: .45s; }
 .glyph-exceptor .b5 { animation-delay: .6s; }
 @keyframes eq-bounce { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.45); } }
-.pc-body {
-  padding: 1.8rem 1.6rem 1.4rem;
-  display: grid;
-  align-content: start;
-  gap: .7rem;
+.glyph-dndvdl{width:86px;height:86px}
+.glyph-dndvdl svg{width:100%;height:100%;overflow:visible}
+.glyph-dndvdl .led{animation:led 2.8s ease-in-out infinite}
+.glyph-dndvdl .l2{animation-delay:.9s}.glyph-dndvdl .l3{animation-delay:1.7s}
+@keyframes led{0%,100%{opacity:1}50%{opacity:.2}}
+.glyph{color:var(--dc,var(--blue))}
+
+/* 1. Ouverture : le mur des seize projets */
+.hero{height:280vh;position:relative}
+.wall{position:absolute;inset:-12% -6%;display:grid;grid-template-columns:repeat(6,1fr);gap:14px;transform:rotate(-8deg) scale(1.12);opacity:calc(.7 - var(--p,0)*.3)}
+.wall .col{display:flex;flex-direction:column;gap:14px;will-change:transform}
+.wall .col:nth-child(odd){transform:translateY(calc(var(--p,0)*-28%))}
+.wall .col:nth-child(even){transform:translateY(calc(-22% + var(--p,0)*28%))}
+.wt{position:relative;aspect-ratio:3/4;background:var(--paper);border:1px solid var(--rule);border-radius:14px;display:flex;align-items:center;justify-content:center}
+.wt::after{content:'';position:absolute;top:12px;right:12px;width:6px;height:6px;border-radius:50%;background:var(--dc)}
+.wall *{animation:none!important}
+.wn,.wl{position:absolute;left:10px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--ink-3)}
+.wn{top:9px}.wl{bottom:12px;font-family:var(--serif);font-size:1rem;letter-spacing:0;color:var(--ink)}
+.veil{position:absolute;inset:0;background:radial-gradient(50% 46% at 50% 40%,rgba(246,247,249,.97),rgba(246,247,249,.9) 50%,rgba(246,247,249,.35) 85%),linear-gradient(180deg,rgba(246,247,249,0) 60%,var(--bg))}
+.hero-copy{position:absolute;z-index:2;left:0;right:0;top:clamp(92px,15vh,150px);text-align:center;padding:0 22px;opacity:calc(1 - var(--p,0)*2.6);transform:translateY(calc(var(--p,0)*-70px))}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(3.2rem,10vw,8.4rem);line-height:.95;letter-spacing:-.03em;margin:16px 0 20px}
+.hero h1 em{font-style:italic;color:var(--blue)}
+.hero .sub{font-size:clamp(1.05rem,2vw,1.35rem);color:var(--ink-2);max-width:38ch;margin:0 auto}
+.hero .sub b{color:var(--ink);font-weight:500}
+.hero-win{position:absolute;z-index:3;left:50%;top:52%;width:min(760px,88vw);transform:translate(-50%,calc(-50% + (1 - var(--pp,0))*70svh)) rotate(calc((1 - var(--pp,0))*-4deg))}
+.win{display:block;background:var(--paper);border:1px solid var(--rule);border-radius:14px;overflow:hidden;box-shadow:0 30px 70px -34px rgba(15,28,46,.35)}
+.win .bar{display:flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-bottom:1px solid var(--rule);background:var(--bg-warm)}
+.win .bar i{width:9px;height:9px;border-radius:50%;background:var(--ink-5)}
+.win .bar i{background:var(--ink-5)}
+.win .url{margin-left:10px;font-family:var(--mono);font-size:10px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shots{display:block;position:relative;aspect-ratio:960/504}
+.shots img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+.shots img.on{opacity:1}
+.hero-cap{margin-top:14px;text-align:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+@media (max-width:760px){.wall{grid-template-columns:repeat(4,1fr)}.wall .col:nth-child(n+5){display:none}.hero-win{top:60%}}
+
+/* 2. Manifeste : les phrases s'empilent et s'allument */
+.manif{height:330vh;position:relative;background:var(--navy);color:var(--on-navy)}
+.manif .pin{display:flex;align-items:center;justify-content:center;padding:0 24px}
+.mlines{max-width:980px;width:100%;display:grid;gap:.3em;font-family:var(--serif);font-size:clamp(1.7rem,4.6vw,3.6rem);line-height:1.12;letter-spacing:-.015em}
+.ml{opacity:.12;transform:translateX(-12px);transition:opacity .45s,transform .45s}
+.ml.on{opacity:1;transform:none}
+.ml.past{opacity:.38}
+.ml em{font-style:italic;color:var(--sky)}
+.ml.fin{color:var(--warm)}
+.mk{position:absolute;top:84px;left:50%;transform:translateX(-50%);color:var(--sky)}
+.mstep{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--on-navy-3)}
+
+/* 3. Les quatre domaines */
+.doms{height:440vh;position:relative}
+.doms .pin{display:flex;align-items:center}
+.dgrid{width:100%;max-width:1200px;margin:0 auto;padding:76px 28px 20px;display:grid;grid-template-columns:minmax(260px,.8fr) 1.2fr;gap:56px;align-items:center}
+.dtexts{display:grid}
+.dtx{grid-area:1/1;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s;pointer-events:none}
+.dtx.on{opacity:1;transform:none;pointer-events:auto}
+.dl{display:block;font-family:var(--serif);font-style:italic;font-size:clamp(7rem,15vw,12rem);line-height:.8;color:var(--dc);margin-bottom:.6rem}
+.dtx .k{color:var(--dc)}
+.dn{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;margin:8px 0 12px}
+.dd{color:var(--ink-2);font-size:1.05rem;max-width:34ch}
+.dots{display:flex;gap:8px;margin-top:28px}
+.dots i{width:28px;height:3px;background:var(--ink-5);transition:background .4s}
+.dots i.on{background:var(--ink)}
+.dpanels{display:grid}
+.dpan{grid-area:1/1;opacity:0;transform:translateX(40px);transition:opacity .55s,transform .55s;pointer-events:none}
+.dpan.on{opacity:1;transform:none;pointer-events:auto}
+.plist{list-style:none;border-top:1px solid var(--rule)}
+.prow{display:grid;grid-template-columns:3.2rem 1fr auto;gap:0 18px;align-items:baseline;padding:18px 0 18px;border-bottom:1px solid var(--rule)}
+.pn{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--ink-4)}
+.pb{min-width:0;display:grid;gap:4px}
+.pa{display:inline-flex;align-items:baseline;gap:.5rem;font-family:var(--serif);font-size:clamp(1.6rem,2.6vw,2.3rem);line-height:1.05;letter-spacing:-.015em;color:var(--ink);transition:color .25s}
+.pa em{font-style:italic;color:inherit}
+.pa .arrow{font-family:var(--sans);font-size:.9rem;color:var(--dc);opacity:0;transform:translate(-6px,4px);transition:opacity .25s,transform .3s}
+.pa:hover{color:var(--dc)}
+.pa:hover .arrow,.pa:focus-visible .arrow{opacity:1;transform:none}
+.pq{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink-3);line-height:1.45;max-width:52ch}
+.pd{justify-self:start;margin-top:4px;font-size:.78rem;font-weight:600;color:var(--dc);border-bottom:1px solid currentColor;padding-bottom:1px}
+.pd:hover .arrow{transform:translate(2px,-2px)}
+.prow .st{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.st.stable{color:var(--green)}.st.beta{color:var(--gold)}.st.actif{color:var(--blue)}.st.concept{color:var(--ink-3)}
+@media (max-width:860px){
+  .dgrid{grid-template-columns:1fr;gap:14px;padding:66px 16px 10px;align-items:start;align-content:center;height:100%}
+  .dl{font-size:4.4rem;float:left;margin:0 14px 0 0}
+  .dn{font-size:1.6rem;margin:2px 0 4px}
+  .dd{font-size:.88rem;clear:both;display:none}
+  .dots{margin-top:8px;clear:both}
+  .prow{grid-template-columns:2rem 1fr;padding:11px 0}
+  .prow .st{display:none}
+  .pn{font-size:.62rem}
+  .pa{font-size:1.45rem}
+  .pq{font-size:.86rem;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+  .pd{font-size:.72rem;margin-top:2px}
+  .pa .arrow{opacity:1;transform:none;font-size:.75rem}
 }
-.pc-id {
-  display: flex; align-items: center; gap: .9rem;
-  font-family: var(--mono);
-  font-size: 11px; color: var(--ink-3);
-  letter-spacing: .1em;
+
+/* 4. Les dossiers : pellicule horizontale */
+.film{height:520vh;position:relative;background:var(--bg-warm)}
+.film .pin{display:flex;align-items:center}
+.fgrid{width:100%;max-width:1200px;margin:0 auto;padding:76px 28px 20px;display:grid;grid-template-columns:minmax(260px,.75fr) 1.25fr;gap:64px;align-items:center}
+.film h2{font-size:clamp(2.2rem,4.4vw,3.6rem);margin:8px 0 28px}
+.dl-list{list-style:none;border-top:1px solid var(--rule)}
+.dli{display:flex;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid var(--rule);color:var(--ink-4);transition:color .35s}
+.dli .dnum{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em}
+.dli .dnm{font-family:var(--serif);font-size:1.25rem;line-height:1.1}
+.dli.on{color:var(--ink)}
+.dli.on .dnum{color:var(--blue)}
+.dpanel{display:grid}
+.dstack{position:relative;aspect-ratio:960/504;max-width:100%}
+.dimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px;border:1px solid var(--rule);background:var(--paper);box-shadow:0 30px 70px -36px rgba(15,28,46,.4);
+  opacity:0;transform:translateY(22px) scale(.97);transition:opacity .55s,transform .65s cubic-bezier(.2,.7,.2,1)}
+.dimg.on{opacity:1;transform:none}
+.dimg.prev{opacity:0;transform:translateY(-14px) scale(.98)}
+.dets{display:grid;margin-top:26px}
+.ddet{grid-area:1/1;opacity:0;transform:translateY(10px);transition:opacity .45s,transform .45s;pointer-events:none}
+.ddet.on{opacity:1;transform:none;pointer-events:auto}
+.daud{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.dline{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,1.8vw,1.4rem);color:var(--ink-2);margin:6px 0 14px;max-width:44ch}
+.dgo{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.92rem;color:var(--paper);background:var(--navy);padding:11px 20px;border-radius:999px;transition:background .2s}
+.dgo:hover{background:var(--blue)}
+.dgo:hover .arrow{transform:translate(2px,-2px)}
+@media (max-width:860px){
+  .fgrid{grid-template-columns:1fr;gap:18px;padding:66px 16px 10px}
+  .film h2{font-size:1.9rem;margin:4px 0 0}
+  .dl-list{display:none}
+  .dets{margin-top:16px}
+  .dline{font-size:1.05rem}
 }
-.pc-id .num { color: var(--ink); font-weight: 500; }
-.pc-id .dash { color: var(--ink-4); }
-.pc-tags { display: flex; gap: .35rem; flex-wrap: wrap; align-items: center; }
-.pc-tag {
-  font-family: var(--mono);
-  font-size: 10px; font-weight: 400;
-  letter-spacing: .08em; text-transform: uppercase;
-  color: var(--ink-2);
-  background: var(--bg-warm);
-  border: 1px solid var(--rule);
-  padding: 3px 8px;
-}
-.pc-status {
-  font-family: var(--mono);
-  font-size: 10px; font-weight: 500;
-  letter-spacing: .12em; text-transform: uppercase;
-  padding: 3px 8px;
-  display: inline-flex; align-items: center; gap: 5px;
-  border: 1px solid;
-}
-.pc-status::before {
-  content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor;
-}
-.pc-status.stable  { color: var(--green); background: rgba(74,107,63,.07); border-color: rgba(74,107,63,.25); }
-.pc-status.beta    { color: var(--gold);  background: rgba(184,137,63,.07); border-color: rgba(184,137,63,.25); }
-.pc-status.concept { color: var(--ink-3); background: rgba(138,132,120,.07); border-color: rgba(138,132,120,.25); }
-.pc-status.actif   { color: var(--blue);  background: var(--blue-soft);     border-color: rgba(42,77,119,.25); }
-.pc-status.actif::before { animation: pulse 2.4s ease-in-out infinite; }
-.pc-title {
-  font-family: var(--serif);
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
-  font-weight: 400; line-height: 1.1;
-  letter-spacing: -.018em;
-  color: var(--ink);
-  margin: .4rem 0 .25rem;
-}
-.pc-title em { font-style: italic; color: var(--blue); }
-.pc-q {
-  font-family: var(--serif);
-  font-size: .98rem;
-  font-style: italic;
-  font-weight: 400;
-  color: var(--ink-2);
-  line-height: 1.65;
-  border-left: 1px solid var(--ink-4);
-  padding-left: .9rem;
-  margin-top: .4rem;
-}
-.pc-q::before { content: '« '; color: var(--ink-4); }
-.pc-q::after { content: ' »'; color: var(--ink-4); }
-.pc-side {
-  border-top: 1px solid var(--rule);
-  padding: 1.4rem 1.6rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 1rem;
-  align-items: end;
-}
-@media (min-width: 800px) {
-  .pc-side {
-    border-top: 0;
-    border-left: 1px solid var(--rule);
-    grid-template-columns: 1fr;
-    align-items: start;
-    align-content: space-between;
-  }
-}
-.pc-stat {
-  display: grid;
-  gap: .25rem;
-  align-content: start;
-}
-.pc-stat-v {
-  font-family: var(--serif);
-  font-size: 2rem;
-  font-weight: 400;
-  color: var(--ink);
-  line-height: 1;
-  letter-spacing: -.02em;
-}
-.pc-stat-v.small { font-size: 1.4rem; }
-.pc-stat-l {
-  font-family: var(--mono);
-  font-size: 10px; color: var(--ink-3);
-  letter-spacing: .1em; text-transform: uppercase;
-}
-.pc-cta {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--ink);
-  display: inline-flex; align-items: center; gap: .5rem;
-  padding-top: .6rem;
-  border-top: 1px solid var(--rule);
-  width: 100%;
-  justify-content: space-between;
-}
-.pc-cta .arrow {
-  font-size: 16px;
-  color: var(--ink-3);
-  transition: transform .3s ease, color .3s ease;
-}
-.pc:hover .pc-cta .arrow {
-  transform: translate(4px, -4px);
-  color: var(--blue);
-}
-#interlude {
-  position: relative;
-  padding: 8rem var(--gutter);
-  background: var(--bg-warm);
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  overflow: hidden;
-}
-.int-bg {
-  position: absolute;
-  right: -3%; top: 50%; transform: translateY(-50%);
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(10rem, 22vw, 24rem);
-  font-weight: 400;
-  color: rgba(20,19,15,.04);
-  line-height: 1;
-  user-select: none;
-  pointer-events: none;
-  letter-spacing: -.04em;
-}
-.int-inner {
-  max-width: 820px;
-  position: relative; z-index: 1;
-  margin: 0 auto;
-}
-.int-label {
-  display: flex; align-items: center; gap: .8rem;
-  font-family: var(--mono);
-  font-size: 11px; color: var(--ink-3);
-  letter-spacing: .14em; text-transform: uppercase;
-  margin-bottom: 2rem;
-}
-.int-label::before { content: ''; width: 24px; height: 1px; background: var(--blue); }
-.int-q {
-  font-family: var(--serif);
-  font-size: clamp(1.6rem, 4vw, 3.2rem);
-  font-weight: 400; line-height: 1.18;
-  letter-spacing: -.015em;
-  color: var(--ink);
-}
-.int-q em { font-style: italic; color: var(--blue); }
-.int-foot {
-  margin-top: 3rem;
-  display: flex; gap: 2rem; flex-wrap: wrap;
-  font-family: var(--mono);
-  font-size: 11px; color: var(--ink-3);
-  letter-spacing: .06em;
-  padding-top: 1.4rem;
-  border-top: 1px solid var(--rule);
-}
-.int-foot span { display: inline-flex; align-items: center; gap: .5rem; }
-.int-foot span::before { content: '/'; color: var(--ink-4); }
-#principes {
-  padding: 7rem var(--gutter);
-  max-width: var(--max);
-  margin: 0 auto;
-}
-.pr-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-}
-@media (min-width: 700px) { .pr-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1080px) { .pr-grid { grid-template-columns: repeat(4, 1fr); } }
-.pr {
-  background: var(--paper);
-  padding: 2.2rem 1.8rem;
-  display: grid;
-  align-content: start;
-  gap: .8rem;
-  position: relative;
-  transition: background .3s ease;
-}
-.pr:hover { background: var(--bg); }
-.pr-n {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--blue);
-  letter-spacing: .14em;
-  display: flex; justify-content: space-between;
-  padding-bottom: 1rem;
-  margin-bottom: .4rem;
-  border-bottom: 1px solid var(--rule);
-}
-.pr-n .roman { color: var(--ink-3); }
-.pr h4 {
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: var(--ink);
-  letter-spacing: -.01em;
-}
-.pr p {
-  font-size: .9rem;
-  color: var(--ink-2);
-  line-height: 1.7;
-}
-#contact {
-  padding: 5rem var(--gutter);
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  background: var(--paper);
-  display: grid; place-items: center;
-  text-align: center;
-}
-.contact-inner { max-width: 700px; }
-.contact-eyebrow {
-  font-family: var(--mono); font-size: 11px;
-  color: var(--ink-3); letter-spacing: .14em;
-  text-transform: uppercase;
-  margin-bottom: 1.3rem;
-}
-.contact-q {
-  font-family: var(--serif);
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
-  line-height: 1.25;
-  letter-spacing: -.015em;
-  color: var(--ink);
-  margin-bottom: 1.6rem;
-}
-.contact-q em { font-style: italic; color: var(--blue); }
-.contact-actions { display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-.btn {
-  font-family: var(--mono);
-  font-size: 12px; font-weight: 500;
-  letter-spacing: .12em; text-transform: uppercase;
-  padding: .85rem 1.4rem;
-  border: 1px solid var(--ink);
-  color: var(--ink);
-  background: transparent;
-  display: inline-flex; align-items: center; gap: .6rem;
-  transition: background .25s, color .25s;
-}
-.btn:hover { background: var(--ink); color: var(--paper); }
-.btn.primary { background: var(--ink); color: var(--paper); }
-.btn.primary:hover { background: var(--blue); border-color: var(--blue); }
-.btn .arrow { transition: transform .3s; }
-.btn:hover .arrow { transform: translate(2px,-2px); }
-.contact-socials {
-  margin-top: 2.2rem;
-  padding-top: 1.6rem;
-  border-top: 1px solid var(--rule);
-  display: flex;
-  flex-wrap: wrap;
-  gap: .6rem;
-  justify-content: center;
-}
-.social-icon {
-  width: 42px; height: 42px;
-  display: inline-grid; place-items: center;
-  border: 1px solid var(--rule);
-  color: var(--ink-2);
-  background: var(--paper);
-  transition: color .2s, border-color .2s, background .2s, transform .2s;
-}
-.social-icon:hover {
-  color: var(--blue);
-  border-color: var(--blue);
-  transform: translateY(-2px);
-}
-.social-icon svg { width: 18px; height: 18px; stroke-width: 1.5; }
-.contact-eyebrow.tiny {
-  font-size: 10px;
-  margin: 1.4rem 0 .6rem;
-  color: var(--ink-3);
-}
-#stack {
-  padding: 7rem var(--gutter);
-  background: var(--bg-warm);
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-.stack-inner { max-width: var(--max); margin: 0 auto; }
-.stack-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-  margin-top: 3rem;
-}
-@media (min-width: 800px) { .stack-grid { grid-template-columns: 1fr 1fr; } }
-.stack-item {
-  background: var(--paper);
-  padding: 2rem 1.8rem;
-  display: grid;
-  gap: .9rem;
-  align-content: start;
-}
-.stack-head {
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--rule);
-}
-.stack-name {
-  font-family: var(--serif);
-  font-size: 1.5rem;
-  letter-spacing: -.01em;
-}
-.stack-name em { font-style: italic; color: var(--blue); }
-.stack-tag {
-  font-family: var(--mono); font-size: 10px;
-  color: var(--ink-3);
-  letter-spacing: .12em; text-transform: uppercase;
-}
-.stack-item p {
-  font-size: .92rem;
-  line-height: 1.7;
-  color: var(--ink-2);
-}
-.stack-item p em { font-style: italic; color: var(--blue); }
-.stack-list {
-  margin-top: .4rem;
-  display: grid; gap: .5rem;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-2);
-}
-.stack-list li {
-  list-style: none;
-  display: flex; gap: .8rem;
-  padding: .35rem 0;
-  border-top: 1px solid var(--rule-2);
-}
-.stack-list li::before { content: '/'; color: var(--ink-4); }
-#legal {
-  padding: 6rem var(--gutter);
-  max-width: var(--max);
-  margin: 0 auto;
-}
-.legal-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.6rem;
-  margin-top: 2.5rem;
-}
-@media (min-width: 800px) { .legal-grid { grid-template-columns: 1fr 1fr; } }
-.legal-block {
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  padding: 1.6rem 1.6rem 1.4rem;
-  display: grid; gap: .6rem;
-  align-content: start;
-}
-.legal-block h4 {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--ink-3);
-  padding-bottom: .8rem;
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: .3rem;
-}
-.legal-block p, .legal-block li {
-  font-size: .88rem; line-height: 1.7; color: var(--ink-2);
-}
-.legal-block ul { padding-left: 1rem; display: grid; gap: .3rem; }
-.legal-block strong { color: var(--ink); font-weight: 500; }
-.legal-block a { color: var(--blue); border-bottom: 1px solid var(--ink-4); transition: border-color .25s; }
-.legal-block a:hover { border-bottom-color: var(--blue); }
-footer {
-  padding: 3rem var(--gutter);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-3);
-}
-@media (min-width: 800px) {
-  footer { grid-template-columns: 1.2fr 2fr 1fr; }
-}
-.ft-brand { display: grid; gap: .4rem; }
-.ft-brand .b1 {
-  font-family: var(--serif); font-style: italic;
-  font-size: 1.3rem; color: var(--ink);
-  letter-spacing: -.01em;
-}
-.ft-brand .b2 { font-size: 11px; letter-spacing: .04em; }
-.ft-cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem 2rem;
-}
-.ft-cols a {
-  color: var(--ink-2);
-  display: inline-flex; align-items: center; gap: .5rem;
-  padding: .15rem 0;
-  transition: color .25s;
-  letter-spacing: .04em;
-}
-.ft-cols a:hover { color: var(--ink); }
-.ft-cols a::before { content: '↗'; color: var(--ink-4); font-size: 10px; }
-.ft-end {
-  display: grid;
-  gap: .4rem;
-  align-content: start;
-  letter-spacing: .04em;
-}
-.ft-end strong { color: var(--ink); font-weight: 500; }
-.ft-socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-  margin: .6rem 0 .2rem;
-}
-.ft-socials a {
-  width: 30px; height: 30px;
-  display: inline-grid; place-items: center;
-  border: 1px solid var(--rule);
-  color: var(--ink-3);
-  transition: color .2s, border-color .2s, transform .2s;
-}
-.ft-socials a:hover {
-  color: var(--blue);
-  border-color: var(--blue);
-  transform: translateY(-1px);
-}
-.ft-socials svg { width: 14px; height: 14px; stroke-width: 1.5; }
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fade-down {
-  from { opacity: 0; transform: translateY(-12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.reveal {
-  opacity: 0;
-  animation: fade-up .9s ease forwards;
-  animation-timeline: view();
-  animation-range: cover 0% cover 30%;
-}
-@supports not (animation-timeline: view()) {
-  .reveal { opacity: 1; }
-}
-@media (max-width: 700px) {
-  :root { --gutter: 1.1rem; }
-  body { font-size: 15px; background-size: 40px 40px; }
-  #stage { padding-top: 7rem; padding-bottom: 4rem; }
-  .stage-coords { display: none; }
-  .crop { display: none; }
-  .pc-thumb { aspect-ratio: 16/9; }
-  .pc-side { padding: 1.1rem 1.3rem; }
-  .pc-body { padding: 1.4rem 1.3rem 1rem; }
-  #interlude { padding: 5rem var(--gutter); }
-  #principes { padding: 5rem var(--gutter); }
+
+/* 5. Chiffres : fiches perforées */
+.nums{padding:120px 24px 120px;text-align:center}
+.nums h2{font-size:clamp(2.3rem,5vw,4rem);margin-top:10px}
+.cards{max-width:1100px;margin:56px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{position:relative;background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:28px 22px 22px;text-align:left}
+.card strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(3.4rem,6vw,4.6rem);line-height:1;color:var(--c)}
+.card span{display:block;margin-top:8px;font-weight:600}
+.card small{display:block;margin-top:4px;color:var(--ink-3);font-size:.82rem}
+.js .card{opacity:0;transform:translateY(24px)}
+.js .card.in{opacity:1;transform:none;transition:opacity .6s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.card:nth-child(2){transition-delay:.1s!important}.card:nth-child(3){transition-delay:.2s!important}.card:nth-child(4){transition-delay:.3s!important}
+@media (max-width:860px){.cards{grid-template-columns:1fr 1fr;gap:14px}}
+
+/* 6. Principes */
+.princ{padding:110px 24px 120px;background:var(--paper)}
+.princ .head,.stack .head{max-width:1150px;margin:0 auto 44px}
+.princ h2,.stack h2{font-size:clamp(2.3rem,5vw,4rem);margin-top:10px}
+.pgrid{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pc{padding:26px 22px;border:1px solid var(--rule);border-radius:16px;background:var(--bg);position:relative}
+.pc .rn{font-family:var(--serif);font-style:italic;font-size:3rem;line-height:1;color:var(--ink-5);transition:color .4s}
+.pc:hover .rn{color:var(--blue)}
+.pc strong{display:block;font-size:1.08rem;margin:10px 0 6px}
+.pc p{color:var(--ink-2);font-size:.93rem}
+@media (max-width:960px){.pgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.pgrid{grid-template-columns:1fr}}
+
+/* 7. Comment c'est fait */
+.stack{padding:110px 24px 120px}
+.sgrid{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sc{padding:24px 22px;border-radius:16px;background:var(--paper);border:1px solid var(--rule)}
+.sc svg{width:28px;height:28px;color:var(--blue);margin-bottom:14px}
+.sc strong{display:block;font-size:1.08rem;margin-bottom:6px}
+.sc p{color:var(--ink-2);font-size:.92rem}
+.sc ul{list-style:none;margin-top:10px;font-family:var(--mono);font-size:.7rem;color:var(--ink-2);display:grid;gap:4px}
+.sc li::before{content:'/ ';color:var(--ink-4)}
+.free{max-width:1150px;margin:22px auto 0;font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2vw,1.35rem);color:var(--ink-2);border-left:3px solid var(--blue);padding-left:16px}
+.free b{font-style:normal;font-weight:400;color:var(--ink)}
+@media (max-width:960px){.sgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.sgrid{grid-template-columns:1fr}}
+
+/* 8. Fin : la suite reste à bâtir */
+.end{height:220vh;position:relative;background:var(--navy);color:var(--on-navy)}
+.end .pin{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px}
+.end .k{color:var(--sky)}
+.end h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(3.2rem,11vw,8.6rem);line-height:.92;margin-top:14px;opacity:calc(.2 + var(--e,0)*1.6)}
+.end h2 span{color:var(--sky)}
+.end .sub{margin-top:18px;color:var(--on-navy-2);font-size:1.08rem;max-width:46ch}
+.end .btns{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;opacity:calc(var(--e,0)*2 - .2)}
+.btn{display:inline-block;background:var(--on-navy);color:var(--navy);font-weight:700;padding:14px 28px;border-radius:999px;font-size:1rem;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px);background:#fff;color:var(--navy)}
+.btn.ghost{background:transparent;border:1px solid var(--on-navy-3);color:var(--on-navy)}
+.socials{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;list-style:none;margin-top:22px;opacity:calc(var(--e,0)*2 - .4)}
+.socials a{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--on-navy-3);border-radius:50%;color:var(--on-navy-2);transition:color .2s,border-color .2s}
+.socials a:hover{color:var(--on-navy);border-color:var(--sky)}
+.socials svg{width:17px;height:17px;stroke-width:1.5}
+.credits{position:relative;width:100%;max-width:600px;margin-top:26px;height:22svh;overflow:hidden;-webkit-mask:linear-gradient(transparent,#000 30%,#000 70%,transparent);mask:linear-gradient(transparent,#000 30%,#000 70%,transparent)}
+.credits .roll{transform:translateY(calc(22svh - var(--e,0)*60svh))}
+.credits dl{display:grid;gap:12px;padding-bottom:20px}
+.credits dt{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--on-navy-3)}
+.credits dd{font-family:var(--serif);font-size:1.15rem}
+
+footer{background:#0a1424;color:var(--on-navy-2);padding:40px 24px 56px;font-size:.82rem}
+footer .in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 2fr 1.2fr;gap:28px}
+footer strong{color:var(--on-navy);font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.15rem}
+footer nav{display:grid;grid-template-columns:repeat(4,auto);gap:4px 18px;font-family:var(--mono);font-size:.7rem}
+footer nav a:hover,footer a:hover{color:var(--on-navy)}
+footer .end-col{display:grid;gap:4px;align-content:start}
+footer .end-col a{text-decoration:underline;text-underline-offset:3px}
+@media (max-width:860px){footer .in{grid-template-columns:1fr}footer nav{grid-template-columns:repeat(2,auto)}}
+
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}
+  #splash *{opacity:1!important;transform:none!important}
+  .hero,.manif,.doms,.film,.end{height:auto}
+  .pin{position:static;height:auto;overflow:visible}
+  .hero .pin,.manif .pin,.doms .pin,.film .pin,.end .pin{padding:100px 20px 60px}
+  .wall{display:none}
+  .hero-copy{position:static;opacity:1;transform:none}
+  .hero-win{position:relative;left:auto;top:auto;transform:none;margin:40px auto 0}
+  .mk,.mstep{position:static;transform:none;margin-bottom:20px}
+  .ml{opacity:1;transform:none}
+  .dtexts{display:none}
+  .dpanels{display:block}
+  .dpan{opacity:1;transform:none;pointer-events:auto;margin-bottom:34px}
+  .dpan::before{content:attr(data-name);display:block;font-family:var(--serif);font-size:1.6rem;color:var(--dc);margin-bottom:12px}
+  .dgrid{grid-template-columns:1fr}
+  .dots{display:none}
+  .fgrid{grid-template-columns:1fr}
+  .dimg{position:relative;opacity:1;transform:none;margin-bottom:12px}
+  .dimg.prev{opacity:1;transform:none}
+  .dstack{aspect-ratio:auto}
+  .dets{display:none}
+  .dl-list{display:none}
+  .end h2,.end .btns,.socials{opacity:1}
+  .credits{height:auto;mask:none;-webkit-mask:none}
+  .credits .roll{transform:none}
+  .js .rv,.js .card{opacity:1;transform:none}
 }
 </style>
 </head>
 <body>
-<a href="#projects" class="skip">Aller aux projets</a>
+<a href="#domaines" class="skip">Aller aux projets</a>
 
-<header id="nav">
-  <a href="#" class="nav-logo">anthropotech/lab</a>
-  <div class="nav-meta">
-    <span>v2.0</span>
-    <span>15 PROJETS</span>
-    <span>PARIS · 48.85°N</span>
-  </div>
-  <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-r">
-    <span></span>
-  </button>
-  <nav class="nav-r" id="nav-r" aria-label="Navigation principale">
-    <a href="#projects" class="nav-link">Projets</a>
-    <a href="#stack" class="nav-link">Stack</a>
-    <a href="#principes" class="nav-link">Principes</a>
-    <a href="#contact" class="nav-link">Contact</a>
-    <a href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener" class="nav-link" data-ext>Magazine</a>
-    <a href="https://github.com/shamsetdean" target="_blank" rel="noopener" class="nav-link" data-ext>GitHub</a>
-  </nav>
-</header>
-
-<section id="stage" aria-labelledby="stage-title">
-  <span class="crop tl"></span>
-  <span class="crop tr"></span>
-  <span class="crop bl"></span>
-  <span class="crop br"></span>
-  <div class="stage-coords" aria-hidden="true">
-    <span>LAT 48.8566</span>
-    <span>LNG 2.3522</span>
-    <span>2025—2026</span>
-  </div>
-  <div class="stage-inner">
-    <div class="stage-main">
-      <p class="stage-id">DOSSIER N° 001 / SHAMS GUETTAF / PARIS</p>
-      <h1 class="stage-title" id="stage-title">
-        Bâtir <span class="br"></span>
-        ce qui n'<em>existe</em> <span class="br"></span>
-        pas encore.
-      </h1>
-      <div class="stage-foot">
-        <a href="#projects">↓ explorer les 15 expériences</a>
-        <a href="#contact">→ prendre contact</a>
-      </div>
-    </div>
-    <aside class="stage-side" aria-label="Spécifications">
-      <dl class="spec">
-        <dt>OBJET</dt><dd>Laboratoire numérique</dd>
-        <dt>AUTEUR</dt><dd>Shams Guettaf</dd>
-        <dt>PORTÉE</dt><dd>Éditorial, outils, infra</dd>
-        <dt>STACK</dt><dd>HTML · CSS · Python · Pi</dd>
-        <dt>DONNÉES</dt><dd><span class="em">Aucune collecte</span></dd>
-        <dt>HÉBERG.</dt><dd>GitHub Pages · Pi local</dd>
-      </dl>
-    </aside>
-  </div>
-</section>
-
-<div id="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">Privacy by design</span>
-    <span class="ticker-item">Zéro dépendance</span>
-    <span class="ticker-item">Hébergement souverain</span>
-    <span class="ticker-item">Cohérence fond / forme</span>
-    <span class="ticker-item">Zéro tracker</span>
-    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span>
-    <span class="ticker-item">Privacy by design</span>
-    <span class="ticker-item">Zéro dépendance</span>
-    <span class="ticker-item">Hébergement souverain</span>
-    <span class="ticker-item">Cohérence fond / forme</span>
-    <span class="ticker-item">Zéro tracker</span>
-    <span class="ticker-item">HTML · CSS · Python · Raspberry Pi</span>
+<div id="splash" role="presentation" aria-hidden="true">
+  <div class="fr">
+    <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+    <h2>anthropotech <span>/lab</span></h2>
+    <p>bâtir par soi-même ce qu'on rêve de voir exister</p>
   </div>
 </div>
 
-<main id="projects">
-  <header class="section-head reveal">
-    <p class="lab">SECTION 02 / EXPÉRIMENTATION</p>
-    <h2 class="ttl">Les <em>expériences</em></h2>
-    <div class="meta">
-      <span><strong>15</strong> projets actifs</span>
-      <span><strong>4</strong> domaines</span>
-      <span>Maj. <strong>2026.08</strong></span>
-    </div>
-  </header>
-
-  <div class="proj-group">
-    <span class="ix">A.</span>
-    <span>Éditorial & Culture</span>
-    <span class="lin"></span>
-    <span class="ct">04 entrées</span>
+<nav class="nav" aria-label="Navigation principale">
+  <div class="in">
+    <a class="brand" href="#haut">anthropotech/lab</a>
+    <ul>
+      <li><a href="#domaines">Projets</a></li>
+      <li><a href="#dossiers">Dossiers</a></li>
+      <li><a href="#principes">Principes</a></li>
+      <li><a href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener">Magazine ↗</a></li>
+    </ul>
+    <a class="pill" href="#contact">Contact</a>
   </div>
+</nav>
 
-  <a class="pc" href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener" aria-labelledby="t01">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°01</span>
-      <span class="pc-thumb-coord br">x:128 y:080</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-01"></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">01</span><span class="dash">—</span><span>HUM-IAN</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Éditorial</span>
-        <span class="pc-tag">IA</span>
-        <span class="pc-tag">Société</span>
-        <span class="pc-status actif">Actif</span>
-      </div>
-      <h3 class="pc-title" id="t01">Hum<em>{i}</em>An</h3>
-      <p class="pc-q">Que reste-t-il de la pensée critique dans un monde où l'IA produit de la pensée à la demande ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v">43+</span>
-        <span class="pc-stat-l">Articles publiés</span>
-      </div>
-      <div class="pc-cta">Lire <span class="arrow">↗</span></div>
-    </div>
-  </a>
+<main id="haut">
 
-  <a class="pc" href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener" aria-labelledby="t02">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°02</span>
-      <span class="pc-thumb-coord br">PUB-DOMAIN</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-02" aria-hidden="true"><svg viewBox="0 0 96 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="pl" d="M48 22 L12 16 L12 72 L48 78 Z"/><path class="pr" d="M48 22 L84 16 L84 72 L48 78 Z"/><line x1="20" y1="30" x2="42" y2="33" opacity=".5"/><line x1="20" y1="38" x2="42" y2="41" opacity=".5"/><line x1="20" y1="46" x2="38" y2="49" opacity=".5"/><line x1="54" y1="33" x2="76" y2="30" opacity=".5"/><line x1="54" y1="41" x2="76" y2="38" opacity=".5"/><line x1="54" y1="49" x2="72" y2="46" opacity=".5"/><line x1="48" y1="22" x2="48" y2="78" opacity=".7"/></svg></div></div>
+<section class="hero" data-scene="hero" aria-label="Anthropotech Lab">
+  <div class="pin">
+    <div class="wall" aria-hidden="true"><div class="col"><div class="wt" style="--dc:var(--blue)"><span class="wn">N°01</span><div class="glyph glyph-01"></div><span class="wl">Hum{i}An</span></div><div class="wt" style="--dc:var(--blue)"><span class="wn">N°04</span><div class="glyph glyph-synapse" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="66" r="4" fill="currentColor" stroke="none"/><circle cx="66" cy="66" r="4" fill="currentColor" stroke="none"/><line x1="20" y1="66" x2="43" y2="24"/><line x1="66" y1="66" x2="43" y2="24"/><circle class="syn-ring" cx="43" cy="24" r="11" opacity=".5"/><circle class="syn-core" cx="43" cy="24" r="6" fill="currentColor" stroke="none"/></svg></div><span class="wl">Synapse</span></div><div class="wt" style="--dc:var(--red)"><span class="wn">N°07</span><div class="glyph glyph-simul" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="10" y="14" width="56" height="46" rx="6"/><rect class="pip" x="50" y="8" width="28" height="20" rx="4"/><circle class="pin-ring" cx="30" cy="72" r="7" opacity=".5"/><circle class="pin-dot" cx="30" cy="72" r="2.6" fill="currentColor" stroke="none"/></svg></div><span class="wl">simul</span></div><div class="wt" style="--dc:var(--gold)"><span class="wn">N°10</span><div class="glyph glyph-06"><i></i></div><span class="wl">Sentinel</span></div><div class="wt" style="--dc:var(--green)"><span class="wn">N°13</span><div class="glyph glyph-08"></div><span class="wl">π.stream</span></div></div><div class="col"><div class="wt" style="--dc:var(--red)"><span class="wn">N°06</span><div class="glyph glyph-05"></div><span class="wl">Didici</span></div><div class="wt" style="--dc:var(--red)"><span class="wn">N°09</span><div class="glyph glyph-exceptor" aria-hidden="true"><svg viewBox="0 0 86 66" fill="currentColor"><rect class="bar b1" x="14" y="40" width="6" height="26" rx="2"/><rect class="bar b2" x="28" y="26" width="6" height="40" rx="2"/><rect class="bar b3" x="42" y="14" width="6" height="52" rx="2"/><rect class="bar b4" x="56" y="30" width="6" height="36" rx="2"/><rect class="bar b5" x="70" y="44" width="6" height="22" rx="2"/></svg></div><span class="wl">exceptōr</span></div><div class="wt" style="--dc:var(--gold)"><span class="wn">N°12</span><div class="glyph glyph-iter" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="track" d="M14 68 C24 68 22 40 34 34 C48 27 46 14 66 26" opacity=".85"/><circle cx="14" cy="68" r="3" fill="currentColor" stroke="none"/><circle class="live-ring" cx="66" cy="26" r="7" opacity=".5"/><circle class="live-dot" cx="66" cy="26" r="2.6" fill="currentColor" stroke="none"/></svg></div><span class="wl">iter</span></div><div class="wt" style="--dc:var(--green)"><span class="wn">N°15</span><div class="glyph glyph-10"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="wl">UFindGo</span></div><div class="wt" style="--dc:var(--blue)"><span class="wn">N°02</span><div class="glyph glyph-02" aria-hidden="true"><svg viewBox="0 0 96 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="pl" d="M48 22 L12 16 L12 72 L48 78 Z"/><path class="pr" d="M48 22 L84 16 L84 72 L48 78 Z"/><line x1="20" y1="30" x2="42" y2="33" opacity=".5"/><line x1="20" y1="38" x2="42" y2="41" opacity=".5"/><line x1="20" y1="46" x2="38" y2="49" opacity=".5"/><line x1="54" y1="33" x2="76" y2="30" opacity=".5"/><line x1="54" y1="41" x2="76" y2="38" opacity=".5"/><line x1="54" y1="49" x2="72" y2="46" opacity=".5"/><line x1="48" y1="22" x2="48" y2="78" opacity=".7"/></svg></div><span class="wl">Codex</span></div></div><div class="col"><div class="wt" style="--dc:var(--gold)"><span class="wn">N°11</span><div class="glyph glyph-07"><i></i></div><span class="wl">Talaria</span></div><div class="wt" style="--dc:var(--green)"><span class="wn">N°14</span><div class="glyph glyph-09" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z" fill="currentColor" stroke="none"/><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z"/><ellipse class="ripple" cx="43" cy="74" rx="20" ry="3"/><line x1="18" y1="74" x2="68" y2="74" opacity=".4"/></svg></div><span class="wl">LégaleInk</span></div><div class="wt" style="--dc:var(--blue)"><span class="wn">N°01</span><div class="glyph glyph-01"></div><span class="wl">Hum{i}An</span></div><div class="wt" style="--dc:var(--blue)"><span class="wn">N°04</span><div class="glyph glyph-synapse" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="66" r="4" fill="currentColor" stroke="none"/><circle cx="66" cy="66" r="4" fill="currentColor" stroke="none"/><line x1="20" y1="66" x2="43" y2="24"/><line x1="66" y1="66" x2="43" y2="24"/><circle class="syn-ring" cx="43" cy="24" r="11" opacity=".5"/><circle class="syn-core" cx="43" cy="24" r="6" fill="currentColor" stroke="none"/></svg></div><span class="wl">Synapse</span></div><div class="wt" style="--dc:var(--red)"><span class="wn">N°07</span><div class="glyph glyph-simul" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="10" y="14" width="56" height="46" rx="6"/><rect class="pip" x="50" y="8" width="28" height="20" rx="4"/><circle class="pin-ring" cx="30" cy="72" r="7" opacity=".5"/><circle class="pin-dot" cx="30" cy="72" r="2.6" fill="currentColor" stroke="none"/></svg></div><span class="wl">simul</span></div></div><div class="col"><div class="wt" style="--dc:var(--green)"><span class="wn">N°16</span><div class="glyph glyph-dndvdl" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="18" y="10" width="50" height="66" rx="3"/><line x1="18" y1="30" x2="68" y2="30" opacity=".5"/><line x1="18" y1="50" x2="68" y2="50" opacity=".5"/><g fill="currentColor" stroke="none"><rect x="25" y="17" width="5" height="5" rx="1" opacity=".35"/><rect x="34" y="17" width="5" height="5" rx="1" opacity=".35"/><rect class="led l1" x="43" y="17" width="5" height="5" rx="1"/><rect x="52" y="17" width="5" height="5" rx="1" opacity=".35"/><rect class="led l2" x="25" y="37" width="5" height="5" rx="1"/><rect x="34" y="37" width="5" height="5" rx="1" opacity=".35"/><rect x="43" y="37" width="5" height="5" rx="1" opacity=".35"/><rect class="led l3" x="52" y="37" width="5" height="5" rx="1"/><rect x="25" y="57" width="5" height="5" rx="1" opacity=".35"/><rect class="led l1" x="34" y="57" width="5" height="5" rx="1"/><rect x="43" y="57" width="5" height="5" rx="1" opacity=".35"/><rect x="52" y="57" width="5" height="5" rx="1" opacity=".35"/></g><path class="cable" d="M45 22 C 60 26, 74 34, 54 42" opacity=".7"/></svg></div><span class="wl">DNDVDL-MAP</span></div><div class="wt" style="--dc:var(--blue)"><span class="wn">N°03</span><div class="glyph glyph-03" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M16 22 Q43 8 70 22 Q74 50 60 70 Q43 80 26 70 Q12 50 16 22 Z"/><ellipse cx="32" cy="40" rx="5" ry="3" fill="currentColor" stroke="none"/><ellipse cx="54" cy="40" rx="5" ry="3" fill="currentColor" stroke="none"/><path class="smile" d="M28 56 Q43 66 58 56"/><path class="frown" d="M28 60 Q43 50 58 60"/><path d="M22 30 Q24 27 26 30" opacity=".6"/><path d="M60 30 Q62 27 64 30" opacity=".6"/></svg></div><span class="wl">Fabulae</span></div><div class="wt" style="--dc:var(--red)"><span class="wn">N°06</span><div class="glyph glyph-05"></div><span class="wl">Didici</span></div><div class="wt" style="--dc:var(--red)"><span class="wn">N°09</span><div class="glyph glyph-exceptor" aria-hidden="true"><svg viewBox="0 0 86 66" fill="currentColor"><rect class="bar b1" x="14" y="40" width="6" height="26" rx="2"/><rect class="bar b2" x="28" y="26" width="6" height="40" rx="2"/><rect class="bar b3" x="42" y="14" width="6" height="52" rx="2"/><rect class="bar b4" x="56" y="30" width="6" height="36" rx="2"/><rect class="bar b5" x="70" y="44" width="6" height="22" rx="2"/></svg></div><span class="wl">exceptōr</span></div><div class="wt" style="--dc:var(--gold)"><span class="wn">N°12</span><div class="glyph glyph-iter" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="track" d="M14 68 C24 68 22 40 34 34 C48 27 46 14 66 26" opacity=".85"/><circle cx="14" cy="68" r="3" fill="currentColor" stroke="none"/><circle class="live-ring" cx="66" cy="26" r="7" opacity=".5"/><circle class="live-dot" cx="66" cy="26" r="2.6" fill="currentColor" stroke="none"/></svg></div><span class="wl">iter</span></div></div><div class="col"><div class="wt" style="--dc:var(--red)"><span class="wn">N°05</span><div class="glyph glyph-04" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><g class="nib"><path d="M58 12 L72 26 L36 62 L22 64 L24 50 Z"/><path d="M36 62 L48 50" /><line x1="30" y1="56" x2="42" y2="68" opacity=".7"/><path d="M52 18 L66 32" opacity=".5"/></g><path d="M18 70 Q26 72 36 70" opacity=".4"/></svg></div><span class="wl">Scribe</span></div><div class="wt" style="--dc:var(--red)"><span class="wn">N°08</span><div class="glyph glyph-clavium" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="30" r="14"/><g class="key-shaft"><line x1="38" y1="40" x2="66" y2="68"/><line x1="58" y1="60" x2="66" y2="52" opacity=".7"/><line x1="50" y1="52" x2="58" y2="44" opacity=".7"/></g></svg></div><span class="wl">Clavium</span></div><div class="wt" style="--dc:var(--gold)"><span class="wn">N°11</span><div class="glyph glyph-07"><i></i></div><span class="wl">Talaria</span></div><div class="wt" style="--dc:var(--green)"><span class="wn">N°14</span><div class="glyph glyph-09" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z" fill="currentColor" stroke="none"/><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z"/><ellipse class="ripple" cx="43" cy="74" rx="20" ry="3"/><line x1="18" y1="74" x2="68" y2="74" opacity=".4"/></svg></div><span class="wl">LégaleInk</span></div><div class="wt" style="--dc:var(--blue)"><span class="wn">N°01</span><div class="glyph glyph-01"></div><span class="wl">Hum{i}An</span></div></div><div class="col"><div class="wt" style="--dc:var(--gold)"><span class="wn">N°10</span><div class="glyph glyph-06"><i></i></div><span class="wl">Sentinel</span></div><div class="wt" style="--dc:var(--green)"><span class="wn">N°13</span><div class="glyph glyph-08"></div><span class="wl">π.stream</span></div><div class="wt" style="--dc:var(--green)"><span class="wn">N°16</span><div class="glyph glyph-dndvdl" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="18" y="10" width="50" height="66" rx="3"/><line x1="18" y1="30" x2="68" y2="30" opacity=".5"/><line x1="18" y1="50" x2="68" y2="50" opacity=".5"/><g fill="currentColor" stroke="none"><rect x="25" y="17" width="5" height="5" rx="1" opacity=".35"/><rect x="34" y="17" width="5" height="5" rx="1" opacity=".35"/><rect class="led l1" x="43" y="17" width="5" height="5" rx="1"/><rect x="52" y="17" width="5" height="5" rx="1" opacity=".35"/><rect class="led l2" x="25" y="37" width="5" height="5" rx="1"/><rect x="34" y="37" width="5" height="5" rx="1" opacity=".35"/><rect x="43" y="37" width="5" height="5" rx="1" opacity=".35"/><rect class="led l3" x="52" y="37" width="5" height="5" rx="1"/><rect x="25" y="57" width="5" height="5" rx="1" opacity=".35"/><rect class="led l1" x="34" y="57" width="5" height="5" rx="1"/><rect x="43" y="57" width="5" height="5" rx="1" opacity=".35"/><rect x="52" y="57" width="5" height="5" rx="1" opacity=".35"/></g><path class="cable" d="M45 22 C 60 26, 74 34, 54 42" opacity=".7"/></svg></div><span class="wl">DNDVDL-MAP</span></div><div class="wt" style="--dc:var(--blue)"><span class="wn">N°03</span><div class="glyph glyph-03" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M16 22 Q43 8 70 22 Q74 50 60 70 Q43 80 26 70 Q12 50 16 22 Z"/><ellipse cx="32" cy="40" rx="5" ry="3" fill="currentColor" stroke="none"/><ellipse cx="54" cy="40" rx="5" ry="3" fill="currentColor" stroke="none"/><path class="smile" d="M28 56 Q43 66 58 56"/><path class="frown" d="M28 60 Q43 50 58 60"/><path d="M22 30 Q24 27 26 30" opacity=".6"/><path d="M60 30 Q62 27 64 30" opacity=".6"/></svg></div><span class="wl">Fabulae</span></div><div class="wt" style="--dc:var(--red)"><span class="wn">N°06</span><div class="glyph glyph-05"></div><span class="wl">Didici</span></div></div></div>
+    <div class="veil" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="k">Laboratoire numérique · Shams &amp; Dean</p>
+      <h1>Bâtir ce qui n'<em>existe</em> pas encore.</h1>
+      <p class="sub"><b>Seize expériences</b>, des outils pour la commune, des lectures, des cartes, et une même façon de faire.</p>
     </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">02</span><span class="dash">—</span><span>CODEX</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Culture</span>
-        <span class="pc-tag">Domaine public</span>
-        <span class="pc-tag">Littérature</span>
-        <span class="pc-status stable">Stable</span>
-      </div>
-      <h3 class="pc-title" id="t02">Codex</h3>
-      <p class="pc-q">Le patrimoine culturel commun devrait-il appartenir à celui qui construit la meilleure interface ?</p>
+    <div class="hero-win" aria-hidden="true">
+      <span class="win"><span class="bar"><i></i><i></i><i></i><span class="url">shamsetdean.github.io/anthropotechlab</span></span><span class="shots"><img src="images/presentations/clavium.webp" width="960" height="504" alt="" class="on"><img src="images/presentations/iter.webp" width="960" height="504" alt="" class=""><img src="images/presentations/dndvdl.webp" width="960" height="504" alt="" class=""><img src="images/presentations/scribe.webp" width="960" height="504" alt="" class=""><img src="images/presentations/ufindgo.webp" width="960" height="504" alt="" class=""><img src="images/presentations/fabulae.webp" width="960" height="504" alt="" class=""></span></span>
+      <p class="hero-cap">Six projets ont déjà leur dossier</p>
     </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v">458</span>
-        <span class="pc-stat-l">Œuvres libres</span>
-      </div>
-      <div class="pc-cta">Ouvrir <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <a class="pc" href="https://fabulae.vercel.app/" target="_blank" rel="noopener" aria-labelledby="t03">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°03</span>
-      <span class="pc-thumb-coord br">PWA · TMDB</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-03" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M16 22 Q43 8 70 22 Q74 50 60 70 Q43 80 26 70 Q12 50 16 22 Z"/><ellipse cx="32" cy="40" rx="5" ry="3" fill="currentColor" stroke="none"/><ellipse cx="54" cy="40" rx="5" ry="3" fill="currentColor" stroke="none"/><path class="smile" d="M28 56 Q43 66 58 56"/><path class="frown" d="M28 60 Q43 50 58 60"/><path d="M22 30 Q24 27 26 30" opacity=".6"/><path d="M60 30 Q62 27 64 30" opacity=".6"/></svg></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">03</span><span class="dash">—</span><span>FABULAE</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Séries</span>
-        <span class="pc-tag">TMDB</span>
-        <span class="pc-tag">PWA</span>
-        <span class="pc-tag">Mobile-first</span>
-        <span class="pc-status beta">Beta</span>
-      </div>
-      <h3 class="pc-title" id="t03"><em>Fabulae</em></h3>
-      <p class="pc-q">Ton Top 3 des séries du moment — classé, partagé, sans compte, sans collecte.</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v small">TMDB</span>
-        <span class="pc-stat-l">API officielle</span>
-      </div>
-      <div class="pc-cta">Tester <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <a class="pc" href="https://synapse-kohl-eta.vercel.app/" target="_blank" rel="noopener" aria-labelledby="t04">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°04</span>
-      <span class="pc-thumb-coord br">VEILLE · IA</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-synapse" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="66" r="4" fill="currentColor" stroke="none"/><circle cx="66" cy="66" r="4" fill="currentColor" stroke="none"/><line x1="20" y1="66" x2="43" y2="24"/><line x1="66" y1="66" x2="43" y2="24"/><circle class="syn-ring" cx="43" cy="24" r="11" opacity=".5"/><circle class="syn-core" cx="43" cy="24" r="6" fill="currentColor" stroke="none"/></svg></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">04</span><span class="dash">—</span><span>SYNAPSE</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Veille</span>
-        <span class="pc-tag">Agrégation</span>
-        <span class="pc-tag">Temps réel</span>
-        <span class="pc-status beta">Beta</span>
-      </div>
-      <h3 class="pc-title" id="t04"><em>Synapse</em></h3>
-      <p class="pc-q">Faut-il choisir entre tout suivre et tout comprendre ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v small">Live</span>
-        <span class="pc-stat-l">Agrégation continue</span>
-      </div>
-      <div class="pc-cta">Découvrir <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <div class="proj-group">
-    <span class="ix">B.</span>
-    <span>Outils & Autonomie</span>
-    <span class="lin"></span>
-    <span class="ct">05 entrées</span>
   </div>
+</section>
 
-  <a class="pc" href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener" aria-labelledby="t05">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°05</span>
-      <span class="pc-thumb-coord br">100% LOCAL</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-04" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><g class="nib"><path d="M58 12 L72 26 L36 62 L22 64 L24 50 Z"/><path d="M36 62 L48 50" /><line x1="30" y1="56" x2="42" y2="68" opacity=".7"/><path d="M52 18 L66 32" opacity=".5"/></g><path d="M18 70 Q26 72 36 70" opacity=".4"/></svg></div></div>
+<section class="manif" data-scene="manif" aria-label="Le point de départ">
+  <div class="pin">
+    <p class="k mk">Le point de départ</p>
+    <div class="mlines">
+      <p class="ml on">Un outil manque <em>à votre collectivité</em> ?</p>
+      <p class="ml">Une application revend <em>vos données</em> ?</p>
+      <p class="ml">Un service gratuit <em>devient payant</em> ?</p>
+      <p class="ml">Un plan n'existe que <em>dans un tableur</em> ?</p>
+      <p class="ml fin">Alors on le construit. Soi-même, simplement, proprement.</p>
     </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">05</span><span class="dash">—</span><span>SCRIBE</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Emploi</span>
-        <span class="pc-tag">CV</span>
-        <span class="pc-tag">Autonomie</span>
-        <span class="pc-status stable">Stable</span>
-      </div>
-      <h3 class="pc-title" id="t05">Scribe</h3>
-      <p class="pc-q">Peut-on concevoir un outil dont le modèle économique est simplement d'être utile ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v">100%</span>
-        <span class="pc-stat-l">Local · zéro tracker</span>
-      </div>
-      <div class="pc-cta">Utiliser <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <a class="pc" href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener" aria-labelledby="t06">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°06</span>
-      <span class="pc-thumb-coord br">QUOTIDIEN</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-05"></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">06</span><span class="dash">—</span><span>DIDICI</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Apprentissage</span>
-        <span class="pc-tag">Éducation</span>
-        <span class="pc-status beta">Non audité</span>
-      </div>
-      <h3 class="pc-title" id="t06"><em>Didici</em></h3>
-      <p class="pc-q">Et si apprendre était une pratique quotidienne, sans friction et sans compte à créer ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v small">À vérifier</span>
-        <span class="pc-stat-l">En audit</span>
-      </div>
-      <div class="pc-cta">Voir <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <a class="pc" href="https://shamsetdean.github.io/simul/" target="_blank" rel="noopener" aria-labelledby="t07">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°07</span>
-      <span class="pc-thumb-coord br">PWA · LOCAL</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-simul" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="10" y="14" width="56" height="46" rx="6"/><rect class="pip" x="50" y="8" width="28" height="20" rx="4"/><circle class="pin-ring" cx="30" cy="72" r="7" opacity=".5"/><circle class="pin-dot" cx="30" cy="72" r="2.6" fill="currentColor" stroke="none"/></svg></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">07</span><span class="dash">—</span><span>SIMUL</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Souvenirs</span>
-        <span class="pc-tag">Camera</span>
-        <span class="pc-tag">Carte</span>
-        <span class="pc-status actif">Actif</span>
-      </div>
-      <h3 class="pc-title" id="t07"><em>simul</em></h3>
-      <p class="pc-q">Un souvenir vecu a deux points de vue a la fois peut-il tenir dans une seule photo ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v">100%</span>
-        <span class="pc-stat-l">Local · zero tracker</span>
-      </div>
-      <div class="pc-cta">Tester <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <a class="pc" href="https://shamsetdean.github.io/clavium/" target="_blank" rel="noopener" aria-labelledby="t08">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°08</span>
-      <span class="pc-thumb-coord br">SUPABASE · RLS</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-clavium" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="30" r="14"/><g class="key-shaft"><line x1="38" y1="40" x2="66" y2="68"/><line x1="58" y1="60" x2="66" y2="52" opacity=".7"/><line x1="50" y1="52" x2="58" y2="44" opacity=".7"/></g></svg></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">08</span><span class="dash">—</span><span>CLAVIUM</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Municipal</span>
-        <span class="pc-tag">Clés</span>
-        <span class="pc-tag">Supabase</span>
-        <span class="pc-status beta">Beta</span>
-      </div>
-      <h3 class="pc-title" id="t08">Clavium</h3>
-      <p class="pc-q">Peut-on tracer un trousseau de clés aussi précisément qu'un accès numérique ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v small">QR</span>
-        <span class="pc-stat-l">Étiquettes par trousseau</span>
-      </div>
-      <div class="pc-cta">Ouvrir <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <a class="pc" href="https://shamsetdean.github.io/except-r/" target="_blank" rel="noopener" aria-labelledby="t09">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°09</span>
-      <span class="pc-thumb-coord br">GLADIA · IA</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-exceptor" aria-hidden="true"><svg viewBox="0 0 86 66" fill="currentColor"><rect class="bar b1" x="14" y="40" width="6" height="26" rx="2"/><rect class="bar b2" x="28" y="26" width="6" height="40" rx="2"/><rect class="bar b3" x="42" y="14" width="6" height="52" rx="2"/><rect class="bar b4" x="56" y="30" width="6" height="36" rx="2"/><rect class="bar b5" x="70" y="44" width="6" height="22" rx="2"/></svg></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">09</span><span class="dash">—</span><span>EXCEPTŌR</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Réunion</span>
-        <span class="pc-tag">IA</span>
-        <span class="pc-tag">Transcription</span>
-        <span class="pc-status beta">Beta</span>
-      </div>
-      <h3 class="pc-title" id="t09">except<em>ōr</em></h3>
-      <p class="pc-q">Une réunion peut-elle se souvenir d'elle-même, sans qu'on ait à prendre de notes ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v small">IA</span>
-        <span class="pc-stat-l">Transcription automatisée</span>
-      </div>
-      <div class="pc-cta">Lancer <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <div class="proj-group">
-    <span class="ix">C.</span>
-    <span>Diagnostic & Mobilité</span>
-    <span class="lin"></span>
-    <span class="ct">03 entrées</span>
+    <p class="mstep" aria-hidden="true"><span class="ms">01</span> / 05</p>
   </div>
+</section>
 
-  <a class="pc" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener" aria-labelledby="t10">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°10</span>
-      <span class="pc-thumb-coord br">v3.28 · 4 OS</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-06"><i></i></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">10</span><span class="dash">—</span><span>SENTINEL</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Diagnostic</span>
-        <span class="pc-tag">Python</span>
-        <span class="pc-tag">Vie privée</span>
-        <span class="pc-tag">Multi-plateforme</span>
-        <span class="pc-status stable">Stable v3.28</span>
+<section class="doms" id="domaines" data-scene="doms" aria-label="Les seize projets, par domaine">
+  <div class="pin">
+    <div class="dgrid">
+      <div>
+        <div class="dtexts">
+      <div class="dtx on" style="--dc:var(--blue)">
+        <span class="dl" aria-hidden="true">A</span>
+        <p class="k">Domaine A · 04 projets</p>
+        <h3 class="dn">Éditorial &amp; Culture</h3>
+        <p class="dd">Des lectures, des questions, des séries : ce qui nourrit l&#x27;esprit critique.</p>
       </div>
-      <h3 class="pc-title" id="t10">SENTINEL</h3>
-      <p class="pc-q">Connaître son système sans en perdre le contrôle — est-ce encore possible ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v">240+</span>
-        <span class="pc-stat-l">Métriques · 4 OS</span>
+      <div class="dtx" style="--dc:var(--red)">
+        <span class="dl" aria-hidden="true">B</span>
+        <p class="k">Domaine B · 05 projets</p>
+        <h3 class="dn">Outils &amp; Autonomie</h3>
+        <p class="dd">Des outils qui rendent service sans rien demander en échange.</p>
       </div>
-      <div class="pc-cta">Télécharger <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <a class="pc" href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener" aria-labelledby="t11">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°11</span>
-      <span class="pc-thumb-coord br">IDFM · OSM</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-07"><i></i></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">11</span><span class="dash">—</span><span>TALARIA</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Transport</span>
-        <span class="pc-tag">Île-de-France</span>
-        <span class="pc-tag">PWA</span>
-        <span class="pc-tag">Mobilité</span>
-        <span class="pc-status beta">Beta</span>
+      <div class="dtx" style="--dc:var(--gold)">
+        <span class="dl" aria-hidden="true">C</span>
+        <p class="k">Domaine C · 03 projets</p>
+        <h3 class="dn">Diagnostic &amp; Mobilité</h3>
+        <p class="dd">Comprendre sa machine, ses trajets, son terrain, sans le confier à d&#x27;autres.</p>
       </div>
-      <h3 class="pc-title" id="t11"><em>Talaria</em></h3>
-      <p class="pc-q">Les transports en commun d'Île-de-France, sans compte, sans pub, sans collecte — depuis n'importe quel mobile.</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v small">IDFM</span>
-        <span class="pc-stat-l">PRIM · OSM · Météo</span>
+      <div class="dtx" style="--dc:var(--green)">
+        <span class="dl" aria-hidden="true">D</span>
+        <p class="k">Domaine D · 04 projets</p>
+        <h3 class="dn">Infrastructure &amp; Concept</h3>
+        <p class="dd">Du matériel modeste, des concepts, et des outils pour l&#x27;infrastructure.</p>
+      </div></div>
+        <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
       </div>
-      <div class="pc-cta">Lancer <span class="arrow">↗</span></div>
-    </div>
-  </a>
-
-  <a class="pc" href="https://shamsetdean.github.io/iter/" target="_blank" rel="noopener" aria-labelledby="t12">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°12</span>
-      <span class="pc-thumb-coord br">GPS · LOCAL</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-iter" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="track" d="M14 68 C24 68 22 40 34 34 C48 27 46 14 66 26" opacity=".85"/><circle cx="14" cy="68" r="3" fill="currentColor" stroke="none"/><circle class="live-ring" cx="66" cy="26" r="7" opacity=".5"/><circle class="live-dot" cx="66" cy="26" r="2.6" fill="currentColor" stroke="none"/></svg></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">12</span><span class="dash">—</span><span>ITER</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">GPS</span>
-        <span class="pc-tag">Itinéraires</span>
-        <span class="pc-tag">Mobilité</span>
-        <span class="pc-status actif">Actif</span>
+      <div class="dpanels">
+      <div class="dpan on" data-i="0" data-name="A. Éditorial &amp; Culture" style="--dc:var(--blue)">
+        <ul class="plist">
+          <li class="prow">
+            <span class="pn">01</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener"><span class="pnm">Hum<em>{i}</em>An</span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Que reste-t-il de la pensée critique dans un monde où l&#x27;IA produit de la pensée à la demande ?</p>
+              
+            </div>
+            <span class="st actif">Actif</span>
+          </li>
+          <li class="prow">
+            <span class="pn">02</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener"><span class="pnm">Codex</span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Le patrimoine culturel commun devrait-il appartenir à celui qui construit la meilleure interface ?</p>
+              
+            </div>
+            <span class="st stable">Stable</span>
+          </li>
+          <li class="prow">
+            <span class="pn">03</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/fabulae-presentation/" target="_blank" rel="noopener"><span class="pnm"><em>Fabulae</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Ton Top 3, ton Flop 3, et les séries que tes proches recommandent. En test privé, sur invitation.</p>
+              
+            </div>
+            <span class="st beta">Test privé</span>
+          </li>
+          <li class="prow">
+            <span class="pn">04</span>
+            <div class="pb">
+              <a class="pa" href="https://synapse-kohl-eta.vercel.app/" target="_blank" rel="noopener"><span class="pnm"><em>Synapse</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Faut-il choisir entre tout suivre et tout comprendre ?</p>
+              
+            </div>
+            <span class="st beta">Beta</span>
+          </li>
+        </ul>
       </div>
-      <h3 class="pc-title" id="t12"><em>iter</em></h3>
-      <p class="pc-q">Peut-on comprendre ses propres trajets sans jamais les confier à quelqu'un d'autre ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v">100%</span>
-        <span class="pc-stat-l">Local · zéro tracker</span>
+      <div class="dpan" data-i="1" data-name="B. Outils &amp; Autonomie" style="--dc:var(--red)">
+        <ul class="plist">
+          <li class="prow">
+            <span class="pn">05</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener"><span class="pnm">Scribe</span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Peut-on concevoir un outil dont le modèle économique est simplement d&#x27;être utile ?</p>
+              <a class="pd" href="https://shamsetdean.github.io/scribe-presentation/" target="_blank" rel="noopener">Lire le dossier <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+            <span class="st stable">Stable</span>
+          </li>
+          <li class="prow">
+            <span class="pn">06</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener"><span class="pnm"><em>Didici</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Et si apprendre était une pratique quotidienne, sans friction et sans compte à créer ?</p>
+              
+            </div>
+            <span class="st beta">Non audité</span>
+          </li>
+          <li class="prow">
+            <span class="pn">07</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/simul/" target="_blank" rel="noopener"><span class="pnm"><em>simul</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Un souvenir vécu à deux points de vue à la fois peut-il tenir dans une seule photo ?</p>
+              
+            </div>
+            <span class="st actif">Actif</span>
+          </li>
+          <li class="prow">
+            <span class="pn">08</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/clavium/" target="_blank" rel="noopener"><span class="pnm">Clavium</span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Peut-on tracer un trousseau de clés aussi précisément qu&#x27;un accès numérique ?</p>
+              <a class="pd" href="https://shamsetdean.github.io/clavium-presentation/" target="_blank" rel="noopener">Lire le dossier <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+            <span class="st beta">Beta</span>
+          </li>
+          <li class="prow">
+            <span class="pn">09</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/except-r/" target="_blank" rel="noopener"><span class="pnm">except<em>ōr</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Une réunion peut-elle se souvenir d&#x27;elle-même, sans qu&#x27;on ait à prendre de notes ?</p>
+              
+            </div>
+            <span class="st beta">Beta</span>
+          </li>
+        </ul>
       </div>
-      <div class="pc-cta">Tester <span class="arrow">↗</span></div>
+      <div class="dpan" data-i="2" data-name="C. Diagnostic &amp; Mobilité" style="--dc:var(--gold)">
+        <ul class="plist">
+          <li class="prow">
+            <span class="pn">10</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener"><span class="pnm">SENTINEL</span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Connaître son système sans en perdre le contrôle : est-ce encore possible ?</p>
+              
+            </div>
+            <span class="st stable">Stable v3.28</span>
+          </li>
+          <li class="prow">
+            <span class="pn">11</span>
+            <div class="pb">
+              <a class="pa" href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener"><span class="pnm"><em>Talaria</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Les transports en commun d&#x27;Île-de-France, sans compte et sans publicité, depuis n&#x27;importe quel mobile.</p>
+              
+            </div>
+            <span class="st beta">Beta</span>
+          </li>
+          <li class="prow">
+            <span class="pn">12</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/iter/" target="_blank" rel="noopener"><span class="pnm"><em>iter</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Et si chaque anomalie repérée sur le terrain était signalée, localisée puis suivie jusqu&#x27;à sa résolution ?</p>
+              <a class="pd" href="https://shamsetdean.github.io/iter-presentation/" target="_blank" rel="noopener">Lire le dossier <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+            <span class="st actif">Actif</span>
+          </li>
+        </ul>
+      </div>
+      <div class="dpan" data-i="3" data-name="D. Infrastructure &amp; Concept" style="--dc:var(--green)">
+        <ul class="plist">
+          <li class="prow">
+            <span class="pn">13</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener"><span class="pnm">π<em>.stream</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Jusqu&#x27;où peut-on aller seul, avec du matériel modeste et une architecture bien pensée ?</p>
+              
+            </div>
+            <span class="st actif">Actif NYC</span>
+          </li>
+          <li class="prow">
+            <span class="pn">14</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener"><span class="pnm">Légale<em>Ink</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Et si la conformité légale devenait aussi invisible qu&#x27;une mise à jour système ?</p>
+              
+            </div>
+            <span class="st concept">Concept</span>
+          </li>
+          <li class="prow">
+            <span class="pn">15</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener"><span class="pnm">UFindGo</span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Trouver une place libre ou un lieu utile à proximité, en temps réel, par la communauté et pour la communauté, sans compte.</p>
+              <a class="pd" href="https://shamsetdean.github.io/ufindgo-presentation/" target="_blank" rel="noopener">Lire le dossier <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+            <span class="st beta">Beta</span>
+          </li>
+          <li class="prow">
+            <span class="pn">16</span>
+            <div class="pb">
+              <a class="pa" href="https://shamsetdean.github.io/dndvdl-presentation/" target="_blank" rel="noopener"><span class="pnm">DNDVDL<em>-MAP</em></span><span class="arrow" aria-hidden="true">↗</span></a>
+              <p class="pq">Une baie informatique peut-elle se lire d&#x27;un coup d&#x27;œil, sans que son plan quitte jamais l&#x27;appareil ?</p>
+              
+            </div>
+            <span class="st concept">Usage interne</span>
+          </li>
+        </ul>
+      </div>
+      </div>
     </div>
-  </a>
-
-  <div class="proj-group">
-    <span class="ix">D.</span>
-    <span>Infrastructure & Concept</span>
-    <span class="lin"></span>
-    <span class="ct">03 entrées</span>
   </div>
+</section>
 
-  <a class="pc" href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener" aria-labelledby="t13">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°13</span>
-      <span class="pc-thumb-coord br">NYC → PARIS</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-08"></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">13</span><span class="dash">—</span><span>PI-STREAM</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Hardware</span>
-        <span class="pc-tag">Automatisation</span>
-        <span class="pc-tag">Raspberry Pi</span>
-        <span class="pc-status actif">Actif NYC</span>
+<section class="film" id="dossiers" data-scene="film" aria-labelledby="film-title">
+  <div class="pin">
+    <div class="fgrid">
+      <div>
+        <p class="k">Les dossiers</p>
+        <h2 class="t" id="film-title">Six projets, <em class="i">racontés en détail.</em></h2>
+        <ol class="dl-list" aria-hidden="true"><li class="dli on"><span class="dnum">01</span><span class="dnm">Clavium</span></li><li class="dli"><span class="dnum">02</span><span class="dnm">iter</span></li><li class="dli"><span class="dnum">03</span><span class="dnm">DNDVDL-MAP</span></li><li class="dli"><span class="dnum">04</span><span class="dnm">Scribe</span></li><li class="dli"><span class="dnum">05</span><span class="dnm">UFindGo</span></li><li class="dli"><span class="dnum">06</span><span class="dnm">Fabulae</span></li></ol>
       </div>
-      <h3 class="pc-title" id="t13">π<em>.stream</em></h3>
-      <p class="pc-q">Jusqu'où peut-on aller seul, avec du hardware bas de gamme et une architecture bien pensée ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v">24/7</span>
-        <span class="pc-stat-l">NYC → Paris</span>
+      <div class="dpanel">
+        <div class="dstack"><img src="images/presentations/clavium.webp" width="960" height="504" alt="Aperçu de la page de présentation de Clavium" loading="lazy" class="dimg on" data-i="0"><img src="images/presentations/iter.webp" width="960" height="504" alt="Aperçu de la page de présentation de iter" loading="lazy" class="dimg" data-i="1"><img src="images/presentations/dndvdl.webp" width="960" height="504" alt="Aperçu de la page de présentation de DNDVDL-MAP" loading="lazy" class="dimg" data-i="2"><img src="images/presentations/scribe.webp" width="960" height="504" alt="Aperçu de la page de présentation de Scribe" loading="lazy" class="dimg" data-i="3"><img src="images/presentations/ufindgo.webp" width="960" height="504" alt="Aperçu de la page de présentation de UFindGo" loading="lazy" class="dimg" data-i="4"><img src="images/presentations/fabulae.webp" width="960" height="504" alt="Aperçu de la page de présentation de Fabulae" loading="lazy" class="dimg" data-i="5"></div>
+        <div class="dets">
+          <div class="ddet on">
+            <p class="daud">Pour les élus et la direction</p>
+            <p class="dline">L&#x27;armoire à clés numérique, crochet par crochet.</p>
+            <a class="dgo" href="https://shamsetdean.github.io/clavium-presentation/" target="_blank" rel="noopener">Lire le dossier Clavium <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ddet">
+            <p class="daud">Pour les élus et la direction</p>
+            <p class="dline">Chaque anomalie du terrain, signalée puis suivie jusqu&#x27;à sa résolution.</p>
+            <a class="dgo" href="https://shamsetdean.github.io/iter-presentation/" target="_blank" rel="noopener">Lire le dossier iter <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ddet">
+            <p class="daud">Outil privé · usage interne</p>
+            <p class="dline">Le contenant est en ligne. Le contenu, jamais.</p>
+            <a class="dgo" href="https://shamsetdean.github.io/dndvdl-presentation/" target="_blank" rel="noopener">Lire le dossier DNDVDL-MAP <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ddet">
+            <p class="daud">Grand public</p>
+            <p class="dline">Du CV à l&#x27;entretien, gratuit, sans compte, rien n&#x27;est collecté.</p>
+            <a class="dgo" href="https://shamsetdean.github.io/scribe-presentation/" target="_blank" rel="noopener">Lire le dossier Scribe <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ddet">
+            <p class="daud">Grand public · bêta</p>
+            <p class="dline">Les places libres signalées par ceux qui les voient.</p>
+            <a class="dgo" href="https://shamsetdean.github.io/ufindgo-presentation/" target="_blank" rel="noopener">Lire le dossier UFindGo <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ddet">
+            <p class="daud">Test privé · sur invitation</p>
+            <p class="dline">L&#x27;art de ne jamais perdre le fil.</p>
+            <a class="dgo" href="https://shamsetdean.github.io/fabulae-presentation/" target="_blank" rel="noopener">Lire le dossier Fabulae <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
       </div>
-      <div class="pc-cta">Voir <span class="arrow">↗</span></div>
     </div>
-  </a>
+  </div>
+</section>
 
-  <a class="pc" href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener" aria-labelledby="t14">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°14</span>
-      <span class="pc-thumb-coord br">CONCEPT</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-09" aria-hidden="true"><svg viewBox="0 0 86 86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z" fill="currentColor" stroke="none"/><path class="drop" d="M43 14 Q58 36 58 50 A15 15 0 0 1 28 50 Q28 36 43 14 Z"/><ellipse class="ripple" cx="43" cy="74" rx="20" ry="3"/><line x1="18" y1="74" x2="68" y2="74" opacity=".4"/></svg></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">14</span><span class="dash">—</span><span>LEGALE-INK</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Concept</span>
-        <span class="pc-tag">e-ink</span>
-        <span class="pc-tag">Droit</span>
-        <span class="pc-status concept">Concept</span>
-      </div>
-      <h3 class="pc-title" id="t14">Légale<em>Ink</em></h3>
-      <p class="pc-q">Et si la conformité légale devenait aussi invisible qu'une mise à jour système ?</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v small">RGPD</span>
-        <span class="pc-stat-l">Pitch · Prototype</span>
-      </div>
-      <div class="pc-cta">Découvrir <span class="arrow">↗</span></div>
-    </div>
-  </a>
+<section class="nums" aria-label="En chiffres">
+  <p class="k rv">En chiffres</p>
+  <h2 class="t rv">Le laboratoire, <em class="i">en quatre fiches.</em></h2>
+  <div class="cards">
+    <div class="card rv" style="--c:var(--blue);--r:-1.5deg"><strong data-count="16">0</strong><span>expériences</span><small>publiées depuis 2025</small></div>
+    <div class="card rv" style="--c:var(--red);--r:1deg"><strong data-count="4">0</strong><span>domaines</span><small>éditorial, outils, mobilité, infra</small></div>
+    <div class="card rv" style="--c:var(--gold);--r:-.5deg"><strong data-count="6">0</strong><span>dossiers</span><small>pour comprendre un projet</small></div>
+    <div class="card rv" style="--c:var(--green);--r:1.5deg"><strong data-count="0">0</strong><span>publicité</span><small>sur l'ensemble des projets</small></div>
+  </div>
+</section>
 
-  <a class="pc" href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener" aria-labelledby="t15">
-    <div class="pc-thumb">
-      <div class="pc-thumb-grid"></div>
-      <span class="pc-thumb-coord tl">N°15</span>
-      <span class="pc-thumb-coord br">LIVE</span>
-      <div class="pc-thumb-art"><div class="glyph glyph-10"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-    </div>
-    <div class="pc-body">
-      <div class="pc-id"><span class="num">15</span><span class="dash">—</span><span>UFINDGO</span></div>
-      <div class="pc-tags">
-        <span class="pc-tag">Carte</span>
-        <span class="pc-tag">Signalement</span>
-        <span class="pc-tag">AR</span>
-        <span class="pc-tag">OSM</span>
-        <span class="pc-status beta">Beta</span>
-      </div>
-      <h3 class="pc-title" id="t15">UfindGo</h3>
-      <p class="pc-q">Trouver une place libre ou un lieu utile à proximité, en temps réel — par la communauté, pour la communauté, sans compte.</p>
-    </div>
-    <div class="pc-side">
-      <div class="pc-stat">
-        <span class="pc-stat-v small">Live</span>
-        <span class="pc-stat-l">Firebase · OSM</span>
-      </div>
-      <div class="pc-cta">Tester <span class="arrow">↗</span></div>
-    </div>
-  </a>
+<section class="princ" id="principes" aria-labelledby="pr-title">
+  <div class="head"><p class="k rv">Méthode</p><h2 class="t rv" id="pr-title">Un seul <em class="i">fil conducteur.</em></h2></div>
+  <div class="pgrid">
+    <div class="pc rv"><span class="rn">I</span><strong>Sobriété des données</strong><p>Ne collecter que ce dont un projet ne peut pas se passer. La plupart des outils fonctionnent entièrement dans le navigateur. Quand un service doit partager des données, il le dit et les efface dès qu'il peut.</p></div>
+    <div class="pc rv"><span class="rn">II</span><strong>Comprendre ce qu'on utilise</strong><p>HTML, CSS, JavaScript, Python, Raspberry Pi. Peu de dépendances, chacune choisie en connaissance de cause.</p></div>
+    <div class="pc rv"><span class="rn">III</span><strong>Hébergement libre</strong><p>GitHub Pages, un Raspberry Pi, et des offres gratuites quand un projet a besoin d'un serveur. Aucun coût imposé, aucune plateforme subie.</p></div>
+    <div class="pc rv"><span class="rn">IV</span><strong>Forme = message</strong><p>Un site sur la maîtrise numérique doit être lui-même maîtrisé : celui-ci ne dépose aucun cookie et charge ses polices depuis son propre dossier.</p></div>
+  </div>
+</section>
+
+<section class="stack" id="stack" aria-labelledby="st-title">
+  <div class="head"><p class="k rv">Comment c'est fait</p><h2 class="t rv" id="st-title">Des outils choisis, <em class="i">des raisons assumées.</em></h2></div>
+  <div class="sgrid">
+    <div class="sc rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><strong>APIs publiques</strong><p>Des sources officielles, ouvertes et documentées, plutôt que des bases maison.</p><ul><li>TMDB : Fabulae</li><li>IDFM / PRIM : Talaria</li><li>OpenStreetMap : Talaria, UFindGo</li><li>Open-Meteo : Talaria</li></ul></div>
+    <div class="sc rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg><strong>GitHub Pages et Pi</strong><p>Le statique, c'est-à-dire la majorité, sur GitHub Pages. Les automatisations sur un Raspberry Pi à la maison.</p><ul><li>Aucun coût, code consultable</li><li>π.stream, scripts Python</li></ul></div>
+    <div class="sc rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/></svg><strong>Vercel</strong><p>Pour les projets qui ont besoin d'un serveur : un déploiement en un envoi Git, sur l'offre gratuite.</p><ul><li>Fabulae, Talaria, Synapse</li><li>Sources toujours sur Git</li></ul></div>
+    <div class="sc rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg><strong>Supabase et Firebase</strong><p>Quand un projet doit enregistrer ou partager des données, avec des règles d'accès strictes.</p><ul><li>Supabase : Clavium, Fabulae, exceptōr, comptes DNDVDL-MAP</li><li>Firebase : signalements UFindGo, effacés en 24 h</li></ul></div>
+  </div>
+  <p class="free rv"><b>Pourquoi le gratuit ?</b> Tant qu'un outil reste gratuit, il reste accessible à quiconque veut bâtir : un étudiant, un autodidacte, une association. Quand un service devient payant, je migre.</p>
+</section>
+
+<section class="end" id="contact" data-scene="end" aria-label="Prendre contact">
+  <div class="pin">
+    <p class="k">Prendre contact</p>
+    <h2>La suite reste <span>à bâtir.</span></h2>
+    <p class="sub">Une conviction à mettre en commun ? Un projet à construire ensemble ? Écrivez-moi.</p>
+    <div class="btns"><a class="btn" href="mailto:shamsetdean@gmail.com">Écrire un e-mail</a><a class="btn ghost" href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn</a></div>
+    <ul class="socials" aria-label="Retrouvez-moi ailleurs">
+      <li><a href="https://github.com/shamsetdean" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></li>
+      <li><a href="https://x.com/shamsetdean" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/shamsetdean" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></li>
+      <li><a href="https://www.facebook.com/shamsetdean" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></li>
+      <li><a href="https://abstracted-crush-f4e.notion.site/SHAMS-DEAN-286d3f1e5597815f9fdfc90d48445621" target="_blank" rel="noopener" aria-label="Notion, page personnelle" title="Notion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></a></li>
+      <li><a href="https://t.co/B2sslp0dGV" target="_blank" rel="noopener" aria-label="Apple Books" title="Apple Books"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></a></li>
+    </ul>
+    <div class="credits" aria-hidden="true"><div class="roll"><dl>
+      <div><dt>Un laboratoire</dt><dd>Anthropotech Lab</dd></div>
+      <div><dt>Conception et développement</dt><dd>Shams &amp; Dean</dd></div>
+      <div><dt>Expériences publiées</dt><dd>Seize, et ce n'est qu'un début</dd></div>
+      <div><dt>Publicité</dt><dd>Aucune</dd></div>
+    </dl></div></div>
+  </div>
+</section>
+
 </main>
 
-<aside id="interlude">
-  <span class="int-bg" aria-hidden="true">Lab.</span>
-  <div class="int-inner reveal">
-    <p class="int-label">SECTION 03 / Ce qui les relie</p>
-    <blockquote class="int-q">
-      Ce n'est pas un portfolio.<br>
-      C'est une <em>conviction</em> :<br>
-      bâtir ce qu'on rêve de voir exister.
-    </blockquote>
-    <div class="int-foot">
-      <span>15 projets</span>
-      <span>4 domaines</span>
-      <span>1 fil conducteur</span>
-      <span>0 collecte</span>
-    </div>
-  </div>
-</aside>
-
-<section id="principes" aria-labelledby="pr-title">
-  <header class="section-head reveal">
-    <p class="lab">SECTION 04 / Méthode</p>
-    <h2 class="ttl" id="pr-title">Un seul <em>fil conducteur</em></h2>
-    <div class="meta">
-      <span>Quinze projets distincts</span>
-      <span>Une même architecture</span>
-    </div>
-  </header>
-  <div class="pr-grid">
-    <article class="pr">
-      <div class="pr-n"><span>PRINCIPE</span><span class="roman">I</span></div>
-      <h4>Souveraineté</h4>
-      <p>Aucun projet ne collecte ni ne transmet de données. Ce n'est pas un paramètre — c'est une architecture de départ.</p>
-    </article>
-    <article class="pr">
-      <div class="pr-n"><span>PRINCIPE</span><span class="roman">II</span></div>
-      <h4>Zéro dépendance</h4>
-      <p>HTML, CSS, Python, Raspberry Pi. Chaque outil compris en totalité par son auteur. Aucune boîte noire acceptée.</p>
-    </article>
-    <article class="pr">
-      <div class="pr-n"><span>PRINCIPE</span><span class="roman">III</span></div>
-      <h4>Hébergement libre</h4>
-      <p>GitHub Pages ou Pi local. Zéro coût d'infrastructure, zéro plateforme imposée, déploiement en un push.</p>
-    </article>
-    <article class="pr">
-      <div class="pr-n"><span>PRINCIPE</span><span class="roman">IV</span></div>
-      <h4>Forme = message</h4>
-      <p>Un site sur la maîtrise numérique qui est lui-même maîtrisé. La forme ne vient pas après le fond.</p>
-    </article>
-  </div>
-</section>
-
-<section id="contact" aria-labelledby="contact-q">
-  <div class="contact-inner reveal">
-    <p class="contact-eyebrow">SECTION 05 / Prendre contact</p>
-    <p class="contact-q" id="contact-q">Une <em>conviction</em> à mettre en commun ? Un projet à <em>bâtir</em> ?</p>
-    <div class="contact-actions">
-      <a class="btn primary" href="/cdn-cgi/l/email-protection#bac9d2dbd7c9dfcededfdbd4faddd7dbd3d694d9d5d7">Email <span class="arrow">↗</span></a>
-      <a class="btn" href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
-    </div>
-    <p class="contact-eyebrow tiny">/ retrouvez-moi ailleurs</p>
-    <div class="contact-socials" role="list">
-      <a class="social-icon" role="listitem" href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
-      <a class="social-icon" role="listitem" href="https://github.com/shamsetdean" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-      </a>
-      <a class="social-icon" role="listitem" href="https://x.com/shamsetdean" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-      <a class="social-icon" role="listitem" href="https://www.instagram.com/shamsetdean" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      </a>
-      <a class="social-icon" role="listitem" href="https://www.facebook.com/shamsetdean" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      </a>
-      <a class="social-icon" role="listitem" href="https://abstracted-crush-f4e.notion.site/SHAMS-DEAN-286d3f1e5597815f9fdfc90d48445621" target="_blank" rel="noopener" aria-label="Notion — Page personnelle" title="Notion">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      </a>
-      <a class="social-icon" role="listitem" href="https://t.co/B2sslp0dGV" target="_blank" rel="noopener" aria-label="Apple Books" title="Apple Books">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      </a>
-      <a class="social-icon" role="listitem" href="/cdn-cgi/l/email-protection#6b18030a06180e1f0f0e0a052b0c060a020745080406" aria-label="Email" title="shamsetdean@gmail.com">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section id="stack" aria-labelledby="stack-title">
-  <div class="stack-inner">
-    <header class="section-head reveal">
-      <p class="lab">SECTION 06 / Stack & méthode</p>
-      <h2 class="ttl" id="stack-title">Comment <em>c'est fait</em></h2>
-      <div class="meta">
-        <span>Outils choisis</span>
-        <span>Raisons assumées</span>
-      </div>
-    </header>
-    <div class="stack-grid">
-      <article class="stack-item">
-        <div class="stack-head">
-          <span class="stack-name">APIs <em>publiques</em></span>
-          <span class="stack-tag">DONNÉES</span>
-        </div>
-        <p>Plutôt que de scraper ou de bâtir mes propres bases, je m'appuie sur des APIs <em>officielles, ouvertes et documentées</em>. C'est plus rapide, plus fiable, et ça respecte le travail des organismes qui les maintiennent.</p>
-        <ul class="stack-list">
-          <li><strong>TMDB</strong> — base de données séries (Fabulae)</li>
-          <li><strong>IDFM / PRIM</strong> — transports Île-de-France (Talaria)</li>
-          <li><strong>OpenStreetMap</strong> — cartographie libre (Talaria, UfindGo)</li>
-          <li><strong>Open-Meteo</strong> — météo sans clé (Talaria, iter)</li>
-        </ul>
-      </article>
-      <article class="stack-item">
-        <div class="stack-head">
-          <span class="stack-name"><em>Vercel</em></span>
-          <span class="stack-tag">HÉBERGEMENT DYNAMIQUE</span>
-        </div>
-        <p>Pour les projets qui ont besoin de fonctions serverless ou d'un build (PWA, fetch d'API), Vercel offre un déploiement <em>en un push Git</em>, gratuit pour les usages personnels, sans carte bancaire requise. Le tier gratuit suffit largement à mes volumes.</p>
-        <ul class="stack-list">
-          <li>Build automatique depuis GitHub</li>
-          <li>HTTPS par défaut, CDN mondial</li>
-          <li>Aucun lock-in : mes sources restent sur Git</li>
-        </ul>
-      </article>
-      <article class="stack-item">
-        <div class="stack-head">
-          <span class="stack-name"><em>Supabase</em></span>
-          <span class="stack-tag">BASE DE DONNÉES</span>
-        </div>
-        <p>Quand un projet a besoin d'écrire des données (signalements UfindGo, trousseaux Clavium, transcriptions exceptōr), Supabase fournit une base <em>PostgreSQL open-source</em> avec auth et API REST clés en main. Le tier gratuit couvre largement les usages communautaires.</p>
-        <ul class="stack-list">
-          <li>PostgreSQL standard, exportable</li>
-          <li>Open-source, auto-hébergeable si besoin</li>
-          <li>Row Level Security pour limiter l'accès</li>
-        </ul>
-      </article>
-      <article class="stack-item">
-        <div class="stack-head">
-          <span class="stack-name"><em>GitHub Pages</em> + Pi</span>
-          <span class="stack-tag">HÉBERGEMENT STATIQUE</span>
-        </div>
-        <p>Pour tout ce qui est statique (la majorité), GitHub Pages suffit : zéro coût, zéro config, version en clair. Pour le reste — captures, cron jobs, automatisations — un <em>Raspberry Pi</em> à la maison fait le travail 24/7 pour quelques euros d'électricité.</p>
-        <ul class="stack-list">
-          <li>GitHub Pages : sites statiques, déploiement Git</li>
-          <li>Raspberry Pi : automation, π.stream, scripts Python</li>
-          <li>Aucune dépendance à un cloud propriétaire</li>
-        </ul>
-      </article>
-      <article class="stack-item" style="grid-column: 1 / -1;">
-        <div class="stack-head">
-          <span class="stack-name"><em>Pourquoi le gratuit ?</em></span>
-          <span class="stack-tag">PRINCIPE</span>
-        </div>
-        <p>Le gratuit n'est pas un compromis — c'est un <em>choix politique</em>. Tant qu'un outil reste gratuit, il reste accessible à <em>quiconque veut bâtir</em>, sans barrière financière. Je m'astreins donc à concevoir des projets qui tiennent sur des tiers gratuits : ça force la frugalité, l'efficacité, et garantit que mes outils restent reproductibles par n'importe qui — étudiant, autodidacte, association — sans demander un budget. Quand un service devient payant, je migre. Le code, lui, reste libre.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="legal" aria-labelledby="legal-title">
-  <header class="section-head reveal">
-    <p class="lab">SECTION 07 / Mentions légales</p>
-    <h2 class="ttl" id="legal-title">Mentions <em>légales</em></h2>
-    <div class="meta">
-      <span>Conformité RGPD</span>
-      <span>Maj. 2026.08</span>
-    </div>
-  </header>
-  <div class="legal-grid">
-    <div class="legal-block">
-      <h4>Éditeur</h4>
-      <p><strong>Shams Guettaf</strong> — particulier, éditeur à titre personnel et non commercial.</p>
-      <p>Contact : <a href="/cdn-cgi/l/email-protection#82f1eae3eff1e7f6e6e7e3ecc2e5efe3ebeeace1edef">shamsetdean@gmail.com</a> · <a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/shamsetdean" target="_blank" rel="noopener">GitHub</a>.</p>
-      <p>Directeur de la publication : Shams Guettaf.</p>
-    </div>
-    <div class="legal-block">
-      <h4>Hébergement</h4>
-      <p>Sites statiques hébergés par <strong>GitHub, Inc.</strong> — 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.</p>
-      <p>Projets dynamiques (Fabulae, Talaria, Synapse) hébergés par <strong>Vercel Inc.</strong> — 340 S Lemon Ave #4133, Walnut, CA 91789, USA.</p>
-      <p>Certains services (UfindGo, Clavium, exceptōr) reposent sur <strong>Supabase Inc.</strong> — 970 Toa Payoh North #07-04, Singapore.</p>
-    </div>
-    <div class="legal-block">
-      <h4>Propriété intellectuelle — Tous droits réservés</h4>
-      <p><strong>© 2025–2026 Shams Guettaf. Tous droits réservés. All rights reserved worldwide.</strong></p>
-      <p>L'ensemble du contenu de ce laboratoire — <strong>code source, architecture logicielle, interfaces, designs, identités visuelles, textes éditoriaux, citations, concepts, noms de projets, marques et logos</strong> — constitue une œuvre originale protégée par le droit d'auteur français (<em>Code de la propriété intellectuelle, art. L.111-1 et suivants</em>) ainsi que par les conventions internationales (<em>Convention de Berne, accord ADPIC, traité OMPI sur le droit d'auteur</em>).</p>
-      <p>Cette protection s'applique dès la création, sans formalité, dans l'ensemble des pays signataires — soit la quasi-totalité du monde.</p>
-      <p><strong>Toute reproduction, représentation, modification, publication, adaptation, traduction, diffusion ou exploitation</strong>, totale ou partielle, par quelque procédé que ce soit (incluant l'entraînement de modèles d'intelligence artificielle), <strong>est strictement interdite sans autorisation écrite préalable de l'auteur</strong>.</p>
-      <p>La consultation publique d'un projet sur Internet ou la visibilité du code dans un dépôt Git <strong>n'emporte aucune renonciation</strong> aux droits patrimoniaux ou moraux de l'auteur. Aucune licence libre n'est concédée par défaut.</p>
-      <p>Toute infraction expose son auteur aux sanctions prévues par les articles <em>L.335-2 et suivants du CPI</em> (jusqu'à 3 ans d'emprisonnement et 300 000 € d'amende en France) ainsi qu'aux dispositions équivalentes dans les juridictions étrangères.</p>
-      <p>Les marques et logos tiers cités appartiennent à leurs propriétaires respectifs.</p>
-    </div>
-    <div class="legal-block">
-      <h4>Données personnelles</h4>
-      <p><strong>Aucune collecte.</strong> Ce site et l'ensemble des projets associés ne déposent aucun cookie de suivi, n'utilisent aucun outil d'analyse, et ne transmettent aucune donnée à des tiers.</p>
-      <p>Les seuls échanges réseau concernent les APIs publiques nécessaires au fonctionnement (TMDB, IDFM, OSM…) — sans authentification utilisateur.</p>
-    </div>
-    <div class="legal-block">
-      <h4>Cookies</h4>
-      <p>Aucun cookie de mesure ni de publicité. Certains projets utilisent uniquement le <strong>localStorage</strong> du navigateur pour mémoriser des préférences (Top 3 Fabulae, position UfindGo…). Ces données restent sur l'appareil de l'utilisateur et ne sont jamais transmises.</p>
-    </div>
-    <div class="legal-block">
-      <h4>Responsabilité</h4>
-      <p>Les projets de ce laboratoire sont des expérimentations personnelles, fournies <strong>« en l'état »</strong>, sans garantie. L'auteur ne saurait être tenu responsable de l'utilisation qui en est faite ni des éventuelles erreurs ou indisponibilités.</p>
-      <p>Tout signalement bienvenu via les canaux de contact.</p>
-    </div>
-  </div>
-</section>
-
 <footer>
-  <div class="ft-brand">
-    <span class="b1">anthropotech /lab</span>
-    <span class="b2">PARIS · 2025—2026 · v2.0</span>
-  </div>
-  <div class="ft-cols">
-    <a href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener">Hum{i}An</a>
-    <a href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener">Codex</a>
-    <a href="https://fabulae.vercel.app/" target="_blank" rel="noopener">Fabulae</a>
-    <a href="https://synapse-kohl-eta.vercel.app/" target="_blank" rel="noopener">Synapse</a>
-    <a href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener">Scribe</a>
-    <a href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener">Didici</a>
-    <a href="https://shamsetdean.github.io/simul/" target="_blank" rel="noopener">simul</a>
-    <a href="https://shamsetdean.github.io/clavium/" target="_blank" rel="noopener">Clavium</a>
-    <a href="https://shamsetdean.github.io/except-r/" target="_blank" rel="noopener">exceptōr</a>
-    <a href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">Sentinel</a>
-    <a href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener">Talaria</a>
-    <a href="https://shamsetdean.github.io/iter/" target="_blank" rel="noopener">iter</a>
-    <a href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">π.stream</a>
-    <a href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">LégaleInk</a>
-    <a href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener">UfindGo</a>
-  </div>
-  <div class="ft-end">
-    <strong>Shams Guettaf</strong>
-    <span><a href="/cdn-cgi/l/email-protection#8dfee5ece0fee8f9e9e8ece3cdeae0ece4e1a3eee2e0" style="color:inherit;">shamsetdean@gmail.com</a></span>
-    <div class="ft-socials" aria-label="Réseaux sociaux">
-      <a href="https://www.linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
-      <a href="https://github.com/shamsetdean" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-      </a>
-      <a href="https://x.com/shamsetdean" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/shamsetdean" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      </a>
-      <a href="https://www.facebook.com/shamsetdean" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      </a>
-      <a href="https://abstracted-crush-f4e.notion.site/SHAMS-DEAN-286d3f1e5597815f9fdfc90d48445621" target="_blank" rel="noopener" aria-label="Notion" title="Notion">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </a>
-      <a href="https://t.co/B2sslp0dGV" target="_blank" rel="noopener" aria-label="Apple Books" title="Apple Books">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      </a>
-    </div>
-    <span><a href="#legal" style="color:inherit;border-bottom:1px solid var(--ink-4);">Mentions légales</a></span>
-    <span>© 2025–2026 — Tous droits réservés</span>
+  <div class="in">
+    <div class="end-col"><strong>anthropotech /lab</strong><span>Conçu et développé par Shams &amp; Dean.</span><span><a href="mailto:shamsetdean@gmail.com">shamsetdean@gmail.com</a></span></div>
+    <nav aria-label="Tous les projets">
+      <a href="https://shamsetdean.github.io/humiAn/" target="_blank" rel="noopener">Hum{i}An</a>
+      <a href="https://shamsetdean.github.io/codex/" target="_blank" rel="noopener">Codex</a>
+      <a href="https://shamsetdean.github.io/fabulae-presentation/" target="_blank" rel="noopener">Fabulae</a>
+      <a href="https://synapse-kohl-eta.vercel.app/" target="_blank" rel="noopener">Synapse</a>
+      <a href="https://shamsetdean.github.io/scribe/" target="_blank" rel="noopener">Scribe</a>
+      <a href="https://shamsetdean.github.io/didici/" target="_blank" rel="noopener">Didici</a>
+      <a href="https://shamsetdean.github.io/simul/" target="_blank" rel="noopener">simul</a>
+      <a href="https://shamsetdean.github.io/clavium/" target="_blank" rel="noopener">Clavium</a>
+      <a href="https://shamsetdean.github.io/except-r/" target="_blank" rel="noopener">exceptōr</a>
+      <a href="https://shamsetdean.github.io/sentinel/" target="_blank" rel="noopener">Sentinel</a>
+      <a href="https://talaria-iota.vercel.app/" target="_blank" rel="noopener">Talaria</a>
+      <a href="https://shamsetdean.github.io/iter/" target="_blank" rel="noopener">iter</a>
+      <a href="https://shamsetdean.github.io/pi-stream/" target="_blank" rel="noopener">π.stream</a>
+      <a href="https://shamsetdean.github.io/legaleink/" target="_blank" rel="noopener">LégaleInk</a>
+      <a href="https://shamsetdean.github.io/vacuum/" target="_blank" rel="noopener">UFindGo</a>
+      <a href="https://shamsetdean.github.io/dndvdl-presentation/" target="_blank" rel="noopener">DNDVDL-MAP</a>
+    </nav>
+    <div class="end-col"><span>&copy; 2025-2026 Shams Guettaf, Anthropotech Lab. Tous droits réservés.</span><span>Ce site ne dépose aucun cookie, n'enregistre rien dans votre navigateur et n'utilise aucun traceur.</span><span><a href="mentions-legales.html">Mentions légales</a></span></div>
   </div>
 </footer>
 
 <script>
 (function(){
-  var burger = document.querySelector('.nav-burger');
-  var nav = document.querySelector('.nav-r');
-  var body = document.body;
-  if(!burger || !nav) return;
-  function close(){
-    body.classList.remove('nav-open');
-    burger.setAttribute('aria-expanded','false');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp = function(v){ return Math.min(1, Math.max(0, v)); };
+
+  var rv = document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(el){ io.observe(el); });
+  } else { rv.forEach(function(el){ el.classList.add('in'); }); }
+
+  var counters = document.querySelectorAll('[data-count]');
+  function runCount(el){
+    var target = +el.getAttribute('data-count'), t0 = null, dur = 1300;
+    if(!target){ el.textContent = '0'; return; }
+    function step(t){ if(t0 === null) t0 = t; var k = clamp((t - t0) / dur); el.textContent = Math.round(target * (1 - Math.pow(1 - k, 3))); if(k < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
   }
-  function toggle(){
-    var open = body.classList.toggle('nav-open');
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if('IntersectionObserver' in window && !reduce){
+    var io2 = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ runCount(e.target); io2.unobserve(e.target); } }); }, {threshold:.6});
+    counters.forEach(function(el){ io2.observe(el); });
+  } else { counters.forEach(function(el){ el.textContent = el.getAttribute('data-count'); }); }
+
+  if(reduce) return;
+
+  var hero = document.querySelector('[data-scene="hero"]'), shots = hero.querySelectorAll('.shots img');
+  var manif = document.querySelector('[data-scene="manif"]'), mls = manif.querySelectorAll('.ml'), ms = manif.querySelector('.ms');
+  var doms = document.querySelector('[data-scene="doms"]'), dtx = doms.querySelectorAll('.dtx'), dpan = doms.querySelectorAll('.dpan'), dots = doms.querySelectorAll('.dots i');
+  var film = document.querySelector('[data-scene="film"]'), dli = film.querySelectorAll('.dli'), dimg = film.querySelectorAll('.dimg'), ddet = film.querySelectorAll('.ddet');
+  var end = document.querySelector('[data-scene="end"]');
+  var lastShot = -1, lastM = -1, lastD = -1, lastF = -1;
+  function pct(el){ var r = el.getBoundingClientRect(); return clamp(-r.top / (r.height - window.innerHeight)); }
+  function pad(n){ return (n < 9 ? '0' : '') + (n + 1); }
+
+  function frame(){
+    var p = pct(hero);
+    hero.style.setProperty('--p', p.toFixed(4));
+    hero.style.setProperty('--pp', clamp(p * 2 - .1).toFixed(4));
+    var si = Math.min(shots.length - 1, Math.floor(clamp((p - .45) / .55) * shots.length));
+    if(si !== lastShot){ lastShot = si; shots.forEach(function(s, i){ s.classList.toggle('on', i === si); }); }
+
+    var m = Math.min(mls.length - 1, Math.floor(pct(manif) * mls.length));
+    if(m !== lastM){ lastM = m; mls.forEach(function(l, i){ l.classList.toggle('on', i === m); l.classList.toggle('past', i < m); }); ms.textContent = pad(m); }
+
+    var d = Math.min(3, Math.floor(pct(doms) * 4));
+    if(d !== lastD){ lastD = d; [dtx, dpan, dots].forEach(function(list){ list.forEach(function(e, i){ e.classList.toggle('on', i === d); }); }); }
+
+    var fi = Math.min(5, Math.floor(pct(film) * 6));
+    if(fi !== lastF){ lastF = fi; [dli, ddet].forEach(function(list){ list.forEach(function(e, i){ e.classList.toggle('on', i === fi); }); }); dimg.forEach(function(e, i){ e.classList.toggle('on', i === fi); e.classList.toggle('prev', i < fi); }); }
+
+    end.style.setProperty('--e', pct(end).toFixed(4));
   }
-  burger.addEventListener('click', toggle);
-  nav.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', close);
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') close();
-  });
-  window.addEventListener('resize', function(){
-    if(window.innerWidth > 760) close();
-  });
+  var ticking = false;
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(function(){ frame(); ticking = false; }); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  frame();
 })();
 </script>
-
+<script>
+(function(){
+  var root = document.documentElement, s = document.getElementById('splash');
+  if(!s || !root.classList.contains('splash-on')) return;
+  var done = false;
+  function close(){ if(done) return; done = true; s.classList.add('out'); root.classList.remove('splash-on'); setTimeout(function(){ if(s.parentNode) s.parentNode.removeChild(s); }, 800); }
+  setTimeout(close, 2500);
+  s.addEventListener('click', close);
+  document.addEventListener('keydown', close, {once:true});
+})();
+</script>
 </body>
 </html>

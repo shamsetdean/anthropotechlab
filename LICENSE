@@ -1,9 +1,9 @@
-Copyright © 2026 Shams Guettaf — Anthropotech Lab
+Copyright © 2025-2026 Shams Guettaf, Anthropotech Lab
 Projet : Anthropotech Lab
 Tous droits réservés.
 
 ------------------------------------------------------------
-AVERTISSEMENT — DÉPÔT PUBLIC SUR GITHUB
+AVERTISSEMENT : DÉPÔT PUBLIC SUR GITHUB
 ------------------------------------------------------------
 
 Le fait que le code source de ce dépôt soit consultable
@@ -41,6 +41,17 @@ CE QUI EST INTERDIT SANS AUTORISATION ÉCRITE PRÉALABLE
 - Toute exploitation commerciale, directe ou indirecte
 - Toute réutilisation du nom, du logo ou de l'identité
   visuelle associée à ce projet
+
+------------------------------------------------------------
+ÉLÉMENTS TIERS
+------------------------------------------------------------
+
+Les polices de caractères du dossier fonts/ (Source Serif 4,
+Public Sans, Red Hat Mono) ne sont pas la propriété de l'auteur.
+Elles appartiennent à leurs auteurs respectifs et sont
+distribuées sous licence SIL Open Font License 1.1, dont le
+texte figure dans fonts/OFL.txt. La présente réserve de
+droits ne s'applique pas à ces fichiers.
 
 ------------------------------------------------------------
 MATURITÉ DU PROJET ET ABSENCE DE GARANTIE
